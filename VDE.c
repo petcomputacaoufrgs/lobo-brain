@@ -65,8 +65,9 @@ int main()
     int cu = 0;
 
     if(funcaoVDE(tabuleiroTeste, '1', &tabini) == 8)
+    {
         printf("iupi");
-
+    }
 
     return 0;
 }
