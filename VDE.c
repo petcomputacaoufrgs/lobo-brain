@@ -10,6 +10,7 @@ int funcaoVDE(char tab[3][3], char jogador, tabuleiroInicial *t)
 {
     int cont = 0;
 
+    //testa empate
     for (int i=0; i<3; i++)
     {
         for(int j=0; j<3; j++)
@@ -27,7 +28,7 @@ int funcaoVDE(char tab[3][3], char jogador, tabuleiroInicial *t)
     {
         t->nVezesInicial++;
         if (t->nVezesInicial == 3)
-            return 8;
+            return 1;
     }
 
 
@@ -36,35 +37,35 @@ int funcaoVDE(char tab[3][3], char jogador, tabuleiroInicial *t)
     {
       if (tab[0][1] == jogador && tab[0][2] == jogador || tab[1][0] == jogador && tab[2][0] == jogador || tab[1][1] == jogador && tab [2][2] == jogador)
         {
-            return 1;
+            return 2;
         }
     }
     else if (tab[0][2] == jogador)
     {
         if (tab[1][1] == jogador && tab[2][0] == jogador || tab[1][2] == jogador && tab[2][2] == jogador)
         {
-            return 1;
+            return 2;
         }
     }
     else if (tab[1][1] == jogador && tab[1][2] == jogador || tab[1][0] == jogador && tab[1][2] == jogador)
     {
-        return 1;
+        return 2;
     }
     else if (tab[2][0] == jogador && tab[2][1] == jogador && tab[2][2] == jogador)
     {
-        return 1;
+        return 2;
     }
 
+    return 0;
 }
 
 
 int main()
 {
-    char tabuleiroTeste[3][3] = {{'0','0','1'},{'0','0','1'},{'0','0','1'}};
-    tabuleiroInicial tabini = {{'0','0','1','0','0','1','0','0','1'}, 2};
-    int cu = 0;
+    char tabuleiroTeste[3][3] = {{'0','0','0'},{'0','0','1'},{'0','0','1'}};
+    tabuleiroInicial tabini = {{'0','1','0','0','0','1','0','0','1'}, 2};
 
-    if(funcaoVDE(tabuleiroTeste, '1', &tabini) == 8)
+    if(funcaoVDE(tabuleiroTeste, '1', &tabini) == 0)
     {
         printf("iupi");
     }
