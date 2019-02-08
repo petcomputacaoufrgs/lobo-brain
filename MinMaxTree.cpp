@@ -6,12 +6,12 @@ using namespace std;
 class Nodo
 {
     public:
-        Nodo();
+        Nodo(string* tabuleiro, Nodo* pai);
         int valor;
         Nodo* pai;
         list<Nodo> filhos;
         string* tabuleiro;
-        void adicionaFilho();
+        void adicionaFilho(string tabuleiro[3][3]);
 
     private:
         list<Nodo>::iterator it;
@@ -33,8 +33,8 @@ Nodo::Nodo(string* tabuleiro, Nodo* pai)
 
     this->pai = pai;
 }
-    
-Nodo::adicionaFilho(string tabuleiro[3][3])
+
+ void Nodo::adicionaFilho(string tabuleiro[3][3])
 {
     it = this->filhos.begin();
     it++;
