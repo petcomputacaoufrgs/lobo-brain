@@ -6,18 +6,22 @@ using namespace std;
 class Nodo
 {
     public:
-        Nodo(string* tabuleiro, Nodo* pai);
         int valor;
-        Nodo* pai;
+        Nodo *pai;
         list<Nodo> filhos;
         string* tabuleiro;
-        void adicionaFilho(string tabuleiro[3][3]);
+        Nodo(string* tabuleiro);
+        void adicionaFilho(string* tabuleiro);
+        void setPai(Nodo *pai)
+        {
+            this->pai = pai;
+        }
 
     private:
         list<Nodo>::iterator it;
 };
 
-Nodo::Nodo(string* tabuleiro, Nodo* pai)
+Nodo::Nodo(string* tabuleiro)
 {
     int nCol = sizeof(tabuleiro) / sizeof(tabuleiro[0]);
 
@@ -31,14 +35,15 @@ Nodo::Nodo(string* tabuleiro, Nodo* pai)
         }
     }
 
-    this->pai = pai;
+    this->pai = NULL;
 }
 
- void Nodo::adicionaFilho(string tabuleiro[3][3])
+ void Nodo::adicionaFilho(string* tabuleiro)
 {
     it = this->filhos.begin();
     it++;
-    Nodo novoFilho = Nodo(tabuleiro, this);
+    Nodo *novoFilho = new Nodo(tabuleiro);
+    novoFilho.setPai(pai);
     this->filhos.insert(it, novoFilho);
 }
 
