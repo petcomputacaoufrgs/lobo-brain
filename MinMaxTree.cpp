@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <vector>
 
 using namespace std;
 
@@ -10,12 +11,10 @@ class Nodo
         Nodo *pai;
         list<Nodo> filhos;
         string* tabuleiro;
+
         Nodo(string* tabuleiro);
+        
         void adicionaFilho(string* tabuleiro);
-        void setPai(Nodo *pai)
-        {
-            this->pai = pai;
-        }
 
     private:
         list<Nodo>::iterator it;
@@ -39,17 +38,21 @@ Nodo::Nodo(string* tabuleiro)
 }
 
  void Nodo::adicionaFilho(string* tabuleiro)
-{
-    it = this->filhos.begin();
+{   
     it++;
-    Nodo *novoFilho = new Nodo(tabuleiro);
-    novoFilho.setPai(pai);
+    Nodo novoFilho = Nodo(tabuleiro);
+    novoFilho.pai = this;
     this->filhos.insert(it, novoFilho);
 }
 
 
 int main()
-{
+{   
+    Nodo nodoTeste = new Nodo({{'0', '0', '1'}, {'1', '0', '0'}, {'1', '0', '1'}});
+    Nodo nodoFilhoT = new Nodo({{'0', '0', '1'}, {'1', '0', '0'}, {'0', '0', '0'}});
+
+    nodoTeste.adicionaFilho(nodoFilhoT);
+
     cout << "sou lindo" << endl;
 
     return 0;
