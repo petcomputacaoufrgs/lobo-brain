@@ -2,7 +2,7 @@
 #define node
 
 #include <vector>
-#include<string>
+#include <string>
 
 class Node
 {
