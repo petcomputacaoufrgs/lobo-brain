@@ -1,7 +1,6 @@
 #include <iostream>
 #include "tree.hpp"
 
-
 using namespace std;
 
 Tree::Tree(vector<string> startingBoard)

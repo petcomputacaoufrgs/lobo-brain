@@ -32,7 +32,7 @@ Node::Node(vector<string> board)
 }
 
 
-int main()
+/*int main()
 {
     vector<string> test00 = {"001", "100", "101"};
     vector<string> test01 = {"000", "110", "100"};
@@ -47,5 +47,5 @@ int main()
     cout << "sou lindo" << endl;
 
     return 0;
-}
+}*/
 
