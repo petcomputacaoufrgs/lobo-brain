@@ -13,7 +13,7 @@ class Node
 
         Node(vector<string> board);
 
-        void addSon(Node* newSon);
+        void addChildren(Node* newSon);
 
 };
 
@@ -36,7 +36,7 @@ Node::Node(vector<string> board)
     this->parent = NULL;
 }
 
- void Node::addSon(Node* newSon)
+ void Node::addChildren(Node* newSon)
 {
     cout << "adiciona filho" << endl;
 
@@ -56,7 +56,7 @@ int main()
     Node* NodeTest = new Node(test00);
     Node* NodeSonT = new Node(test01);
 
-    NodeTest->addSon(NodeSonT);
+    NodeTest->addChildren(NodeSonT);
 
     cout << "sou lindo" << endl;
 
