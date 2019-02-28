@@ -9,17 +9,17 @@ class Nodo
         int valor;
         Nodo *pai;
         vector<Nodo> filhos;
-        vector<string>* tabuleiro;
+        vector<string> tabuleiro;
 
-        Nodo(vector<string>* tabuleiro);
+        Nodo(vector<string> tabuleiro);
 
-        void adicionaFilho(vector<string>* tabuleiro);
+        void adicionaFilho(Nodo* novoFilho);
 
 };
 
-Nodo::Nodo(vector<string>* tabuleiro)
+Nodo::Nodo(vector<string> tabuleiro)
 {
-    cout << tabuleiro[2][2];
+    cout << tabuleiro[2][2] << "criou nodo" << endl;
 
     int nCol = sizeof(tabuleiro) / sizeof(tabuleiro[0]);
 
@@ -36,13 +36,13 @@ Nodo::Nodo(vector<string>* tabuleiro)
     this->pai = NULL;
 }
 
- void Nodo::adicionaFilho(vector<string>* tabuleiro)
+ void Nodo::adicionaFilho(Nodo* novoFilho)
 {
-    cout << tabuleiro[2].at(2);
+    cout << "adiciona filho" << endl;
 
-    Nodo novoFilho = Nodo(tabuleiro);
-    novoFilho.pai = this;
-    this->filhos.push_back(novoFilho);
+    //Nodo novoFilho = Nodo(tabuleiro);
+    novoFilho->pai = this;
+    this->filhos.push_back(*novoFilho);
 }
 
 
@@ -53,10 +53,10 @@ int main()
 
     cout << teste00[1][1];
 
-    Nodo nodoTeste = new Nodo(teste00);
-    //Nodo nodoFilhoT = new Nodo(teste01);
+    Nodo* nodoTeste = new Nodo(teste00);
+    Nodo* nodoFilhoT = new Nodo(teste01);
 
-    //nodoTeste.adicionaFilho(teste01);
+    nodoTeste->adicionaFilho(nodoFilhoT);
 
     cout << "sou lindo" << endl;
 
