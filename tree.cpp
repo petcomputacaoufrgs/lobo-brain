@@ -10,9 +10,9 @@ Tree::Tree(vector<string> startingBoard)
     this->setRoot(rootNode);
 }
 
-void Tree::setRoot(Node root)
+void Tree::setRoot(Node* root)
 {
-    this->root = &root;
+    this->root = root;
 }
 
 

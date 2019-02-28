@@ -9,7 +9,7 @@ class Tree
         Node* root;
 
         Tree(std::vector<std::string> startingBoard);
-        void setRoot(Node root);
+        void setRoot(Node* root);
 };
 
 #endif
