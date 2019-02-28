@@ -1,5 +1,4 @@
 #include <iostream>
-#include <list>
 #include <vector>
 
 using namespace std;
@@ -9,19 +8,19 @@ class Nodo
     public:
         int valor;
         Nodo *pai;
-        list<Nodo> filhos;
-        string* tabuleiro;
+        vector<Nodo> filhos;
+        vector<string> tabuleiro;
 
-        Nodo(string* tabuleiro);
+        Nodo(vector<string>* tabuleiro);
         
-        void adicionaFilho(string* tabuleiro);
+        void adicionaFilho(vector<string>* tabuleiro);
 
-    private:
-        list<Nodo>::iterator it;
 };
 
-Nodo::Nodo(string* tabuleiro)
+Nodo::Nodo(vector<string>* tabuleiro)
 {
+    cout << tabuleiro[2][2];
+
     int nCol = sizeof(tabuleiro) / sizeof(tabuleiro[0]);
 
     int nLin = sizeof(tabuleiro[0]) / sizeof(char);
@@ -37,21 +36,27 @@ Nodo::Nodo(string* tabuleiro)
     this->pai = NULL;
 }
 
- void Nodo::adicionaFilho(string* tabuleiro)
+ void Nodo::adicionaFilho(vector<string>* tabuleiro)
 {   
-    it++;
+    cout << tabuleiro[2].at(2);
+
     Nodo novoFilho = Nodo(tabuleiro);
     novoFilho.pai = this;
-    this->filhos.insert(it, novoFilho);
+    this->filhos.push_back(novoFilho);
 }
 
 
 int main()
 {   
-    Nodo nodoTeste = new Nodo({{'0', '0', '1'}, {'1', '0', '0'}, {'1', '0', '1'}});
-    Nodo nodoFilhoT = new Nodo({{'0', '0', '1'}, {'1', '0', '0'}, {'0', '0', '0'}});
+    vector<string> teste00 = {"001", "100", "101"};
+    vector<string> teste01 = {"000", "110", "100"}; 
+    
+    cout << teste00[1][1];
 
-    nodoTeste.adicionaFilho(nodoFilhoT);
+    Nodo nodoTeste = new Nodo(teste00);
+    //Nodo nodoFilhoT = new Nodo(teste01);
+
+    //nodoTeste.adicionaFilho(teste01);
 
     cout << "sou lindo" << endl;
 
