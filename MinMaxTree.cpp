@@ -9,10 +9,10 @@ class Nodo
         int valor;
         Nodo *pai;
         vector<Nodo> filhos;
-        vector<string> tabuleiro;
+        vector<string>* tabuleiro;
 
         Nodo(vector<string>* tabuleiro);
-        
+
         void adicionaFilho(vector<string>* tabuleiro);
 
 };
@@ -37,7 +37,7 @@ Nodo::Nodo(vector<string>* tabuleiro)
 }
 
  void Nodo::adicionaFilho(vector<string>* tabuleiro)
-{   
+{
     cout << tabuleiro[2].at(2);
 
     Nodo novoFilho = Nodo(tabuleiro);
@@ -47,10 +47,10 @@ Nodo::Nodo(vector<string>* tabuleiro)
 
 
 int main()
-{   
+{
     vector<string> teste00 = {"001", "100", "101"};
-    vector<string> teste01 = {"000", "110", "100"}; 
-    
+    vector<string> teste01 = {"000", "110", "100"};
+
     cout << teste00[1][1];
 
     Nodo nodoTeste = new Nodo(teste00);
