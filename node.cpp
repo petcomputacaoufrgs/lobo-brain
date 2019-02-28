@@ -1,21 +1,7 @@
 #include <iostream>
-#include <vector>
+#include "node.hpp"
 
 using namespace std;
-
-class Node
-{
-    public:
-        int value;
-        Node *parent;
-        vector<Node> children;
-        vector<string> board;
-
-        Node(vector<string> board);
-
-        void addChildren(Node* newSon);
-
-};
 
 Node::Node(vector<string> board)
 {
