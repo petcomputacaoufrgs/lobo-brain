@@ -10,6 +10,7 @@ class Tree
 
         Tree(std::vector<std::string> startingBoard);
         void setRoot(Node* root);
+        void generateChildren(Node* node, char player);
 };
 
 #endif

@@ -14,6 +14,17 @@ void Tree::setRoot(Node* root)
     this->root = root;
 }
 
+void Tree::generateChildren(Node* node, char player)
+{
+    vector<vector<string>> possibleBoards;
+    possibleBoards = generateBoards(node.board, player);
+
+    for (vector<string>::iterator it = possibleBoards.begin(); it != possibleBoards.end(); it++)
+    {
+        Node* newChildren = new Node(it);
+        node.addChildren(newChildren);
+    }
+}
 
 int main()
 {
