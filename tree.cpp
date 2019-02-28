@@ -3,60 +3,60 @@
 
 using namespace std;
 
-class Nodo
+class Node
 {
     public:
-        int valor;
-        Nodo *pai;
-        vector<Nodo> filhos;
-        vector<string> tabuleiro;
+        int value;
+        Node *parent;
+        vector<Node> children;
+        vector<string> board;
 
-        Nodo(vector<string> tabuleiro);
+        Node(vector<string> board);
 
-        void adicionaFilho(Nodo* novoFilho);
+        void addSon(Node* newSon);
 
 };
 
-Nodo::Nodo(vector<string> tabuleiro)
+Node::Node(vector<string> board)
 {
-    cout << tabuleiro[2][2] << "criou nodo" << endl;
+    cout << board[2][2] << "criou Node" << endl;
 
-    int nCol = sizeof(tabuleiro) / sizeof(tabuleiro[0]);
+    int nCol = sizeof(board) / sizeof(board[0]);
 
-    int nLin = sizeof(tabuleiro[0]) / sizeof(char);
+    int nLin = sizeof(board[0]) / sizeof(char);
 
     for (int i=0; i<nCol; i++)
     {
         for (int j=0; j<nLin; j++)
         {
-            this->tabuleiro[i][j] = tabuleiro[i][j];
+            this->board[i][j] = board[i][j];
         }
     }
 
-    this->pai = NULL;
+    this->parent = NULL;
 }
 
- void Nodo::adicionaFilho(Nodo* novoFilho)
+ void Node::addSon(Node* newSon)
 {
     cout << "adiciona filho" << endl;
 
-    //Nodo novoFilho = Nodo(tabuleiro);
-    novoFilho->pai = this;
-    this->filhos.push_back(*novoFilho);
+    //Node newSon = Node(board);
+    newSon->parent = this;
+    this->children.push_back(*newSon);
 }
 
 
 int main()
 {
-    vector<string> teste00 = {"001", "100", "101"};
-    vector<string> teste01 = {"000", "110", "100"};
+    vector<string> test00 = {"001", "100", "101"};
+    vector<string> test01 = {"000", "110", "100"};
 
-    cout << teste00[1][1];
+    cout << test00[1][1];
 
-    Nodo* nodoTeste = new Nodo(teste00);
-    Nodo* nodoFilhoT = new Nodo(teste01);
+    Node* NodeTest = new Node(test00);
+    Node* NodeSonT = new Node(test01);
 
-    nodoTeste->adicionaFilho(nodoFilhoT);
+    NodeTest->addSon(NodeSonT);
 
     cout << "sou lindo" << endl;
 
