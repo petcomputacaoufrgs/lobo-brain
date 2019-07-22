@@ -10,7 +10,7 @@ int funcaoVDE(char tab[3][3], char jogador, tabuleiroInicial *t)
 {
     int cont = 0;
 
-    //testa empate
+    //testa empateo
     for (int i=0; i<3; i++)
     {
         for(int j=0; j<3; j++)
@@ -23,6 +23,8 @@ int funcaoVDE(char tab[3][3], char jogador, tabuleiroInicial *t)
             }
         }
     }
+
+// o hummes é corno
 
     if (cont == 9)
     {

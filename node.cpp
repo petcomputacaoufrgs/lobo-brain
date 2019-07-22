@@ -48,4 +48,3 @@ Node::Node(vector<string> board)
 
     return 0;
 }*/
-
