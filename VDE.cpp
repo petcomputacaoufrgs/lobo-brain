@@ -65,9 +65,9 @@ int funcaoVDE(char tab[3][3], char jogador, tabuleiroInicial *t)
 int main()
 {
     char tabuleiroTeste[3][3] = {{'0','0','0'},{'0','0','1'},{'0','0','1'}};
-    tabuleiroInicial tabini = {{'0','1','0','0','0','1','0','0','1'}, 2};
+    tabuleiroInicial tabIni = {{'0','1','0','0','0','1','0','0','1'}, 2};
 
-    if(funcaoVDE(tabuleiroTeste, '1', &tabini) == 0)
+    if(funcaoVDE(tabuleiroTeste, '1', &tabIni) == 0)
     {
         printf("iupi");
     }
