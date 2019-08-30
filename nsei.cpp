@@ -1,4 +1,3 @@
-nsei
 #include <vector>
 #include <string>
 #include "tree.hpp"
