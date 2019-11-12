@@ -1,112 +1,137 @@
-#include <stdio.h>
 #include <iostream>
 #include <vector>
-#include <string>
 
-//ja sei q to fazendo doidera de ponteiros, vai ser mudado deixa rolar
-std::vector<std::vector<int>> tapatanMoves(int player_pos)
+using namespace std;
+
+
+vector<vector<int>> tapatanMoves(int player_pos)
 {
 
-   std::vector<std::vector<int>> possible_mov;
+   vector<vector<int>> possible_mov;
+   vector<int> ij;
+
    switch(player_pos)
    {
       case 0://(0,0)
-         std::vector<int> ija;
-         ija[0] = 0; ija[1] = 1;
-         possible_mov.push_back(ija);
-         std::vector<int> ijb;
-         ijb[0] = 1; ijb[1] = 0;
-         possible_mov.push_back(ijb);
-         std::vector<int> ijc;
-         ijc[0] = 1; ijc[1] = 1;
-         possible_mov.push_back(ijc);
-         return possible_mov;
+         ij.push_back(0); ij.push_back(1);
+         possible_mov.push_back(ij);
+		 ij.clear();
+         ij.push_back(1); ij.push_back(0);
+         possible_mov.push_back(ij);
+		 ij.clear();
+         ij.push_back(1); ij.push_back(1);
+         possible_mov.push_back(ij);
+         break;
       case 1://(0,1)
-         std::vector<int> ija;
-         ija[0] = 0; ija[1] = 0;
-         possible_mov.push_back(ija);
-         std::vector<int> ijb;
-         ijb[0] = 1; ijb[1] = 1;
-         possible_mov.push_back(ijb);
-         std::vector<int> ijc;
-         ijc[0] = 0; ijc[1] = 2;
-         possible_mov.push_back(ijc);
-         return possible_mov;
+         ij.push_back(0); ij.push_back(0);
+         possible_mov.push_back(ij);
+		 ij.clear();
+         ij.push_back(1); ij.push_back(1);
+         possible_mov.push_back(ij);
+		 ij.clear();
+         ij.push_back(0); ij.push_back(2);
+         possible_mov.push_back(ij);
+         break;
       case 2://(0,2)
-         ij[0] = 0; ij[1] = 1;
+         ij.push_back(0); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 1;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 2;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(2);
          possible_mov.push_back(ij);
-         return possible_mov;
+         break;
       case 3://(1,0)
-         ij[0] = 0; ij[1] = 0;
+         ij.push_back(0); ij.push_back(0);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 1;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 2; ij[1] = 0;
+		 ij.clear();
+         ij.push_back(2); ij.push_back(0);
          possible_mov.push_back(ij);
-         return possible_mov;
+         break;
       case 4://(1,1)
-         ij[0] = 0; ij[1] = 0;
+         ij.push_back(0); ij.push_back(0);
          possible_mov.push_back(ij);
-         ij[0] = 0; ij[1] = 1;
+		 ij.clear();
+         ij.push_back(0); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 0; ij[1] = 2;
+		 ij.clear();
+         ij.push_back(0); ij.push_back(2);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 0;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(0);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 2;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(2);
          possible_mov.push_back(ij);
-         ij[0] = 2; ij[1] = 0;
+		 ij.clear();
+         ij.push_back(2); ij.push_back(0);
          possible_mov.push_back(ij);
-         ij[0] = 2; ij[1] = 1;
+		 ij.clear();
+         ij.push_back(2); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 2; ij[1] = 2;
+		 ij.clear();
+         ij.push_back(2); ij.push_back(2);
          possible_mov.push_back(ij);
-         return possible_mov;
+         break;
       case 5://(1,2)
-         ij[0] = 0; ij[1] = 2;
+         ij.push_back(0); ij.push_back(2);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 1;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 2; ij[1] = 2;
+		 ij.clear();
+         ij.push_back(2); ij.push_back(2);
          possible_mov.push_back(ij);
-         return possible_mov;
+         break;
       case 6://(2,0)
-         ij[0] = 2; ij[1] = 1;
+         ij.push_back(2); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 0;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(0);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 1;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(1);
          possible_mov.push_back(ij);
-         return possible_mov;
+         break;
       case 7://(2,1)
-         ij[0] = 2; ij[1] = 0;
+         ij.push_back(2); ij.push_back(0);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 1;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 2; ij[1] = 2;
+		 ij.clear();
+         ij.push_back(2); ij.push_back(2);
          possible_mov.push_back(ij);
-         return possible_mov;
+         break;
       case 8://(2,2)
-         ij[0] = 2; ij[1] = 1;
+         ij.push_back(2); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 1;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(1);
          possible_mov.push_back(ij);
-         ij[0] = 1; ij[1] = 2;
+		 ij.clear();
+         ij.push_back(1); ij.push_back(2);
          possible_mov.push_back(ij);
-         return possible_mov;
+         break;
    }
+   return possible_mov;
+   
 }
 
-using namespace std;
-int main()
+
+/*int main()
 {
-      std::string x[3] = {"haha","hah","hah"};
-
-      std::cout << x[0];
-
+      vector<std::vector<int>> movs;
+	  cout << "indo ";
+	  movs = tapatanMoves(1);
+	  cout << "foi" << endl;  
+	
+	 for (vector<vector<int>>::iterator it = movs.begin(); it != movs.end(); it++)
+		 for(vector<int>::iterator it2 = it->begin(); it2 != it->end(); it2++)
+			 cout <<  *it2;
    return 0;
-}
+}*/

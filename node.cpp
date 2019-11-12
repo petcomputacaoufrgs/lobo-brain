@@ -6,19 +6,9 @@ using namespace std;
 Node::Node(vector<string> board)
 {
     cout << board[2][2] << "criou Node" << endl;
-
-    int nCol = sizeof(board) / sizeof(board[0]);
-
-    int nLin = sizeof(board[0]) / sizeof(char);
-
-    for (int i=0; i<nCol; i++)
-    {
-        for (int j=0; j<nLin; j++)
-        {
-            this->board[i][j] = board[i][j];
-        }
-    }
-
+	
+	this->board.assign(board.begin(), board.end());
+	
     this->parent = NULL;
 }
 
@@ -32,7 +22,7 @@ Node::Node(vector<string> board)
 }
 
 
-/*int main()
+/*int main()RR
 {
     vector<string> test00 = {"001", "100", "101"};
     vector<string> test01 = {"000", "110", "100"};
@@ -43,7 +33,7 @@ Node::Node(vector<string> board)
     Node* NodeSonT = new Node(test01);
 
     NodeTest->addChildren(NodeSonT);
-
+	
     cout << "sou lindo" << endl;
 
     return 0;
