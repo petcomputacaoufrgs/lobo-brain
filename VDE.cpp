@@ -2,18 +2,24 @@
 #include <vector>
 #include <string> 
 
+/* Retorna 0 se o estado nao eh terminal
+ *         1 se empate
+ *		   2 se vitoria 
+ *        -1 se derrota
+ */
 
-typedef struct tabuleiroInicial
-{
-    char posicaoInicial[3][3];
-    int  nVezesInicial; 
-} tabuleiroInicial;
 
-//a funcao VDE tbm serve como teste para se o estado eh terminal - 0 se nao eh sei la
+//typedef struct tabuleiroInicial
+//{
+//    char posicaoInicial[3][3];
+//    int  nVezesInicial; 
+//} tabuleiroInicial;            ANTIGA
+
+//a funcao VDE tbm serve como teste para se o estado eh terminal (!= 0)
 //mudando tipo do tabuleiro por compatibilidade com o resto 
 
 
-//int funcaoVDE(char tab[3][3], char jogador, char oponente, tabuleiroInicial *t)
+//int funcaoVDE(char tab[3][3], char jogador, char oponente, tabuleiroInicial *t) ANTIGA
 int funcaoVDE(std::vector<std::string> tab, std::vector<std::string> tab_ini, char jogador, char oponente, int *repeticoes_inicial)
 {   //VITORIA --> 2 EMPATE --> 1 DERROTA --> -1 NDA --> 0
     int cont = 0;

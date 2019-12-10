@@ -3,9 +3,13 @@
 
 using namespace std;
 
-
 vector<vector<int>> tapatanMoves(int player_pos)
 {
+/* Considerando um tabuleiro de tapatan com posicoes numeradas de 0 até 8
+ * recebe a posicao do jogador e retorna um vetor com todas as posicoes 
+ * que o jogador pode alcancar a partir da atual. 
+ * neste ultimo cada posicao eh uma dupla de int i,j (linha, coluna)
+ */
 
    vector<vector<int>> possible_mov;
    vector<int> ij;
@@ -15,7 +19,7 @@ vector<vector<int>> tapatanMoves(int player_pos)
       case 0://(0,0)
          ij.push_back(0); ij.push_back(1);
          possible_mov.push_back(ij);
-		 ij.clear();
+		 ij.clear(); //provavelmente formas melhores de fazer isso mas sei la ponteiros 
          ij.push_back(1); ij.push_back(0);
          possible_mov.push_back(ij);
 		 ij.clear();

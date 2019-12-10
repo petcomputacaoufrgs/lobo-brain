@@ -24,7 +24,7 @@ vector<vector<string>> Tree::generateBoards(vector<string> board, char player)
     vector<vector<int>> possible_mov;
     vector<vector<string>> possibleBoards;
     // passa a posicao (de 0 a 8 no tapatan) do jogador analisado e, no move.cpp ve os movimentos possiveis a partir daquela posicao
-    // move.cpp devolve uma lista de duplas (i,j) de cada posicao atual e aqui na generate a gente verifica quais movimentos sao possiveis e adiciona no vetor a ser devolvido
+    // move.cpp devolve uma lista de duplas (i,j) ((linha, coluna)) de cada posicao atual e aqui na generate a gente verifica quais movimentos sao possiveis e adiciona no vetor a ser devolvido
     
     for(i=0;i<3;i++)
     {

@@ -4,6 +4,8 @@
 #include "tree.hpp"
 #include "VDE.cpp"
 
+//nao funciona mas boto fe.. acho que so estora a memoria
+
 using namespace std;
 
 Node* max (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n);
