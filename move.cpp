@@ -3,21 +3,25 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
+// Seria legal entender isso aqui
+
 //ja sei q to fazendo doidera de ponteiros, vai ser mudado deixa rolar
 std::vector<std::vector<int>> tapatanMoves(int player_pos)
 {
 
-   std::vector<std::vector<int>> possible_mov;
+   vector<vector<int>> possible_mov;
    switch(player_pos)
    {
       case 0://(0,0)
-         std::vector<int> ija;
+         vector<int> ija;
          ija[0] = 0; ija[1] = 1;
          possible_mov.push_back(ija);
-         std::vector<int> ijb;
+         vector<int> ijb;
          ijb[0] = 1; ijb[1] = 0;
          possible_mov.push_back(ijb);
-         std::vector<int> ijc;
+         vector<int> ijc;
          ijc[0] = 1; ijc[1] = 1;
          possible_mov.push_back(ijc);
          return possible_mov;
@@ -101,7 +105,6 @@ std::vector<std::vector<int>> tapatanMoves(int player_pos)
    }
 }
 
-using namespace std;
 // int main()
 // {
 //       std::string x[3] = {"haha","hah","hah"};
