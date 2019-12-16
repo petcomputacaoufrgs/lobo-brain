@@ -1,11 +1,44 @@
 #include <stdio.h>
 #include <vector>
-#include <string> 
+#include <string>
+#include "tabuleiro.hpp"
+
+
+
+
+/*
+
+
+ESTA MERDA FUNCIONA
+
+SE FOR ALTERAR FAZ ALGUM BACKUP
+
+CORNO
+
+
+*/
+
+
+
+// OLD MAS SALVO PQ VAI Q NEH
+// variavel global para contar
+//  quantas vezes chegou a posicao inicial
+// int empate = 0;
+
+
+
 
 /* Retorna 0 se o estado nao eh terminal
- *         1 se empate
- *		   2 se vitoria 
- *        -1 se derrota
+ *		   100 se vitoria 
+ *         -100 se derrota
+ *         -1 se empate
+ *         OLD: incrementa a var "empate" se empate
+
+    os valores escolhidos para vitoria e derrota
+    devem ser alterados se a altura da arvore
+    for muito grande
+
+
  */
 
 
@@ -20,7 +53,7 @@
 
 
 //int funcaoVDE(char tab[3][3], char jogador, char oponente, tabuleiroInicial *t) ANTIGA
-int funcaoVDE(std::vector<std::string> tab, std::vector<std::string> tab_ini, char jogador, char oponente, int *repeticoes_inicial)
+int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
 {   //VITORIA --> 2 EMPATE --> 1 DERROTA --> -1 NDA --> 0
     int cont = 0;
 
@@ -29,10 +62,9 @@ int funcaoVDE(std::vector<std::string> tab, std::vector<std::string> tab_ini, ch
     {
         for(int j=0; j<3; j++)
         {
-            //printf("%c %c", tab[i][j], tab_ini[i][j]);
-            if(tab[i][j] == tab_ini[i][j])
+
+            if(tab.posicoes[i][j] == tab_ini.posicoes[i][j])
             {
-                //printf("kk\n");
                 cont++;
             }
         }
@@ -43,83 +75,88 @@ int funcaoVDE(std::vector<std::string> tab, std::vector<std::string> tab_ini, ch
     if (cont == 9)
     {
         (*repeticoes_inicial)++;
-        if (*repeticoes_inicial == 3)
-            return 1;
+        if (*repeticoes_inicial == 3) {
+            return -1;
+        }
     }
 
 
     //testa vitoria
-    if (tab[0][0] == jogador)
+    if (tab.posicoes[0][0] == jogador)
     {
-      if (tab[0][1] == jogador && tab[0][2] == jogador || tab[1][0] == jogador && tab[2][0] == jogador || tab[1][1] == jogador && tab [2][2] == jogador)
+      if (tab.posicoes[0][1] == jogador && tab.posicoes[0][2] == jogador || tab.posicoes[1][0] == jogador && tab.posicoes[2][0] == jogador || tab.posicoes[1][1] == jogador && tab.posicoes[2][2] == jogador)
         {
-            return 2;
+            return 100;
         }
     }
-    else if (tab[0][2] == jogador)
+    else if (tab.posicoes[0][2] == jogador)
     {
-        if (tab[1][1] == jogador && tab[2][0] == jogador || tab[1][2] == jogador && tab[2][2] == jogador)
+        if (tab.posicoes[1][1] == jogador && tab.posicoes[2][0] == jogador || tab.posicoes[1][2] == jogador && tab.posicoes[2][2] == jogador)
         {
-            return 2;
+            return 100;
         }
     }
-    else if (tab[1][1] == jogador && tab[1][2] == jogador || tab[1][0] == jogador && tab[1][2] == jogador)
+    else if (tab.posicoes[1][1] == jogador && tab.posicoes[1][2] == jogador || tab.posicoes[1][0] == jogador && tab.posicoes[1][2] == jogador)
     {
-        return 2;
+        return 100;
     }
-    else if (tab[2][0] == jogador && tab[2][1] == jogador && tab[2][2] == jogador)
+    else if (tab.posicoes[2][0] == jogador && tab.posicoes[2][1] == jogador && tab.posicoes[2][2] == jogador)
     {
-        return 2;
+        return 100;
     }
 	
 	//testa derrota
-	if (tab[0][0] == oponente)
+	if (tab.posicoes[0][0] == oponente)
     {
-      if (tab[0][1] == oponente && tab[0][2] == oponente || tab[1][0] == oponente && tab[2][0] == oponente || tab[1][1] == oponente && tab [2][2] == oponente)
+      if (tab.posicoes[0][1] == oponente && tab.posicoes[0][2] == oponente || tab.posicoes[1][0] == oponente && tab.posicoes[2][0] == oponente || tab.posicoes[1][1] == oponente && tab.posicoes[2][2] == oponente)
         {
-            return -1;
+            return -100;
         }
     }
-    else if (tab[0][2] == oponente)
+    else if (tab.posicoes[0][2] == oponente)
     {
-        if (tab[1][1] == oponente && tab[2][0] == oponente || tab[1][2] == oponente && tab[2][2] == oponente)
+        if (tab.posicoes[1][1] == oponente && tab.posicoes[2][0] == oponente || tab.posicoes[1][2] == oponente && tab.posicoes[2][2] == oponente)
         {
-            return -1;
+            return -100;
         }
     }
-    else if (tab[1][1] == oponente && tab[1][2] == oponente || tab[1][0] == oponente && tab[1][2] == oponente)
+    else if (tab.posicoes[1][1] == oponente && tab.posicoes[1][2] == oponente || tab.posicoes[1][0] == oponente && tab.posicoes[1][2] == oponente)
     {
-        return -1;
+        return -100;
     }
-    else if (tab[2][0] == oponente && tab[2][1] == oponente && tab[2][2] == oponente)
+    else if (tab.posicoes[2][0] == oponente && tab.posicoes[2][1] == oponente && tab.posicoes[2][2] == oponente)
     {
-        return -1;
+        return -100;
     }
 
     return 0;
 }
 
 
-/*int main()
+int main()
 {
-//   char t1[3][3] = {{'1','0','0'},{'0','1','0'},{'0','0','1'}};
-//	char t2[3][3] = {{'0','0','2'},{'0','0','2'},{'0','0','2'}};
-//	char t3[3][3] = {'0','1','0','0','0','1','0','0','1'};
-	std::string s00("100"), s01("010"), s02("001"),
-	            s10("010"), s11("001"), s12("001"); 
-	
-	std::vector<std::string> v0;
-	std::vector<std::string> v1;
-	
-	v0.push_back(s00); v0.push_back(s01); v0.push_back(s02);
-	v1.push_back(s10); v1.push_back(s11); v1.push_back(s12);
-	
+    Tabuleiro t1 ({ {'1','0','2'},
+                    {'2','1','0'},
+                    {'2','0','1'}   });
+	Tabuleiro t2 ({ {'0','0','2'},
+                    {'0','0','2'},
+                    {'0','0','2'}   });
+
+    Tabuleiro t3 ({ {'2','1','2'},
+                    {'2','1','2'},
+                    {'1','2','1'}   });
+
+    Tabuleiro tini ({   {'2', '1', '2'},
+                        {'0', '0', '0'},
+                        {'1', '2', '1'}     });
+
 	int nIni = 1;
 
-    printf("--->%d\n", funcaoVDE(v0, v1, '1', '2', &nIni));
-    printf("--->%d\n", funcaoVDE(v0, v1, '2', '1', &nIni));
-	printf("--->%d\n", funcaoVDE(v1, v1, '1', '2', &nIni));
-    printf("--->%d\n", funcaoVDE(v1, v1, '1', '2', &nIni));
+    printf("--->\t%d\n", funcaoVDE(t1, tini, '1', '2', &nIni));
+    printf("--->\t%d\n", funcaoVDE(t1, tini, '2', '1', &nIni));
+	printf("--->\t%d\n", funcaoVDE(t2, tini, '1', '2', &nIni));
+    printf("--->\t%d\n", funcaoVDE(t2, tini, '2', '1', &nIni));
+    printf("--->\t%d\n", funcaoVDE(t3, tini, '2', '1', &nIni));
 
     return 0;
-}*/
+}

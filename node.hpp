@@ -4,17 +4,21 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 class Node
 {
     public:
         int value;
         Node *parent;
-        std::vector<Node> children;
-        std:: vector<std::string> board;
+        vector<Node> children;
+        Tabuleiro board;
 
-        Node(std::vector<std::string> board);
+        Node(Tabuleiro board);
 
         void addChildren(Node* newChildren);
 };
 
 #endif
+
+// OK?

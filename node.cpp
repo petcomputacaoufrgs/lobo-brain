@@ -3,12 +3,25 @@
 
 using namespace std;
 
-Node::Node(vector<string> board)
+// era vector<string>, agora eh char
+Node::Node(Tabuleiro board)
 {
-    cout << board[2][2] << "criou Node" << endl;
-	
-	this->board.assign(board.begin(), board.end());
-	
+    // cout << board[2][2] << "criou Node" << endl;
+
+    /*int nCol = sizeof(board) / sizeof(board[0]);
+
+    int nLin = sizeof(board[0]) / sizeof(char);
+
+    for (int i=0; i<nCol; i++)
+    {
+        for (int j=0; j<nLin; j++)
+        {
+            this->board[i][j] = board[i][j];
+        }
+    }*/
+
+    this->board = board;
+
     this->parent = NULL;
 }
 
@@ -33,7 +46,7 @@ Node::Node(vector<string> board)
     Node* NodeSonT = new Node(test01);
 
     NodeTest->addChildren(NodeSonT);
-	
+
     cout << "sou lindo" << endl;
 
     return 0;

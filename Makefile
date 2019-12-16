@@ -1,6 +1,6 @@
 CC=g++
 
-all: vde node move tree
+all: vde node tree decision
 
 vde: VDE.cpp
 	$(CC) --std=c++11 VDE.cpp -o VDE
@@ -8,12 +8,12 @@ vde: VDE.cpp
 node: node.cpp
 	$(CC) --std=c++11 node.cpp -o node
 
-move: move.cpp
-	$(CC) --std=c++11 move.cpp -o move
-
 tree: tree.cpp
 	$(CC) --std=c++11 tree.cpp node.cpp -o tree
 
+tree: decision.cpp
+	$(CC) --std=c++11 decision.cpp node.cpp -o decision
+
 clean:
-	rm -rf *.o VDE node move  tree
+	rm -rf *.o VDE node tree
 
