@@ -38,21 +38,10 @@ CORNO
     devem ser alterados se a altura da arvore
     for muito grande
 
-
  */
 
 
-//typedef struct tabuleiroInicial
-//{
-//    char posicaoInicial[3][3];
-//    int  nVezesInicial; 
-//} tabuleiroInicial;            ANTIGA
-
-//a funcao VDE tbm serve como teste para se o estado eh terminal (!= 0)
-//mudando tipo do tabuleiro por compatibilidade com o resto 
-
-
-//int funcaoVDE(char tab[3][3], char jogador, char oponente, tabuleiroInicial *t) ANTIGA
+// Retorna o valor heurístico do nodo
 int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
 {   //VITORIA --> 2 EMPATE --> 1 DERROTA --> -1 NDA --> 0
     int cont = 0;
@@ -72,6 +61,7 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
 
 // o hummes é corno
 
+    // Tabuleiro igual ao do comeco -> empate
     if (cont == 9)
     {
         (*repeticoes_inicial)++;
@@ -84,19 +74,23 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
     //testa vitoria
     if (tab.posicoes[0][0] == jogador)
     {
-      if (tab.posicoes[0][1] == jogador && tab.posicoes[0][2] == jogador || tab.posicoes[1][0] == jogador && tab.posicoes[2][0] == jogador || tab.posicoes[1][1] == jogador && tab.posicoes[2][2] == jogador)
+      if (tab.posicoes[0][1] == jogador && tab.posicoes[0][2] == jogador ||
+            tab.posicoes[1][0] == jogador && tab.posicoes[2][0] == jogador ||
+            tab.posicoes[1][1] == jogador && tab.posicoes[2][2] == jogador)
         {
             return 100;
         }
     }
     else if (tab.posicoes[0][2] == jogador)
     {
-        if (tab.posicoes[1][1] == jogador && tab.posicoes[2][0] == jogador || tab.posicoes[1][2] == jogador && tab.posicoes[2][2] == jogador)
+        if (tab.posicoes[1][1] == jogador && tab.posicoes[2][0] == jogador ||
+            tab.posicoes[1][2] == jogador && tab.posicoes[2][2] == jogador)
         {
             return 100;
         }
     }
-    else if (tab.posicoes[1][1] == jogador && tab.posicoes[1][2] == jogador || tab.posicoes[1][0] == jogador && tab.posicoes[1][2] == jogador)
+    else if (tab.posicoes[1][1] == jogador && tab.posicoes[1][2] == jogador ||
+            tab.posicoes[1][0] == jogador && tab.posicoes[1][2] == jogador)
     {
         return 100;
     }
@@ -108,19 +102,23 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
 	//testa derrota
 	if (tab.posicoes[0][0] == oponente)
     {
-      if (tab.posicoes[0][1] == oponente && tab.posicoes[0][2] == oponente || tab.posicoes[1][0] == oponente && tab.posicoes[2][0] == oponente || tab.posicoes[1][1] == oponente && tab.posicoes[2][2] == oponente)
+      if (tab.posicoes[0][1] == oponente && tab.posicoes[0][2] == oponente ||
+            tab.posicoes[1][0] == oponente && tab.posicoes[2][0] == oponente ||
+            tab.posicoes[1][1] == oponente && tab.posicoes[2][2] == oponente)
         {
             return -100;
         }
     }
     else if (tab.posicoes[0][2] == oponente)
     {
-        if (tab.posicoes[1][1] == oponente && tab.posicoes[2][0] == oponente || tab.posicoes[1][2] == oponente && tab.posicoes[2][2] == oponente)
+        if (tab.posicoes[1][1] == oponente && tab.posicoes[2][0] == oponente ||
+            tab.posicoes[1][2] == oponente && tab.posicoes[2][2] == oponente)
         {
             return -100;
         }
     }
-    else if (tab.posicoes[1][1] == oponente && tab.posicoes[1][2] == oponente || tab.posicoes[1][0] == oponente && tab.posicoes[1][2] == oponente)
+    else if (tab.posicoes[1][1] == oponente && tab.posicoes[1][2] == oponente ||
+                tab.posicoes[1][0] == oponente && tab.posicoes[1][2] == oponente)
     {
         return -100;
     }
@@ -133,8 +131,13 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
 }
 
 
+
+// Main reservada à testes da função VDE, comentar se não for o caso
 int main()
 {
+
+    // Tabuleiros para testes da função VDE
+
     Tabuleiro t1 ({ {'1','0','2'},
                     {'2','1','0'},
                     {'2','0','1'}   });
@@ -146,10 +149,13 @@ int main()
                     {'2','1','2'},
                     {'1','2','1'}   });
 
+    // Tabuleiro inicial, base de comparacao para empate
+
     Tabuleiro tini ({   {'2', '1', '2'},
                         {'0', '0', '0'},
                         {'1', '2', '1'}     });
 
+    // Armazena o numero de vezes que o tabuleiro esteve na posicao inicial
 	int nIni = 1;
 
     printf("--->\t%d\n", funcaoVDE(t1, tini, '1', '2', &nIni));
