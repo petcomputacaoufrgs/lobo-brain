@@ -1,3 +1,5 @@
 VDE
 node
 tree
+*.o
+*.exe
