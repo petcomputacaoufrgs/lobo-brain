@@ -1,5 +1,5 @@
-#ifndef tree
-#define tree
+#ifndef TREE_H
+#define TREE_H
 
 #include "node.hpp"
 #include "tabuleiro.hpp"
@@ -19,6 +19,7 @@ class Tree
 
         Tree(Tabuleiro startingBoard);//construtor
         void setRoot(Node* root);//metodo setter para a raiz
+        vector<Tabuleiro> generateBoards(Tabuleiro board, char player); 
         void generateChildren(Node* node, char player);//gera filhos da raiz
 };
 

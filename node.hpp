@@ -1,8 +1,9 @@
-#ifndef node
-#define node
+#ifndef NODE_H
+#define NODE_H
 
 #include <vector>
 #include <string>
+#include "tabuleiro.hpp"
 
 using namespace std;
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "node.hpp"
+#include "tabuleiro.hpp"
 
 using namespace std;
 

@@ -2,12 +2,12 @@
 #include <vector>
 #include "tree.hpp"
 #include "tabuleiro.hpp"
-#include "move.cpp"
+#include "move.hpp"
 
 using namespace std;
 
 //Metodo construtor da arvore
-Tree::Tree(vector<vector<char>> startingBoard)
+Tree::Tree(Tabuleiro startingBoard)
 {
     Node* rootNode = new Node(startingBoard);
     this->setRoot(rootNode);
@@ -58,10 +58,10 @@ void Tree::setRoot(Node* root)
 // NAO ENTENDENDO, MAS MEIO QUE COMENTEI OQ EU ACHO QUE DEVERIA FAZER
 
 
-vector<Tabuleiro>* Tree::generateBoards(Tabuleiro board, char player)
+vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
 {
-    int i,j;
-    std::vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
+    int i,j, player_pos;
+    vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
 
     vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
 
@@ -73,14 +73,14 @@ vector<Tabuleiro>* Tree::generateBoards(Tabuleiro board, char player)
             {
                 player_pos = 3*i+j;//realiza uma aritmetica para determinar a posicao do jogador no tabuleiro
                 possible_mov = tapatanMoves(player_pos);
-                for(vector<int>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)//varre todas as posicoes do tabuleiro
+                for(vector<vector<int>>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)//varre todas as posicoes do tabuleiro
                 {
-                    if(board.posicao[it[0]][it[1]] == '0')//verifica se a posicao do tabuleiro esta vazia para poder realizar a possivel movimentacao
+                    if(board.posicoes[it->at(0)][it->at(1)] == '0')//verifica se a posicao do tabuleiro esta vazia para poder realizar a possivel movimentacao
                     {
                         //gambiarra fodida pois n sei cpp quem quiser melhorar pode dale
-                        std::vector<Tabuleiro> newBoard = board;
-                        newBoard.posicao[it[0]][it[1]] = player;//gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
-                        newBoard.posicao[i][j] = '0';//quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
+                        Tabuleiro newBoard = board;
+                        newBoard.posicoes[it->at(0)][it->at(1)] = player;//gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
+                        newBoard.posicoes[i][j] = '0';//quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
 
                         //!!
                         possibleBoards.push_back(newBoard);//ISSO EU ACHO Q TEM QUE MUDAR, PQ ACHO QUE NAO É MAIS ISSO
@@ -104,19 +104,23 @@ vector<Tabuleiro>* Tree::generateBoards(Tabuleiro board, char player)
 *   generateChildren:                                                                    *
 
 ******************************************************************************************/
-void Tree::generateChildren(Node* node, char player)
+void Tree::generateChildren(Node* current_state, char player)
 {
-    vector<vector<string>> possibleBoards;
-    cd DopossibleBoards = generateBoards(node.board, player);
-
-    /*for (vector<string>::iterator it = possibleBoards.begin(); it != possibleBoards.end(); it++)
+    vector<Tabuleiro> possibleBoards;
+    Node* newChild;
+    Tabuleiro board;
+    
+    possibleBoards = generateBoards(current_state->board, player); 
+    
+    for (vector<Tabuleiro>::iterator it = possibleBoards.begin(); it != possibleBoards.end(); it++)
     {
-        Node* newChildren = new Node(it);
-        self.addChildren(newChildren);
-    }*/
+        newChild = new Node(*it);
+        current_state->addChildren(newChild);
+    }
 }
 
-int main()
+
+/*int main()
 {
     // Tabuleiros para testes da função VDE
     Tabuleiro t1 ({ {'1','0','2'},
@@ -136,9 +140,9 @@ int main()
                         {'0', '0', '0'},
                         {'1', '2', '1'}     });
 
-    Tree* testree = new Tree(start);
+    Tree* testree = new Tree(t1);
 
     cout << testree->root << endl;
 
     return 0;
-}
+}*/

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "move.hpp"
 
 using namespace std;
 
@@ -31,29 +32,26 @@ using namespace std;
 *****************************************************************************/
 std::vector<std::vector<int>> tapatanMoves(int player_pos)
 {
-
-   vector<vector<int>> possible_mov;
-   switch(player_pos)
-   {
+      vector<vector<int>> possible_mov;
+      vector<int> ija;
+      vector<int> ijb;
+      vector<int> ijc;
+      vector<int> ij;
+      switch(player_pos)
+      {
       case 0://(0,0)
-         vector<int> ija;
          ija[0] = 0; ija[1] = 1;
          possible_mov.push_back(ija);
-         vector<int> ijb;
          ijb[0] = 1; ijb[1] = 0;
          possible_mov.push_back(ijb);
-         vector<int> ijc;
          ijc[0] = 1; ijc[1] = 1;
          possible_mov.push_back(ijc);
          return possible_mov;
       case 1://(0,1)
-         std::vector<int> ija;
          ija[0] = 0; ija[1] = 0;
          possible_mov.push_back(ija);
-         std::vector<int> ijb;
          ijb[0] = 1; ijb[1] = 1;
          possible_mov.push_back(ijb);
-         std::vector<int> ijc;
          ijc[0] = 0; ijc[1] = 2;
          possible_mov.push_back(ijc);
          return possible_mov;

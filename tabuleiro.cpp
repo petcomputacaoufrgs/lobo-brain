@@ -14,3 +14,8 @@ Tabuleiro::Tabuleiro(vector<vector<char>> posicoes)
 {
 	this->posicoes = posicoes;
 }
+
+Tabuleiro::Tabuleiro()
+{
+
+}

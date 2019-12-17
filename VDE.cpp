@@ -1,7 +1,8 @@
-#include <stdio.h>
+#include <iostream>
 #include <vector>
 #include <string>
 #include "tabuleiro.hpp"
+#include "VDE.hpp"
 
 
 
@@ -154,7 +155,7 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
 
 
 // Main reservada à testes da função VDE, comentar se não for o caso
-int main()
+/*int main()
 {
 
     // Tabuleiros para testes da função VDE
@@ -178,6 +179,8 @@ int main()
     // Armazena o numero de vezes que o tabuleiro esteve na posicao inicial
 	int nIni = 1;
 
+
+    //mudar para cout
     printf("--->\t%d\n", funcaoVDE(t1, tini, '1', '2', &nIni));
     printf("--->\t%d\n", funcaoVDE(t1, tini, '2', '1', &nIni));
 	printf("--->\t%d\n", funcaoVDE(t2, tini, '1', '2', &nIni));
@@ -185,4 +188,4 @@ int main()
     printf("--->\t%d\n", funcaoVDE(t3, tini, '2', '1', &nIni));
 
     return 0;
-}
+}*/

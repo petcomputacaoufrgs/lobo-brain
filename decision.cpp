@@ -3,7 +3,7 @@
 #include <iostream>
 #include "tabuleiro.hpp"
 #include "tree.hpp"
-#include "VDE.cpp"
+#include "VDE.hpp"
 
 using namespace std;
 
@@ -135,7 +135,7 @@ Node* min (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 // executa tudo e ve qual é a melhor jogada
 Node* decision(Tree *game, Node *current_state, int *n) {
 
-	tabuleiro gen ( {	{'0','0','0'},
+	Tabuleiro gen ( {	{'0','0','0'},
 						{'0','0','0'},
 						{'0','0','0'}	} );
 
@@ -159,23 +159,3 @@ Node* decision(Tree *game, Node *current_state, int *n) {
 }
 
 
-//talvez nao deva ser uma main
-// mas sim uma parada do tipo joga_ai{}
-int main() {
-
-	// tab.posicoesuleiro na posicao inicial
-	// 0 = vazio
-	// 1/2 = jogador
-	tab.posicoesuleiro start = {	{'1', '2', '1'},
-									{'0', '0', '0'},
-									{'2', '1', '2'}		};
-
-	// gera arvore do inicio
-	Tree* test_tree = new Tree(start);
-	// repeticoes inicias
-	int rep = 0;
-	// escolha de jogada
-	Node *choice = decision(test_tree, test_tree->root, &rep);
-
-
-}
