@@ -18,21 +18,26 @@ void Tree::setRoot(Node* root)
     this->root = root;
 }
 
-/*********************************************************
-*   generateBoards:                                      *
-*       - Recebe como entrada um tabuleiro               *
-*       (estado atual do jogo) e o jogador atual         *
-*       - Retorna um ponteiro para a raiz de um          *
-*       conjunto de possiveis tabuleiros gerados         *
-*       - passa a posicao (de 0 a 8 no tapatan) do       * 
-*        jogador analisado e, no move.cpp ve os          *
-*       movimentos possiveis a partir daquela posicao    *
-*       - move.cpp devolve uma lista de duplas (i,j)     *
-*       de cada posicao atual                            *
-*       e aqui na generate a gente verifica quais        *
-*       movimentos sao possiveis e adiciona no           *
-*       vetor a ser devolvido                            *
-**********************************************************/
+/*****************************************************************************************
+*   generateBoards:                                                                      *
+*       - Especificacao:                                                                 *
+*           - Gera os possiveis tabuleiros (jogadas) a partir de um tabuleiro            *
+*           atual dado,*ou seja, gera as possiveis jogadas que a maquina                 *
+*           pode fazer a partir de um estado de jogo                                     *
+*                                                                                        *  
+*       - Entardas:                                                                      *
+*           - Recebe como entrada um tabuleiro (estado atual do jogo) e o jogador atual  *
+*       - Saida:                                                                         *
+*           - Retorna um ponteiro para a raiz de um                                      *
+*           conjunto de possiveis tabuleiros gerados                                     *
+*                                                                                        *
+*       - Dados importantes:                                                             *
+*           - passa a posicao (de 0 a 8 no tapatan) do jogador analisado e,              *
+*           no move.cpp ve os movimentos possiveis a partir daquela posicao              *
+*           - move.cpp devolve uma lista de duplas (i,j) de cada posicao atual           *
+*           e aqui na generate a gente verifica quais movimentos sao possiveis           *
+*           e adiciona no vetor a ser devolvido                                          *
+******************************************************************************************/
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //LEEEEEEEEEEEEEEEEEEEEE ESSAAAAAAAAAA PORRAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -95,6 +100,10 @@ vector<Tabuleiro>* Tree::generateBoards(Tabuleiro board, char player)
 //ISSO AQUI EU SIMPLEMENTE NAO FACO IDEIA OQ TA ROLANDO(??????????????????????????)
 // APARENTEMENTE ELE TA GERANDO OS FILHOS DE UM ESTADO ATUAL DE JOGO
 //MAS PRA MIM NAO FAZ NEHUM SENTIDO
+/*****************************************************************************************
+*   generateChildren:                                                                    *
+
+******************************************************************************************/
 void Tree::generateChildren(Node* node, char player)
 {
     vector<vector<string>> possibleBoards;
@@ -109,7 +118,23 @@ void Tree::generateChildren(Node* node, char player)
 
 int main()
 {
-    vector<string> start = {"102," "012", "201"};
+    // Tabuleiros para testes da função VDE
+    Tabuleiro t1 ({ {'1','0','2'},
+                    {'2','1','0'},
+                    {'2','0','1'}   });
+    
+    Tabuleiro t2 ({ {'0','0','2'},
+                    {'0','0','2'},
+                    {'0','0','2'}   });
+
+    Tabuleiro t3 ({ {'2','1','2'},
+                    {'2','1','2'},
+                    {'1','2','1'}   });
+
+// Tabuleiro inicial, base de comparacao para empate
+    Tabuleiro tini ({   {'2', '1', '2'},
+                        {'0', '0', '0'},
+                        {'1', '2', '1'}     });
 
     Tree* testree = new Tree(start);
 
