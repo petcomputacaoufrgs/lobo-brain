@@ -3,6 +3,7 @@
 #include "tree.hpp"
 #include "tabuleiro.hpp"
 #include "move.hpp"
+#include "node.hpp"
 
 using namespace std;
 
@@ -119,30 +120,3 @@ void Tree::generateChildren(Node* current_state, char player)
     }
 }
 
-
-/*int main()
-{
-    // Tabuleiros para testes da função VDE
-    Tabuleiro t1 ({ {'1','0','2'},
-                    {'2','1','0'},
-                    {'2','0','1'}   });
-    
-    Tabuleiro t2 ({ {'0','0','2'},
-                    {'0','0','2'},
-                    {'0','0','2'}   });
-
-    Tabuleiro t3 ({ {'2','1','2'},
-                    {'2','1','2'},
-                    {'1','2','1'}   });
-
-// Tabuleiro inicial, base de comparacao para empate
-    Tabuleiro tini ({   {'2', '1', '2'},
-                        {'0', '0', '0'},
-                        {'1', '2', '1'}     });
-
-    Tree* testree = new Tree(t1);
-
-    cout << testree->root << endl;
-
-    return 0;
-}*/

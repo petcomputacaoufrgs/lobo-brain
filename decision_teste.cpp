@@ -1,8 +1,14 @@
-//talvez nao deva ser uma main
-// mas sim uma parada do tipo joga_ai{}
+#include <vector>
+#include <string>
+#include <iostream>
+#include "tabuleiro.hpp"
+#include "tree.hpp"
+#include "VDE.hpp"
+
+
 int main() {
     
-        // tab.posicoesuleiro na posicao inicial
+        // tab.posicoes na posicao inicial
         // 0 = vazio
         // 1/2 = jogador
     
@@ -16,6 +22,14 @@ int main() {
         int rep = 0;
         // escolha de jogada
         Node *choice = decision(test_tree, test_tree->root, &rep);
+
+        //printa o tabuleiro que retorna a melhor jogada
+        for (int i=0; i<3; i++){
+            cout << endl;
+            for(int j=0; j<3; j++)
+                cout << choice->board->posicao << " ";
+        }
+        
     
     
-    }
+}

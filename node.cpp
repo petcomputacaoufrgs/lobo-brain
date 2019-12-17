@@ -35,20 +35,3 @@ Node::Node(Tabuleiro board)
     this->children.push_back(*newSon);
 }
 
-
-/*int main()
-{
-    vector<string> test00 = {"001", "100", "101"};
-    vector<string> test01 = {"000", "110", "100"};
-
-    cout << test00[1][1];
-
-    Node* NodeTest = new Node(test00);
-    Node* NodeSonT = new Node(test01);
-
-    NodeTest->addChildren(NodeSonT);
-
-    cout << "sou lindo" << endl;
-
-    return 0;
-}*/

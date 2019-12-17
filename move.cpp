@@ -124,11 +124,4 @@ std::vector<std::vector<int>> tapatanMoves(int player_pos)
    }
 }
 
-// int main()
-// {
-//       std::string x[3] = {"haha","hah","hah"};
 
-//       std::cout << x[0];
-
-//    return 0;
-// }
