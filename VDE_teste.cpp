@@ -4,6 +4,8 @@
 #include "tabuleiro.hpp"
 #include "VDE.hpp"
 
+using namespace std;
+
 // Main reservada à testes da função VDE, comentar se não for o caso
 int main()
 {

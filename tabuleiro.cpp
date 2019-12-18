@@ -1,5 +1,6 @@
 #include "tabuleiro.hpp"
 
+using namespace std;
 
 /**************************************************
 *	Estrutura tabuleiro:                          *

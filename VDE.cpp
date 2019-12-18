@@ -4,7 +4,7 @@
 #include "tabuleiro.hpp"
 #include "VDE.hpp"
 
-
+using namespace std;
 /*
 
 

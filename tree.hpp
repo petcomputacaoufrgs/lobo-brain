@@ -21,6 +21,7 @@ class Tree
         void setRoot(Node* root);//metodo setter para a raiz
         vector<Tabuleiro> generateBoards(Tabuleiro board, char player); 
         void generateChildren(Node* node, char player);//gera filhos da raiz
+        
 };
 
 #endif

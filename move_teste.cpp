@@ -9,9 +9,11 @@ using namespace std;
 
 int main()
 {
-    player_pos = 0
+    int player_pos = 0;
 
     vector<vector<int>> possible_mov = tapatanMoves(player_pos);
+
+    //for(vector<vector<int>>::iterator)
 
     return 0;
 }
