@@ -30,7 +30,7 @@ using namespace std;
 *                 deve-se implementar algo melhor para tabuleiros maiores   *
 *                 i.e. grafo                                                *
 *****************************************************************************/
-std::vector<std::vector<int>> tapatanMoves(int player_pos)
+vector<vector<int>> tapatanMoves(int player_pos)
 {
       vector<vector<int>> possible_mov;
       vector<int> ija;

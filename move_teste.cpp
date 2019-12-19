@@ -13,7 +13,6 @@ int main()
 
     vector<vector<int>> possible_mov = tapatanMoves(player_pos);
 
-    //for(vector<vector<int>>::iterator)
-
+   // deve-se varrer todo possible_mov, mas como nao sei cpp nao sei fazer isso :D
     return 0;
 }
