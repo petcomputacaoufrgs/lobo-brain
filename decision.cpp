@@ -1,12 +1,28 @@
 #include <vector>
 #include <string>
 #include <iostream>
+
+#include <unistd.h>
+
 #include "tabuleiro.hpp"
 #include "tree.hpp"
 #include "VDE.hpp"
 #include "decision.hpp"
 
 using namespace std;
+
+void printa_tab(Tabuleiro tab) {
+
+	for(int i=0; i<3; i++) {
+		for(int j=0; j<3; j++) {
+			cout << "| " << tab.posicoes[i][j] << " ";
+		}
+                cout << "|" << endl;
+	}
+
+	cout << "====================\n\n" << endl ;
+
+}
 
 /*****************************************************************************************
 *  	 max/min/decision(minimax):                                                          *
@@ -39,6 +55,10 @@ using namespace std;
 ******************************************************************************************/
 Node* max (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 
+	cout << "	MAX\n";
+	printa_tab(current_state->board);
+	usleep(10000);
+
 	// possivel jogada, analisada na iteracao
 	Node *possible_choice;
 	// verifica se é nodo terminal
@@ -46,6 +66,9 @@ Node* max (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 	
 	if(stt) {
 		// é terminal
+
+		cout << "\n\n\tESTADO TERMINAL MAX [" << stt << "]" << endl;
+
 		current_state->value = stt;
 		return current_state;
 	}
@@ -94,16 +117,23 @@ Node* max (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 
 Node* min (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 
+	cout << "	MIN\n";
+	printa_tab(current_state->board);
+	usleep(10000);
+
 	// aqui é tudo igual ao max mas da perspectiva do
 	// oponente entao fodase le o outro
 
 	Node *possible_choice;
-	int stt = funcaoVDE(current_state->board, game->root->board, '1', '2', n);
+	int stt = funcaoVDE(current_state->board, game->root->board, '2', '1', n);
 
 	// VERIFICAR SE EMPATE = 3
 	//	lembrar de criar (arrumar?) variavel empate global
 
 	if(stt) {
+
+		cout << "\n\n\tESTADO TERMINAL MIN [" << stt << "]" << endl;
+
 		current_state->value = stt;
 		return current_state;
 	}

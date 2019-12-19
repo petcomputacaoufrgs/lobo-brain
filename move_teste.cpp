@@ -7,12 +7,28 @@
 using namespace std;
 
 
+void printvet(vector <int> const &vet, int j) {
+   cout << "--> elementos do vetor [" << j << "]: ";
+   
+   for(int j=0; j < vet.size(); j++)
+      cout << vet.at(j) << ' ';
+
+    cout << endl;
+}
+
 int main()
 {
-    int player_pos = 0;
+    int i = 1;
+    int j = 1;
+    int player_pos = 3*i + j;
 
     vector<vector<int>> possible_mov = tapatanMoves(player_pos);
 
-   // deve-se varrer todo possible_mov, mas como nao sei cpp nao sei fazer isso :D
+   // funciona
+   // move = OK
+
+    for(int i = 0; i < possible_mov.size(); i++)
+        printvet(possible_mov.at(i), i);
+
     return 0;
 }

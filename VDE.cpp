@@ -106,17 +106,15 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
         if (tab.posicoes[1][1] == jogador && tab.posicoes[2][0] == jogador ||
             tab.posicoes[1][2] == jogador && tab.posicoes[2][2] == jogador)
         {
-            return 100;
+            return 200;
         }
     }
-    else if (tab.posicoes[1][1] == jogador && tab.posicoes[1][2] == jogador ||
-            tab.posicoes[1][0] == jogador && tab.posicoes[1][2] == jogador)
+    else if (tab.posicoes[1][1] == jogador)
     {
-        return 100;
-    }
-    else if (tab.posicoes[2][0] == jogador && tab.posicoes[2][1] == jogador && tab.posicoes[2][2] == jogador)
-    {
-        return 100;
+        if(tab.posicoes[0][1] == jogador && tab.posicoes[2][1] == jogador ||
+            tab.posicoes[1][0] == jogador && tab.posicoes[1][2] == jogador) {
+            return 300;
+        }
     }
 	
 	//testa derrota
@@ -134,17 +132,15 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
         if (tab.posicoes[1][1] == oponente && tab.posicoes[2][0] == oponente ||
             tab.posicoes[1][2] == oponente && tab.posicoes[2][2] == oponente)
         {
-            return -100;
+            return -200;
         }
     }
-    else if (tab.posicoes[1][1] == oponente && tab.posicoes[1][2] == oponente ||
-                tab.posicoes[1][0] == oponente && tab.posicoes[1][2] == oponente)
+    else if (tab.posicoes[1][1] == oponente)
     {
-        return -100;
-    }
-    else if (tab.posicoes[2][0] == oponente && tab.posicoes[2][1] == oponente && tab.posicoes[2][2] == oponente)
-    {
-        return -100;
+        if(tab.posicoes[0][1] == oponente && tab.posicoes[2][1] == oponente ||
+            tab.posicoes[1][0] == oponente && tab.posicoes[1][2] == oponente) {
+            return -300;
+        }
     }
 
     return 0;

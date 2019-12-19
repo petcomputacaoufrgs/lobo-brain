@@ -8,6 +8,15 @@
 
 using namespace std;
 
+void printvet(vector <int> const &vet, int j) {
+   cout << "--> elementos do vetor [" << j << "]: ";
+   
+   for(int j=0; j < vet.size(); j++)
+      cout << vet.at(j) << ' ';
+
+    cout << endl;
+}
+
 int main() {
     
         // tab.posicoes na posicao inicial
@@ -24,6 +33,10 @@ int main() {
         Tree* test_tree = new Tree(start);
         // repeticoes inicias
         int rep = 0;
+
+        // printa_tab(start);
+
+
         // escolha de jogada
         choice = decision(test_tree, test_tree->root, &rep);
 
