@@ -5,6 +5,8 @@
 #include "move.hpp"
 #include "node.hpp"
 
+
+// aparentemente as funcoes relacionadas a tree.cpp estao funcionando corretamente
 using namespace std;
 
 int main()
