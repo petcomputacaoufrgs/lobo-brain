@@ -1,3 +1,7 @@
+#include <iostream>
+#include <vector>
+#include "tree.hpp"
+#include "tabuleiro.hpp"
 #include "move.hpp"
 #include "node.hpp"
 
