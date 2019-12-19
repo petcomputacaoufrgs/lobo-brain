@@ -19,7 +19,6 @@ class Node
 
         void addChildren(Node* newChildren);
 };
-
 #endif
 
 // OK?

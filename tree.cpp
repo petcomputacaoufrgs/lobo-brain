@@ -98,12 +98,17 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
 
 
 
-//ISSO AQUI EU SIMPLEMENTE NAO FACO IDEIA OQ TA ROLANDO(??????????????????????????)
-// APARENTEMENTE ELE TA GERANDO OS FILHOS DE UM ESTADO ATUAL DE JOGO
-//MAS PRA MIM NAO FAZ NEHUM SENTIDO
+
 /*****************************************************************************************
 *   generateChildren:                                                                    *
-
+*       - Especificacao: a partir de um estado atual de jogo e um jogador,               *
+*       gera todos os possiveis tabuleiros a partir dop estado dado.                     *
+*                                                                                        *
+*       - Entrada: recebe como parametro o estado atual do jogo(nodo que contem o board) *
+*       e o jogador o qual se deve gerar as possiveis jogadas                            *
+*                                                                                        *
+*       - Observacao:                                                                    *
+*           - Os nodos filhos sao alocados dinamicamente na memoria, por isso é void     *
 ******************************************************************************************/
 void Tree::generateChildren(Node* current_state, char player)
 {
@@ -111,8 +116,10 @@ void Tree::generateChildren(Node* current_state, char player)
     Node* newChild;
     Tabuleiro board;
     
+    //Gera os possiveis tabuleiros a partir da posicao corrente (jogadas do player)
     possibleBoards = generateBoards(current_state->board, player); 
     
+    //Adiciona os filhos (Node que contem board) no respectivo Node pai
     for (vector<Tabuleiro>::iterator it = possibleBoards.begin(); it != possibleBoards.end(); it++)
     {
         newChild = new Node(*it);

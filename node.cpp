@@ -5,6 +5,9 @@
 using namespace std;
 
 // era vector<string>, agora eh char
+
+// aparentemente aqui esta com algum erro 
+// logico que nao esta  inicializando corretamente a classe Node
 Node::Node(Tabuleiro board)
 {
     /*cout << board.posicoes[2][2] << "criou Node" << endl;
@@ -28,8 +31,6 @@ Node::Node(Tabuleiro board)
 
  void Node::addChildren(Node* newSon)
 {
-    cout << "adiciona filho" << endl;
-
     //Node newSon = Node(board);
     newSon->parent = this;
     this->children.push_back(*newSon);
