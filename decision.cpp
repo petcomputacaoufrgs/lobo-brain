@@ -1,8 +1,10 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <stdlib.h>
 
 #include <unistd.h>
+#include <windows.h>
 
 #include "tabuleiro.hpp"
 #include "tree.hpp"
@@ -57,7 +59,8 @@ Node* max (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 
 	cout << "	MAX\n";
 	printa_tab(current_state->board);
-	usleep(10000);
+	//usleep(10000);
+	//Sleep(5000);
 
 	// possivel jogada, analisada na iteracao
 	Node *possible_choice;
@@ -80,6 +83,9 @@ Node* max (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 
 	// varre filhos do nodo atual, na procura da batida perfeita
 	for(int i=0; i < current_state->children.size(); i++) {
+
+		cout << i << ", " << current_state->children.size() << endl;
+		
 
 		/*
 
@@ -119,13 +125,14 @@ Node* min (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 
 	cout << "	MIN\n";
 	printa_tab(current_state->board);
-	usleep(10000);
+	//usleep(10000);
+	//Sleep(5000);
 
 	// aqui é tudo igual ao max mas da perspectiva do
 	// oponente entao fodase le o outro
 
 	Node *possible_choice;
-	int stt = funcaoVDE(current_state->board, game->root->board, '2', '1', n);
+	int stt = funcaoVDE(current_state->board, game->root->board, '1', '2', n);
 
 	// VERIFICAR SE EMPATE = 3
 	//	lembrar de criar (arrumar?) variavel empate global
@@ -140,6 +147,8 @@ Node* min (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 
 	game->generateChildren(current_state, '2');
 	for(int i=0; i < current_state->children.size(); i++) {
+
+		
 
 		possible_choice = max(game,
 			&(current_state->children[i]),

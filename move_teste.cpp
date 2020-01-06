@@ -10,7 +10,7 @@ using namespace std;
 // aparentemente as funcoes relacionadas a move.cpp estao funcionando corretamente
 int main()
 {
-    int player_pos = 4;
+    int player_pos = 7;
 
     vector<vector<int>> possible_mov = tapatanMoves(player_pos);
 

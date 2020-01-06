@@ -23,9 +23,9 @@ int main() {
         // 0 = vazio
         // 1/2 = jogador
     
-        Tabuleiro start ({	{'1', '2', '1'},
-                                {'0', '0', '0'},
-                                {'2', '1', '2'}		});
+        Tabuleiro start ({	{'1', '2', '0'},
+                            {'0', '1', '0'},
+                            {'1', '2', '2'}		});
 
         Node* choice;
     
@@ -45,6 +45,8 @@ int main() {
             //cout << endl;
             for(int j=0; j<3; j++)
                 cout << choice->board.posicoes[i][j] << " ";
+            
+            cout << endl;
         }
 
         return 0;
