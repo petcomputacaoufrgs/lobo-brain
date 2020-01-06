@@ -34,127 +34,121 @@ vector<vector<int>> tapatanMoves(int player_pos)
 {
       vector<vector<int>> possible_mov;
       //mais uma gambiarra fodida pra consertar uma gamiarra fodida
-      vector<int> ija;
-      vector<int> ijb;
-      vector<int> ijc;
-      vector<int> ijd;
-      vector<int> ije;
-      vector<int> ijf;
-      vector<int> ijg;
-      vector<int> ijh;
+      vector<int> ij[2];
+
       switch(player_pos)
       {
       case 0://(0,0)
-         ija.push_back(0); ija.push_back(1);
-         possible_mov.push_back(ija);
+         ij[0] = 0; ij[1] = 1;
+         possible_mov.push_back(ij);
 
-         ijb.push_back(1); ijb.push_back(0);
-         possible_mov.push_back(ijb);
+         ij[0] = 1; ij[1] = 0;
+         possible_mov.push_back(ij);
 
-         ijc.push_back(1); ijc.push_back(1);
-         possible_mov.push_back(ijc);
+         ij[0] = 1; ij[1] = 1;
+         possible_mov.push_back(ij);
 
          return possible_mov;
       case 1://(0,1)
-         ija.push_back(0); ija.push_back(0);
-         possible_mov.push_back(ija);
+         ij[0] = 0; ij[1] = 0;
+         possible_mov.push_back(ij);
 
-         ijb.push_back(1); ijb.push_back(1);
-         possible_mov.push_back(ijb);
+         ij[0] = 1; ij[1] = 1;
+         possible_mov.push_back(ij);
          
-         ijc.push_back(0); ijc.push_back(2);
-         possible_mov.push_back(ijc);
+         ij[0] = 0; ij[1] = 2;
+         possible_mov.push_back(ij);
          
          return possible_mov;
       case 2://(0,2)
-         ija.push_back(0); ija.push_back(1);
-         possible_mov.push_back(ija);
+         ij[0] = 0; ij[1] = 1;
+         possible_mov.push_back(ij);
          
-         ijb.push_back(1); ijb.push_back(1);
-         possible_mov.push_back(ijb);
+         ij[0] = 1; ij[1] = 1;
+         possible_mov.push_back(ij);
          
-         ijc.push_back(1); ijc.push_back(2);
-         possible_mov.push_back(ijc);
+         ij[0] = 1; ij[1] = 2;
+         possible_mov.push_back(ij);
          
          return possible_mov;
       case 3://(1,0)
-         ija.push_back(0); ija.push_back(0);
-         possible_mov.push_back(ija);
+         ij[0] = 0; ij[1] = 0;
+         possible_mov.push_back(ij);
 
-         ijb.push_back(1); ijb.push_back(1);
-         possible_mov.push_back(ijb);
+         ij[0] = 1; ij[1] = 1;
+         possible_mov.push_back(ij);
          
-         ija.push_back(2); ija.push_back(0);
-         possible_mov.push_back(ijc);
+         ij[0] = 2; ij[1] = 0;
+         possible_mov.push_back(ij);
          
          return possible_mov;
       case 4://(1,1)
-         ija.push_back(0); ija.push_back(0);
-         possible_mov.push_back(ija);
+         ij[0] = 0; ij[1] = 0;
+         possible_mov.push_back(ij);
          
-         ijb.push_back(0); ijb.push_back(1);
-         possible_mov.push_back(ijb);
+         ij[0] = 0; ij[1] = 1;
+         possible_mov.push_back(ij);
 
-         ijc.push_back(0); ijc.push_back(2);
-         possible_mov.push_back(ijc);
+         ij[0] = 0; ij[1] = 2;
+         possible_mov.push_back(ij);
          
-         ijd.push_back(1); ijd.push_back(0);
-         possible_mov.push_back(ijd);
+         ij[0] = 1; ij[1] = 0;
+         possible_mov.push_back(ij);
 
-         ije.push_back(1); ije.push_back(2);
-         possible_mov.push_back(ije);
+         ij[0] = 1; ij[1] = 2;
+         possible_mov.push_back(ij);
          
-         ijf.push_back(2); ijf.push_back(0);
-         possible_mov.push_back(ijf);
+         ij[0] = 2; ij[1] = 0;
+         possible_mov.push_back(ij);
          
-         ijg.push_back(2); ijg.push_back(1);
-         possible_mov.push_back(ijg);
+         ij[0] = 2; ij[1] = 1;
+         possible_mov.push_back(ij);
 
-         ijh.push_back(2); ijh.push_back(2);
-         possible_mov.push_back(ijh);
+         ij[0] = 2; ij[1] = 2;
+         possible_mov.push_back(ij);
          return possible_mov;
       case 5://(1,2)
-         ija.push_back(0); ija.push_back(2);
-         possible_mov.push_back(ija);
+         ij[0] = 0; ij[1] = 2;
+         possible_mov.push_back(ij);
 
-         ija.push_back(1); ijb.push_back(1);
-         possible_mov.push_back(ijb);
+         ij[0] = 1; ij[1] = 1;
+         possible_mov.push_back(ij);
 
-         ijc.push_back(2); ijc.push_back(2);
-         possible_mov.push_back(ijc);
+         ij[0] = 2; ij[1] = 2;
+         possible_mov.push_back(ij);
          
          return possible_mov;
       case 6://(2,0)
-         ija.push_back(2); ija.push_back(1);
-         possible_mov.push_back(ija);
+         ij[0] = 2; ij[1] = 1;
+         possible_mov.push_back(ij);
          
-         ijb.push_back(1); ijb.push_back(0);
-         possible_mov.push_back(ijb);
+         ij[0] = 1; ij[1] = 0;
+         possible_mov.push_back(ij);
          
-         ijc.push_back(1); ijc.push_back(1);
-         possible_mov.push_back(ijc);
+         ij[0] = 1; ij[1] = 1;
+         possible_mov.push_back(ij);
          
          return possible_mov;
       case 7://(2,1)
-         ija.push_back(2); ija.push_back(0);
-         possible_mov.push_back(ija);
+         ij[0] = 2; ij[1] = 0;
+         possible_mov.push_back(ij);
          
-         ijb.push_back(1); ijb.push_back(1);
-         possible_mov.push_back(ijb);
+         ij[0] = 1; ij[1] = 1;
+         possible_mov.push_back(ij);
          
-         ijc.push_back(2); ijc.push_back(2);
-         possible_mov.push_back(ijc);
+         ij[0] = 2; ij[1] = 2;
+         possible_mov.push_back(ij);
          
          return possible_mov;
       case 8://(2,2)
-         ija.push_back(2); ija.push_back(1);
-         possible_mov.push_back(ija);
+         ij[0] = 2; ij[1] = 1;
+         possible_mov.push_back(ij);
 
-         ijb.push_back(1); ijb.push_back(1);
-         possible_mov.push_back(ijb);
+         ij[0] = 1; ij[1] = 1;
+         possible_mov.push_back(ij);
          
-         ijc.push_back(1); ijc.push_back(2);
-         possible_mov.push_back(ijc);
+         ij[0] = 1; ij[1] = 2;
+         possible_mov.push_back(ij);
          
          return possible_mov;
    }
