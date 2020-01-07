@@ -50,7 +50,9 @@ bool empate(int rep) {
 *			- Recebe umaa arvore do jogo, sempre criando filhos (possiveis jogadas)      *
 *			recursivamente ao longo da execucao, o estado atual do jogo, alpha,          *
 *			beta, e o numero de repeticoes do estado atual do jogo                       *
-*			(condicao de parada para controlar o caso de empate)                         *
+*			(condicao de parada para controlar o caso de empate), a profundidade atual   *
+*           que se encontra a  busca e um booleno para verificar se eh ou nao o jogador  *
+*           que devemos maximizar a jogada                                               *
 *                                                                                        *
 * 		- Saida:                                                                         *
 *			- Retorna ou o beta ou o alpha dependendo da melhor jogada,                  *
@@ -113,34 +115,36 @@ int minimax(Tree *game, Node *current_state, int alpha,
 
 
 	/* CASOS NÃO TERMINAIS */
-
 	if(isMax) {
+		// MAXIMIZING
 
 		int best = alpha;
-
+		// Gera as opossiveis jogadas a partir do estado atual do jogo
 		game->generateChildren(current_state, '1');
 
+		// Varre todos os filhos (tabuleiros) gerados
 		for(int i = 0; i < current_state->children.size(); i++){
 
 			// printa_tab(current_state->children[i]->board);
 
 			int possible_choice = minimax(game, current_state->children[i],
-																			alpha, beta, rep, !isMax, depth + 1);
+								          alpha, beta, rep, !isMax, depth + 1);
 
 			// printf("\nalpha = %d, beta = %d, best = %d, prof = %d, end = %p\n", alpha, beta, best, depth, &current_state);
 
+			// Encontra o melhor valor heuristico ate o estado atual do jogo
 			best = max(best, possible_choice);
 			alpha = max(alpha, best);
 
+			// Alpha-Beta prunning
 			if(beta <= alpha)
-					return best;
+				return best;
 		}
 		return best;
 
 	}else{
 
-		/* MINIMIZAR */
-
+		// MINIMIZING
 		int best = beta;
 
 		// Popula toda a arvore de possibilidades
@@ -161,53 +165,16 @@ int minimax(Tree *game, Node *current_state, int alpha,
 			best = min(best, possible_choice);
 			beta = min(beta, best);
 
-			// poda
+			// Alpha-Beta prunning
 			if(beta <= alpha)
-					return best;
+				return best;
+
 		}// Fim das recursoes
+		// Retorna o valor heuristico da melhor jogada
 		return best;
 	}
 }
 
-
-/*
-
-	***********************8
-	moveVal == currentChoice->value
-	bestMove == bestChoice->board
-
-	Node* bestChoice;
-	Node* currentChoice;
-
-*/
-
-
-
-// executa tudo e ve qual é a melhor jogada
-// Node* decision(Tree *game, Node *current_state, int *n) {
-//
-// 	Tabuleiro gen ( {	{'0','0','0'},
-// 										{'0','0','0'},
-// 										{'0','0','0'}	} );
-//
-// 	// inicializar alpha e beta "vazios"
-// 	Node *alpha = new Node(gen);
-// 	Node *beta 	= new Node(gen);
-//
-// 	//nossos infinitos
-// 	alpha->value = -10000;
-// 	beta->value	 = 10000;
-//
-// 	// inicializar jogada
-// 	Node *choice;
-//
-// 	// escolher jogada
-// 	choice = max(game, current_state, alpha, beta, n);
-//
-// 	// retornar a jogada escolhida
-// 	return choice;
-//
-// }
 
 
 Node* decision(Tree *game, Node *current_state, int *rep) {
@@ -220,14 +187,16 @@ Node* decision(Tree *game, Node *current_state, int *rep) {
 	int currentChoice;
 	Node* bestChoice;
 
+	// Gera as possiveis jogadas a partir do estado atual do jogo
 	game->generateChildren(current_state, '1');
 
+	// Varre todas as possiveis jogadas selecionando a melhor delas
 	for(int i = 0; i < current_state->children.size(); i++){
-		// cout << "aaaaaaaaaaaaaa" << endl;
+			// Encontra a melhor jogada atraves do retorno do valor heuristico
 			currentChoice = minimax(game, current_state->children[i],
 			alpha, beta, rep, false, 1);
-			// cout << "bbbbbb" << endl;
 
+			// Verifica se eh a melhor jogada a ser realizada
 			if (currentChoice > alpha){
 				alpha = currentChoice;
 				bestChoice = current_state->children[i];
@@ -235,7 +204,7 @@ Node* decision(Tree *game, Node *current_state, int *rep) {
 			}
 	}
 
-	cout << "melhor valor heuristico: " << bestChoice->value << endl;
+	//cout << "melhor valor heuristico: " << bestChoice->value << endl;
 
 	// retornar a jogada escolhida
 	return bestChoice;

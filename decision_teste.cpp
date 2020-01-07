@@ -14,9 +14,9 @@ int main() {
         // 0 = vazio
         // 1/2 = jogador
 
-        Tabuleiro start ({	{'1', '2', '0'},
-                            {'0', '1', '0'},
-                            {'1', '2', '2'}		});
+        Tabuleiro start ({{'2', '0', '1'},
+                          {'0', '1', '2'},
+                          {'2', '1', '0'}});
 
         Node* choice;
 
