@@ -25,7 +25,7 @@ void Tree::setRoot(Node* root)
 *           - Gera os possiveis tabuleiros (jogadas) a partir de um tabuleiro            *
 *           atual dado,*ou seja, gera as possiveis jogadas que a maquina                 *
 *           pode fazer a partir de um estado de jogo                                     *
-*                                                                                        *  
+*                                                                                        *
 *       - Entardas:                                                                      *
 *           - Recebe como entrada um tabuleiro (estado atual do jogo) e o jogador atual  *
 *       - Saida:                                                                         *
@@ -50,12 +50,12 @@ void Tree::setRoot(Node* root)
 //POIS A POSICAO DO TABULEIRO vector<vector<char>>
 //ENTAO ACHO QUE FAZ SENTIDO
 
-// ALTEREI O MODO DE ACESSO A POSICAO DO TABULEIRO, O 'String board[3]' 
+// ALTEREI O MODO DE ACESSO A POSICAO DO TABULEIRO, O 'String board[3]'
 //QUE ERA PASSADO COMO PARAMETRO FOI SUBSTTUIDO 'Tabuleiro board'
 
 //DESSA FORMA, O ACESSO AS POSICOES DO TABULEIRO SERA 'board.posicao[i][j]
 
-// A GAMBIARRA FODIDA QUE FIZERAM AQUI AINDA CONTINUA ILEGIVEL E CONTINUO 
+// A GAMBIARRA FODIDA QUE FIZERAM AQUI AINDA CONTINUA ILEGIVEL E CONTINUO
 // NAO ENTENDENDO, MAS MEIO QUE COMENTEI OQ EU ACHO QUE DEVERIA FAZER
 
 
@@ -66,10 +66,10 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
 
     vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
 
-    cout << board.posicoes.size() << endl;
-    for (auto vec : board.posicoes) {
-        cout << "AA " << vec.size() << endl;
-    }
+    // cout << board.posicoes.size() << endl;
+    // for (auto vec : board.posicoes) {
+    //     cout << "AA " << vec.size() << endl;
+    // }
     for(i=0;i<3;i++)
     {
         for(j=0;j<3;j++)
@@ -84,7 +84,7 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
                     {
                         //gambiarra fodida pois n sei cpp quem quiser melhorar pode dale
                         Tabuleiro newBoard = board;
-                        cout << "x = " << it->at(0) << ", y = " << it->at(1) << endl;
+                        // cout << "x = " << it->at(0) << ", y = " << it->at(1) << endl;
                         newBoard.posicoes[it->at(0)][it->at(1)] = player;//gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
                         newBoard.posicoes[i][j] = '0';//quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
 
@@ -120,10 +120,10 @@ void Tree::generateChildren(Node* current_state, char player)
     vector<Tabuleiro> possibleBoards;
     Node* newChild;
     Tabuleiro board;
-    
+
     //Gera os possiveis tabuleiros a partir da posicao corrente (jogadas do player)
-    possibleBoards = this->generateBoards(current_state->board, player); 
-    
+    possibleBoards = this->generateBoards(current_state->board, player);
+
     //Adiciona os filhos (Node que contem board) no respectivo Node pai
     for (vector<Tabuleiro>::iterator it = possibleBoards.begin(); it != possibleBoards.end(); it++)
     {
@@ -131,4 +131,3 @@ void Tree::generateChildren(Node* current_state, char player)
         current_state->addChildren(newChild);
     }
 }
-

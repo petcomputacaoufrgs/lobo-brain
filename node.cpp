@@ -6,7 +6,7 @@ using namespace std;
 
 // era vector<string>, agora eh char
 
-// aparentemente aqui esta com algum erro 
+// aparentemente aqui esta com algum erro
 // logico que nao esta  inicializando corretamente a classe Node
 Node::Node(Tabuleiro board)
 {
@@ -33,6 +33,5 @@ Node::Node(Tabuleiro board)
 {
     //Node newSon = Node(board);
     newSon->parent = this;
-    this->children.push_back(*newSon);
+    this->children.push_back(newSon);
 }
-

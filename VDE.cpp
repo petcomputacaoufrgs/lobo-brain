@@ -64,6 +64,7 @@ CORNO
 
 int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
 {
+
     int cont = 0;
 
     //testa empate
@@ -82,11 +83,12 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
 // o hummes é corno
 
     // Tabuleiro igual ao do comeco -> empate
+    // Retorna 0 e incrementa repeticoes do tab inicial
     if (cont == 9)
     {
         (*repeticoes_inicial)++;
         if (*repeticoes_inicial == 3) {
-            return -1;
+            return 0;
         }
     }
 
@@ -106,14 +108,14 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
         if (tab.posicoes[1][1] == jogador && tab.posicoes[2][0] == jogador ||
             tab.posicoes[1][2] == jogador && tab.posicoes[2][2] == jogador)
         {
-            return 200;
+            return 100;
         }
     }
     else if (tab.posicoes[1][1] == jogador)
     {
         if(tab.posicoes[0][1] == jogador && tab.posicoes[2][1] == jogador ||
             tab.posicoes[1][0] == jogador && tab.posicoes[1][2] == jogador) {
-            return 300;
+            return 100;
         }
     }
 	
@@ -132,14 +134,14 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
         if (tab.posicoes[1][1] == oponente && tab.posicoes[2][0] == oponente ||
             tab.posicoes[1][2] == oponente && tab.posicoes[2][2] == oponente)
         {
-            return -200;
+            return -100;
         }
     }
     else if (tab.posicoes[1][1] == oponente)
     {
         if(tab.posicoes[0][1] == oponente && tab.posicoes[2][1] == oponente ||
             tab.posicoes[1][0] == oponente && tab.posicoes[1][2] == oponente) {
-            return -300;
+            return -100;
         }
     }
 

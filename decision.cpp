@@ -2,9 +2,10 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include <unistd.h>
-#include <windows.h>
+// #include <windows.h>
 
 #include "tabuleiro.hpp"
 #include "tree.hpp"
@@ -12,6 +13,8 @@
 #include "decision.hpp"
 
 using namespace std;
+
+const int DEPTH_MAX = 2;
 
 void printa_tab(Tabuleiro tab) {
 
@@ -24,6 +27,13 @@ void printa_tab(Tabuleiro tab) {
 
 	cout << "====================\n\n" << endl ;
 
+}
+
+bool empate(int rep) {
+	if(rep == 3) {
+		return true;
+	}
+	return false;
 }
 
 /*****************************************************************************************
@@ -40,7 +50,7 @@ void printa_tab(Tabuleiro tab) {
 *			- Recebe umaa arvore do jogo, sempre criando filhos (possiveis jogadas)      *
 *			recursivamente ao longo da execucao, o estado atual do jogo, alpha,          *
 *			beta, e o numero de repeticoes do estado atual do jogo                       *
-*			(condicao de parada para controlar o caso de empate)                         *	
+*			(condicao de parada para controlar o caso de empate)                         *
 *                                                                                        *
 * 		- Saida:                                                                         *
 *			- Retorna ou o beta ou o alpha dependendo da melhor jogada,                  *
@@ -55,143 +65,179 @@ void printa_tab(Tabuleiro tab) {
 *			para podar um detrminado ramo aleatorio da arvore                            *
 *                                                                                        *
 ******************************************************************************************/
-Node* max (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
+int minimax(Tree *game, Node *current_state, int alpha,
+			  int beta, int *rep, bool isMax, int depth) {
 
-	cout << "	MAX\n";
-	printa_tab(current_state->board);
-	//usleep(10000);
-	//Sleep(5000);
+// if(isMax) {
+// 	cout << "\tMAX" << endl;
+// }else{
+// 	cout << "\tMIN" << endl;
+// }
 
-	// possivel jogada, analisada na iteracao
-	Node *possible_choice;
-	// verifica se é nodo terminal
-	int stt = funcaoVDE(current_state->board, game->root->board, '1', '2', n);
-	
-	if(stt) {
-		// é terminal
+	// printa_tab(current_state->board);
+	usleep(200000);
 
-		cout << "\n\n\tESTADO TERMINAL MAX [" << stt << "]" << endl;
 
-		current_state->value = stt;
-		return current_state;
+	// Valoração do tabuleiro atual
+	int score = funcaoVDE(current_state->board, game->root->board, '1', '2', rep);
+
+
+	/* CASOS TERMINAIS */
+
+	// Ganhou
+	if(score == 100) {
+		cout << "TERMINAL 100" << endl;
+		return score - depth;
 	}
 
-	// n terminal
+	// Perdeu
+	if(score == -100) {
+	cout << "TERMINAL -100" << endl;
+		return score + depth;
+	}
 
-	// popula arvore de possibilidades
-	game->generateChildren(current_state, '1');
+	// Nem quem ganhar vai perder e nem quem perder vai ganhar
+	if(empate(*rep)) {
+		cout << "TERMINAL 0" << endl;
+		return 0;
+	}
 
-	// varre filhos do nodo atual, na procura da batida perfeita
-	for(int i=0; i < current_state->children.size(); i++) {
+	// printf("\nprof = %d, max = %d\n", depth, DEPTH_MAX);
 
-		cout << i << ", " << current_state->children.size() << endl;
-		
+	// Atingiu a profundidade máxima
+	if(depth >= DEPTH_MAX) {
+		cout << "TERMINAL POR PROFUNDIDADE" << endl;
+		cout << "VDE = " << score << endl;
+		return score;
+	}
 
-		/*
 
-		PARA FAZER NIVEIS DE DIFICULDADE
-			- a ideia é podar a árvore aleatoriamente
-			com base na dificuldade selecionada
-			- ter um valor base
+	/* CASOS NÃO TERMINAIS */
 
-		if(proba < valor corte) {
-			continue; //'pula essa rodada do for'
+	if(isMax) {
+
+		int best = alpha;
+
+		game->generateChildren(current_state, '1');
+
+		for(int i = 0; i < current_state->children.size(); i++){
+
+			// printa_tab(current_state->children[i]->board);
+
+			int possible_choice = minimax(game, current_state->children[i],
+																			alpha, beta, rep, !isMax, depth + 1);
+
+			// printf("\nalpha = %d, beta = %d, best = %d, prof = %d, end = %p\n", alpha, beta, best, depth, &current_state);
+
+			best = max(best, possible_choice);
+			alpha = max(alpha, best);
+
+			if(beta <= alpha)
+					return best;
 		}
+		return best;
 
+	}else{
 
-		*/
+		/* MINIMIZAR */
 
-		// vai pros casos minimais da situacao atual
-		possible_choice = min(game,
-			&(current_state->children[i]),
-			alpha,
-			beta,
-			n);
+		int best = beta;
 
-		// troca alpha pelo valor da melhor jogada
-		if(possible_choice->value > alpha->value)
-			alpha = possible_choice;
+		// Popula toda a arvore de possibilidades
+		game->generateChildren(current_state, '2');
 
-		// tenta realizar poda alpha-beta
-		if(beta->value <= alpha->value)
-			return beta;
+		// Varre filhos do nodo atual, na procura da batida perfeita
+		for(int i = 0; i < current_state->children.size(); i++){
+
+			// printa_tab(current_state->children[i]->board);
+
+			// Recursao, comecando pela esquerda dps filhos e incrementando profundidade
+			int possible_choice = minimax(game, current_state->children[i],
+																			alpha, beta, rep, !isMax, depth + 1);
+
+			// printf("\nalpha = %d, beta = %d, best = %d, prof = %d, end = %p\n", alpha, beta, best, depth, &current_state);
+
+			// Verifica se o resultado da recursao foi melhor do que aquele que se tem
+			best = min(best, possible_choice);
+			beta = min(beta, best);
+
+			// poda
+			if(beta <= alpha)
+					return best;
+		}// Fim das recursoes
+		return best;
 	}
-
-	// retorna a melhor jogada maximal
-	return alpha;
 }
 
-Node* min (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n) {
 
-	cout << "	MIN\n";
-	printa_tab(current_state->board);
-	//usleep(10000);
-	//Sleep(5000);
+/*
 
-	// aqui é tudo igual ao max mas da perspectiva do
-	// oponente entao fodase le o outro
+	***********************8
+	moveVal == currentChoice->value
+	bestMove == bestChoice->board
 
-	Node *possible_choice;
-	int stt = funcaoVDE(current_state->board, game->root->board, '1', '2', n);
+	Node* bestChoice;
+	Node* currentChoice;
 
-	// VERIFICAR SE EMPATE = 3
-	//	lembrar de criar (arrumar?) variavel empate global
+*/
 
-	if(stt) {
-
-		cout << "\n\n\tESTADO TERMINAL MIN [" << stt << "]" << endl;
-
-		current_state->value = stt;
-		return current_state;
-	}
-
-	game->generateChildren(current_state, '2');
-	for(int i=0; i < current_state->children.size(); i++) {
-
-		
-
-		possible_choice = max(game,
-			&(current_state->children[i]),
-			alpha,
-			beta,
-			n);
-
-		if(possible_choice->value < beta->value)
-			beta = possible_choice;
-
-		if(beta->value <= alpha->value)
-			return alpha;
-	}
-
-	return beta;
-
-}
 
 
 // executa tudo e ve qual é a melhor jogada
-Node* decision(Tree *game, Node *current_state, int *n) {
+// Node* decision(Tree *game, Node *current_state, int *n) {
+//
+// 	Tabuleiro gen ( {	{'0','0','0'},
+// 										{'0','0','0'},
+// 										{'0','0','0'}	} );
+//
+// 	// inicializar alpha e beta "vazios"
+// 	Node *alpha = new Node(gen);
+// 	Node *beta 	= new Node(gen);
+//
+// 	//nossos infinitos
+// 	alpha->value = -10000;
+// 	beta->value	 = 10000;
+//
+// 	// inicializar jogada
+// 	Node *choice;
+//
+// 	// escolher jogada
+// 	choice = max(game, current_state, alpha, beta, n);
+//
+// 	// retornar a jogada escolhida
+// 	return choice;
+//
+// }
 
-	Tabuleiro gen ( {	{'0','0','0'},
-						{'0','0','0'},
-						{'0','0','0'}	} );
 
-	// inicializar alpha e beta "vazios"
-	Node *alpha = new Node(gen);
-	Node *beta 	= new Node(gen);
+Node* decision(Tree *game, Node *current_state, int *rep) {
 
 	//nossos infinitos
-	alpha->value = -100000;
-	beta->value	 = 100000;
+	int alpha = -10000;
+	int beta = 10000;
 
 	// inicializar jogada
-	Node *choice;
+	int currentChoice;
+	Node* bestChoice;
 
-	// escolher jogada
-	choice = max(game, current_state, alpha, beta, n);
+	game->generateChildren(current_state, '1');
+
+	for(int i = 0; i < current_state->children.size(); i++){
+		// cout << "aaaaaaaaaaaaaa" << endl;
+			currentChoice = minimax(game, current_state->children[i],
+			alpha, beta, rep, false, 1);
+			// cout << "bbbbbb" << endl;
+
+			if (currentChoice > alpha){
+				alpha = currentChoice;
+				bestChoice = current_state->children[i];
+				bestChoice->value = alpha;
+			}
+	}
+
+	cout << "melhor valor heuristico: " << bestChoice->value << endl;
 
 	// retornar a jogada escolhida
-	return choice;
+	return bestChoice;
 
 }
-
-

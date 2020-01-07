@@ -12,7 +12,7 @@ class Node
     public:
         int value;
         Node *parent;
-        vector<Node> children;
+        vector<Node*> children;
         Tabuleiro board;
 
         Node(Tabuleiro board);

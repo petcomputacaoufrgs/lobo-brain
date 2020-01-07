@@ -9,9 +9,8 @@
 #include "VDE.hpp"
 
 using namespace std;
-
-Node* max (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n);
-Node* min (Tree *game, Node *current_state, Node *alpha, Node *beta, int *n);
-Node* decision(Tree *game, Node *current_state, int *n);
+int minimax(Tree *game, Node *current_state, int alpha, int beta, int *rep, bool isMax, int depth);
+Node* decision(Tree *game, Node *current_state, int *rep);
+void printa_tab(Tabuleiro tab);
 
 #endif
