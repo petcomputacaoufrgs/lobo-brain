@@ -16,6 +16,8 @@ using namespace std;
 
 const int DEPTH_MAX = 2;
 
+	/* FUNÇÔES AUXILIARES */
+
 void printa_tab(Tabuleiro tab) {
 
 	for(int i=0; i<3; i++) {
@@ -37,7 +39,7 @@ bool empate(int rep) {
 }
 
 /*****************************************************************************************
-*  	 max/min/decision(minimax):                                                          *
+*  	 minimax/decision(minimax):                                                          *
 *       - Especificacao:                                                                 *
 *			- Executa o algoritmo minimax with alpha-beta pruning a fim de encontrar     *
 *			a melhor jogada para a maquina realizar, ou seja, o algortimo executa uma    *
@@ -70,13 +72,6 @@ bool empate(int rep) {
 int minimax(Tree *game, Node *current_state, int alpha,
 			  int beta, int *rep, bool isMax, int depth) {
 
-// if(isMax) {
-// 	cout << "\tMAX" << endl;
-// }else{
-// 	cout << "\tMIN" << endl;
-// }
-
-	// printa_tab(current_state->board);
 	usleep(200000);
 
 
@@ -87,50 +82,39 @@ int minimax(Tree *game, Node *current_state, int alpha,
 	/* CASOS TERMINAIS */
 
 	// Ganhou
-	if(score == 100) {
-		cout << "TERMINAL 100" << endl;
+	if(score == 100)
 		return score - depth;
-	}
 
 	// Perdeu
-	if(score == -100) {
-	cout << "TERMINAL -100" << endl;
+	if(score == -100)
 		return score + depth;
-	}
 
 	// Nem quem ganhar vai perder e nem quem perder vai ganhar
-	if(empate(*rep)) {
-		cout << "TERMINAL 0" << endl;
+	if(empate(*rep))
 		return 0;
-	}
-
-	// printf("\nprof = %d, max = %d\n", depth, DEPTH_MAX);
 
 	// Atingiu a profundidade máxima
-	if(depth >= DEPTH_MAX) {
-		cout << "TERMINAL POR PROFUNDIDADE" << endl;
-		cout << "VDE = " << score << endl;
+	if(depth >= DEPTH_MAX)
 		return score;
-	}
 
 
 	/* CASOS NÃO TERMINAIS */
+
+
 	if(isMax) {
+
 		// MAXIMIZING
 
 		int best = alpha;
+
 		// Gera as opossiveis jogadas a partir do estado atual do jogo
 		game->generateChildren(current_state, '1');
 
 		// Varre todos os filhos (tabuleiros) gerados
 		for(int i = 0; i < current_state->children.size(); i++){
 
-			// printa_tab(current_state->children[i]->board);
-
 			int possible_choice = minimax(game, current_state->children[i],
 								          alpha, beta, rep, !isMax, depth + 1);
-
-			// printf("\nalpha = %d, beta = %d, best = %d, prof = %d, end = %p\n", alpha, beta, best, depth, &current_state);
 
 			// Encontra o melhor valor heuristico ate o estado atual do jogo
 			best = max(best, possible_choice);
@@ -139,7 +123,9 @@ int minimax(Tree *game, Node *current_state, int alpha,
 			// Alpha-Beta prunning
 			if(beta <= alpha)
 				return best;
-		}
+		}	//Fim das recursoes
+
+		// Retorna o valor heuristico da melhor jogada
 		return best;
 
 	}else{
@@ -153,13 +139,9 @@ int minimax(Tree *game, Node *current_state, int alpha,
 		// Varre filhos do nodo atual, na procura da batida perfeita
 		for(int i = 0; i < current_state->children.size(); i++){
 
-			// printa_tab(current_state->children[i]->board);
-
 			// Recursao, comecando pela esquerda dps filhos e incrementando profundidade
 			int possible_choice = minimax(game, current_state->children[i],
 																			alpha, beta, rep, !isMax, depth + 1);
-
-			// printf("\nalpha = %d, beta = %d, best = %d, prof = %d, end = %p\n", alpha, beta, best, depth, &current_state);
 
 			// Verifica se o resultado da recursao foi melhor do que aquele que se tem
 			best = min(best, possible_choice);
@@ -170,6 +152,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 				return best;
 
 		}// Fim das recursoes
+
 		// Retorna o valor heuristico da melhor jogada
 		return best;
 	}
@@ -192,16 +175,18 @@ Node* decision(Tree *game, Node *current_state, int *rep) {
 
 	// Varre todas as possiveis jogadas selecionando a melhor delas
 	for(int i = 0; i < current_state->children.size(); i++){
+
 			// Encontra a melhor jogada atraves do retorno do valor heuristico
 			currentChoice = minimax(game, current_state->children[i],
 			alpha, beta, rep, false, 1);
 
-			// Verifica se eh a melhor jogada a ser realizada
+			// Verifica se é a melhor jogada a ser realizada
 			if (currentChoice > alpha){
 				alpha = currentChoice;
 				bestChoice = current_state->children[i];
 				bestChoice->value = alpha;
 			}
+
 	}
 
 	//cout << "melhor valor heuristico: " << bestChoice->value << endl;

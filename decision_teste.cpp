@@ -22,6 +22,7 @@ int main() {
 
         // gera arvore do inicio
         Tree* test_tree = new Tree(start);
+        
         // repeticoes inicias
         int rep = 0;
 

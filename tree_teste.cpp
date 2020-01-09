@@ -22,7 +22,7 @@ void printChildren(Node* root)
         for (vector<Node>::iterator it = root->children.begin(); it != root->children.end(); it++)
         {
             printChildren(&*it);
-        }    
+        }
     }
 }
 
@@ -31,15 +31,17 @@ int main()
     Tabuleiro tini ({   {'2', '1', '2'},
                         {'0', '0', '0'},
                         {'1', '2', '1'}     });
+
     Tree* treeTest = new Tree(tini);
     Tree* treeTest1 = new Tree(tini);
     treeTest->generateChildren(treeTest->root, '1');
+
     // a ideia desse laco é printar todos os tabuleiros possiveis a partir do NodeTest que seria o 'current_state'
     printChildren(treeTest->root);
 
     treeTest1->generateChildren(treeTest1->root, '2');
     // a ideia desse laco é printar todos os tabuleiros possiveis a partir do NodeTest que seria o 'current_state'
     printChildren(treeTest1->root);
-    
+
     return 0;
 }
