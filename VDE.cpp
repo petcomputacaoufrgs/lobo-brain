@@ -5,26 +5,6 @@
 #include "VDE.hpp"
 
 using namespace std;
-/*
-
-
-ESTA MERDA FUNCIONA
-
-SE FOR ALTERAR FAZ ALGUM BACKUP
-
-CORNO
-
-
-*/
-
-
-
-// OLD MAS SALVO PQ VAI Q NEH
-// variavel global para contar
-//  quantas vezes chegou a posicao inicial
-// int empate = 0;
-
-
 
 /***********************************************************************************************
 *   funcaoVDE:                                                                                 *
@@ -59,7 +39,7 @@ CORNO
 *           da pontuacao desse ramo.                                                           *
 *                                                                                              *
 *      - Mudancas importantes:                                                                 *
-*           - Incrementava a variavel 'empate' caso ocorresse empate                           * 
+*           - Incrementava a variavel 'empate' caso ocorresse empate                           *
 ************************************************************************************************/
 
 int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
@@ -118,7 +98,7 @@ int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int
             return 100;
         }
     }
-	
+
 	//testa derrota
 	if (tab.posicoes[0][0] == oponente)
     {

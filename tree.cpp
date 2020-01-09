@@ -4,6 +4,7 @@
 #include "tabuleiro.hpp"
 #include "move.hpp"
 #include "node.hpp"
+#include "decision.hpp"
 
 using namespace std;
 
@@ -40,10 +41,6 @@ void Tree::setRoot(Node* root)
 *           e adiciona no vetor a ser devolvido                                          *
 ******************************************************************************************/
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//LEEEEEEEEEEEEEEEEEEEEE ESSAAAAAAAAAA PORRAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-
 //MANO
 //ALTEREI ESSA PORRA
 //TUDO QUE TINHA vector<vector<vector<char>>> EU MUDEI PARA vector<Tabuleiro>,
@@ -58,7 +55,6 @@ void Tree::setRoot(Node* root)
 // A GAMBIARRA FODIDA QUE FIZERAM AQUI AINDA CONTINUA ILEGIVEL E CONTINUO
 // NAO ENTENDENDO, MAS MEIO QUE COMENTEI OQ EU ACHO QUE DEVERIA FAZER
 
-
 vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
 {
     int i,j, player_pos;
@@ -66,10 +62,6 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
 
     vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
 
-    // cout << board.posicoes.size() << endl;
-    // for (auto vec : board.posicoes) {
-    //     cout << "AA " << vec.size() << endl;
-    // }
     for(i=0;i<3;i++)
     {
         for(j=0;j<3;j++)
@@ -78,25 +70,24 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
             {
                 player_pos = 3*i+j;//realiza uma aritmetica para determinar a posicao do jogador no tabuleiro
                 possible_mov = tapatanMoves(player_pos);
+
                 for(vector<vector<int>>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)//varre todas as posicoes do tabuleiro
                 {
                     if(board.posicoes[it->at(0)][it->at(1)] == '0')//verifica se a posicao do tabuleiro esta vazia para poder realizar a possivel movimentacao
                     {
                         //gambiarra fodida pois n sei cpp quem quiser melhorar pode dale
                         Tabuleiro newBoard = board;
-                        // cout << "x = " << it->at(0) << ", y = " << it->at(1) << endl;
                         newBoard.posicoes[it->at(0)][it->at(1)] = player;//gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
                         newBoard.posicoes[i][j] = '0';//quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
 
-                        //!!
-                        possibleBoards.push_back(newBoard);//ISSO EU ACHO Q TEM QUE MUDAR, PQ ACHO QUE NAO É MAIS ISSO
-                        //SEPA TINHA QUE SER ALGO DO TIPO SLA NAO FACO IDEIA PENSA AI
+                        possibleBoards.push_back(newBoard);
                     }
 
                 }
             }
         }
     }
+
     return possibleBoards;
 }
 

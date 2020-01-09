@@ -28,9 +28,9 @@ void printChildren(Node* root)
 
 int main()
 {
-    Tabuleiro tini ({   {'2', '1', '2'},
-                        {'0', '0', '0'},
-                        {'1', '2', '1'}     });
+    Tabuleiro tini ({ {'2', '1', '0'},
+                      {'0', '2', '0'},
+                      {'2', '1', '1'}});
 
     Tree* treeTest = new Tree(tini);
     Tree* treeTest1 = new Tree(tini);

@@ -3,18 +3,19 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
-
-#include <unistd.h>
-// #include <windows.h>
-
 #include "tabuleiro.hpp"
 #include "tree.hpp"
 #include "VDE.hpp"
 #include "decision.hpp"
 
+#include <unistd.h>				// Uncomment 4 linux
+// #include <windows.h>			// Uncomment 4 windows
+
 using namespace std;
 
+
 	/* FUNÇÔES AUXILIARES */
+
 
 void printa_tab(Tabuleiro tab) {
 
@@ -77,6 +78,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 
 	/* CASOS TERMINAIS */
 
+
 	// Ganhou
 	if(score == 100) {
 		current_state->value = score - depth;
@@ -96,7 +98,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 }
 	// Atingiu a profundidade máxima
 	if(depth >= max_depth) {
-		current_state->value = score;
+		current_state->value = score + depth; // NOTE: Somar o depth faz sentido aqui?
 		return current_state->value;
 }
 
@@ -106,7 +108,9 @@ int minimax(Tree *game, Node *current_state, int alpha,
 
 	if(isMax) {
 
-		// MAXIMIZING
+
+		/* MAXIMIZING */
+
 
 		int best = alpha;
 
@@ -124,8 +128,8 @@ int minimax(Tree *game, Node *current_state, int alpha,
 			alpha = max(alpha, best);
 
 			// Alpha-Beta prunning
-			if(beta <= alpha)
-				return best;
+			if(alpha >= beta)
+				return best;	// Beta cut-off
 		}	//Fim das recursoes
 
 		// Retorna o valor heuristico da melhor jogada
@@ -133,7 +137,9 @@ int minimax(Tree *game, Node *current_state, int alpha,
 
 	}else{
 
-		// MINIMIZING
+
+		/* MINIMIZING */
+
 
 		int best = beta;
 
@@ -152,9 +158,9 @@ int minimax(Tree *game, Node *current_state, int alpha,
 			beta = min(beta, best);
 
 			// Alpha-Beta prunning
-			if(beta <= alpha)
-				return best;
-		}// Fim das recursoes
+			if(alpha >= beta)
+				return best;	// Alpha cut-off
+		} // Fim das recursoes
 
 		// Retorna o valor heuristico da melhor jogada
 		return best;
@@ -165,7 +171,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 
 Node* decision(Tree *game, Node *current_state, int *rep, int max_depth) {
 
-	//nossos infinitos
+	// nossos infinitos
 	int alpha = -10000;
 	int beta = 10000;
 
@@ -191,8 +197,6 @@ Node* decision(Tree *game, Node *current_state, int *rep, int max_depth) {
 			}
 
 	}
-
-	//cout << "melhor valor heuristico: " << bestChoice->value << endl;
 
 	// retornar a jogada escolhida
 	return bestChoice;
