@@ -14,8 +14,6 @@
 
 using namespace std;
 
-const int DEPTH_MAX = 2;
-
 	/* FUNÇÔES AUXILIARES */
 
 void printa_tab(Tabuleiro tab) {
@@ -27,7 +25,7 @@ void printa_tab(Tabuleiro tab) {
                 cout << "|" << endl;
 	}
 
-	cout << "====================\n\n" << endl ;
+	cout << "=============\n\n" << endl ;
 
 }
 
@@ -69,11 +67,9 @@ bool empate(int rep) {
 *			para podar um detrminado ramo aleatorio da arvore                            *
 *                                                                                        *
 ******************************************************************************************/
+
 int minimax(Tree *game, Node *current_state, int alpha,
-			  int beta, int *rep, bool isMax, int depth) {
-
-	usleep(200000);
-
+			  int beta, int *rep, bool isMax, int depth, int max_depth) {
 
 	// Valoração do tabuleiro atual
 	int score = funcaoVDE(current_state->board, game->root->board, '1', '2', rep);
@@ -82,20 +78,27 @@ int minimax(Tree *game, Node *current_state, int alpha,
 	/* CASOS TERMINAIS */
 
 	// Ganhou
-	if(score == 100)
-		return score - depth;
+	if(score == 100) {
+		current_state->value = score - depth;
+		return current_state->value;
+}
 
 	// Perdeu
-	if(score == -100)
-		return score + depth;
+	if(score == -100) {
+		current_state->value = score + depth;
+		return current_state->value;
+}
 
 	// Nem quem ganhar vai perder e nem quem perder vai ganhar
-	if(empate(*rep))
-		return 0;
-
+	if(empate(*rep)) {
+		current_state->value = 0;
+		return current_state->value;
+}
 	// Atingiu a profundidade máxima
-	if(depth >= DEPTH_MAX)
-		return score;
+	if(depth >= max_depth) {
+		current_state->value = score;
+		return current_state->value;
+}
 
 
 	/* CASOS NÃO TERMINAIS */
@@ -114,7 +117,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 		for(int i = 0; i < current_state->children.size(); i++){
 
 			int possible_choice = minimax(game, current_state->children[i],
-								          alpha, beta, rep, !isMax, depth + 1);
+								          alpha, beta, rep, !isMax, depth + 1, max_depth);
 
 			// Encontra o melhor valor heuristico ate o estado atual do jogo
 			best = max(best, possible_choice);
@@ -131,6 +134,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 	}else{
 
 		// MINIMIZING
+
 		int best = beta;
 
 		// Popula toda a arvore de possibilidades
@@ -141,7 +145,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 
 			// Recursao, comecando pela esquerda dps filhos e incrementando profundidade
 			int possible_choice = minimax(game, current_state->children[i],
-																			alpha, beta, rep, !isMax, depth + 1);
+																			alpha, beta, rep, !isMax, depth + 1, max_depth);
 
 			// Verifica se o resultado da recursao foi melhor do que aquele que se tem
 			best = min(best, possible_choice);
@@ -150,7 +154,6 @@ int minimax(Tree *game, Node *current_state, int alpha,
 			// Alpha-Beta prunning
 			if(beta <= alpha)
 				return best;
-
 		}// Fim das recursoes
 
 		// Retorna o valor heuristico da melhor jogada
@@ -160,7 +163,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 
 
 
-Node* decision(Tree *game, Node *current_state, int *rep) {
+Node* decision(Tree *game, Node *current_state, int *rep, int max_depth) {
 
 	//nossos infinitos
 	int alpha = -10000;
@@ -178,7 +181,7 @@ Node* decision(Tree *game, Node *current_state, int *rep) {
 
 			// Encontra a melhor jogada atraves do retorno do valor heuristico
 			currentChoice = minimax(game, current_state->children[i],
-			alpha, beta, rep, false, 1);
+			alpha, beta, rep, false, 1, max_depth);
 
 			// Verifica se é a melhor jogada a ser realizada
 			if (currentChoice > alpha){

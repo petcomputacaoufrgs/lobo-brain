@@ -14,26 +14,30 @@ int main() {
         // 0 = vazio
         // 1/2 = jogador
 
-        Tabuleiro start ({{'2', '0', '1'},
-                          {'0', '1', '2'},
-                          {'2', '1', '0'}});
+        Tabuleiro start ({{'2', '1', '0'},
+                          {'0', '2', '0'},
+                          {'2', '1', '1'}});
 
         Node* choice;
 
         // gera arvore do inicio
         Tree* test_tree = new Tree(start);
-        
+
         // repeticoes inicias
         int rep = 0;
 
-        printa_tab(start);
-        cout << "\tINICIO DO ALGORITMO" << endl;
+        // profundidade maxima
+        int max_depth = 2;
 
+        // Printa input
+        cout << "\n\n >> IN\n=============" << endl;
+        printa_tab(start);
 
         // escolha de jogada
-        choice = decision(test_tree, test_tree->root, &rep);
+        choice = decision(test_tree, test_tree->root, &rep, max_depth);
 
-        //printa o tabuleiro que retorna a melhor jogada
+        // Printa output
+        cout << "\n\n >> OUT (" << choice->value << ")\n=============" << endl;
         printa_tab(choice->board);
 
         return 0;
