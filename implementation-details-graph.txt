@@ -58,3 +58,31 @@ Ideia de implementacao de grafo para a representacao do tabuleiro
 
     * decision.cpp
         Nao precisara ser alterada.
+
+
+* Esqueleto basico da classe Tabuleiro
+
+class Tabuleiro
+{
+    public:
+        Vertice casa_tabuleiro;
+
+        Tabuleiro(Vertice* posicao); // o tabuleiro pode ser inicializado
+        // a partir de um vertice inicial
+
+
+}
+
+class Vertice
+{
+    public:
+        int posicao;
+        int player;
+        vector<Vertice*> vizinhos; // lista de adjacencia (cada vertice possui uma lista de vizinhos)
+
+        Vertice(int pos, int player); // na inicializacao do tabuleiro
+        // as casa nao ocupadas devem ser inicizalizadas com 0
+
+        void addNeighbour(Vertice *newNeighbour);
+
+}
