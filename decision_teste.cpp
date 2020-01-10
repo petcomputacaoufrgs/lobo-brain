@@ -1,10 +1,13 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <algorithm>
+#include <iterator>
 #include "tabuleiro.hpp"
 #include "tree.hpp"
 #include "VDE.hpp"
 #include "decision.hpp"
+#include "move.hpp"
 
 using namespace std;
 
@@ -94,6 +97,8 @@ int main() {
 
           Node* choice;
 
+          vector<vector<int>> possible_mov;
+
           // gera arvore do inicio
           Tree* game = new Tree(start);
 
@@ -102,14 +107,14 @@ int main() {
 
           // profundidade maxima
           // NOTE: Quanto maior for esse valor, mais difícil será o jogo
-          int max_depth = 5;
+          int max_depth = 38;
 
           system("clear");
-          cout << "\n\nWelcome comrade! You're player 2, now go on and beat this mafka!\n\n" << endl;
+          cout << "\n\nWelcome comrade! You're player 2, now go on and beat this piece of software!\n\n" << endl;
 
           printa_tab(tab_atual);
 
-          do {
+          while(funcaoVDE(tab_atual, game->root->board, '1', '2', &rep) == 0){
 
 
             /* JOGADA PLAYER */
@@ -120,15 +125,24 @@ int main() {
             // fica nesse loop até as entradas representarem uma jogada valida
             while(!jogada_valida) {
 
-              // aguarda Entradas e verifica se são válidas
+              // aguarda entradas e verifica se são válidas
               from = receive_coord(false, 0, 2);
               if(tab_atual.posicoes[from[0]] [from[1]] == '2') {
                   while(!jogada_valida) {
                       to = receive_coord(true, 0, 2);
                       if(tab_atual.posicoes[to[0]] [to[1]] == '0') {
-                        tab_atual.posicoes[from[0]] [from[1]] = '0';
-                        tab_atual.posicoes[to[0]] [to[1]] = '2';
-                        jogada_valida = true;
+
+                        int player_pos = 3*from[0] + from[1];
+                        possible_mov = tapatanMoves(player_pos);
+
+                        // Se a casa está no vetor possible_mov, então a jogada é válida
+                        if(find(begin(possible_mov), end(possible_mov), to) != end(possible_mov)) {
+                            tab_atual.posicoes[from[0]] [from[1]] = '0';
+                            tab_atual.posicoes[to[0]] [to[1]] = '2';
+                            jogada_valida = true;
+                        }else{
+                            cout << "\tTHAT PIECE CANT GO THERE MY CONFEDERATE\n\t  TRY A DIFFERENT ONE!" << endl;
+                        }
                       }else{
                         cout << "\tTHERE's ALREADY A PIECE IN THERE!\n\t  TRY A DIFFERENT ONE!" << endl;
                       }
@@ -143,7 +157,7 @@ int main() {
             jogada_valida = false;
             game = new Tree(tab_atual);
 
-            cout << "\n\tIS THAT UR MOVE, SON?" << endl;
+            cout << "\n\tYou moved this:" << endl;
             printa_tab(tab_atual);
 
 
@@ -153,20 +167,20 @@ int main() {
             choice = decision(game, game->root, &rep, max_depth);
             tab_atual = choice->board;
 
-            cout << "\n\tMAFKA MOVE THAT SHIT UP" << endl;
+            cout << "\n\tYour binary opponent made this move:" << endl;
             printa_tab(tab_atual);
 
-          }while(funcaoVDE(choice->board, game->root->board, '1', '2', &rep) == 0);
+          }
 
           // Se saiu do loop, acabou o jogo
 
-          cout << "END GAME\n" << endl;
+          cout << "GAME OVER\n" << endl;
 
           // Descobre quem ganhou
           if(funcaoVDE(choice->board, game->root->board, '2', '1', &rep) > 0)
-                cout << "MY MAN! YOU WON! CONGRATS!" << endl;
+                cout << ":)" << endl;
           else
-                cout << "NOT ALWAYS U HAVE WHAT U WANT, b0y" << endl;
+                cout << ":(" << endl;
 
           return 0;
 
