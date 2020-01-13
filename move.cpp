@@ -155,3 +155,12 @@ vector<vector<int>> tapatanMoves(int player_pos)
       default: return possible_mov;
    }
 }
+
+
+
+
+vector<vector<int>> pongHauKiMoves(int player_pos) {
+
+
+
+}

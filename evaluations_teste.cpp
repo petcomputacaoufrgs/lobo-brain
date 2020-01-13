@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include "tabuleiro.hpp"
-#include "VDE.hpp"
+#include "evaluations.hpp"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main()
     Tabuleiro t1 ({ {'1','0','2'},
                     {'2','1','0'},
                     {'2','0','1'}   });
-                    
+
 	Tabuleiro t2 ({ {'0','0','2'},
                     {'0','0','2'},
                     {'0','0','2'}   });
@@ -33,11 +33,11 @@ int main()
 
 
     //mudar para cout
-    printf("--->\t%d\n", funcaoVDE(t1, tini, '1', '2', &nIni));
-    printf("--->\t%d\n", funcaoVDE(t1, tini, '2', '1', &nIni));
-	printf("--->\t%d\n", funcaoVDE(t2, tini, '1', '2', &nIni));
-    printf("--->\t%d\n", funcaoVDE(t2, tini, '2', '1', &nIni));
-    printf("--->\t%d\n", funcaoVDE(t3, tini, '2', '1', &nIni));
+    printf("--->\t%d\n", evaluateTapatan(t1, tini, '1', '2', &nIni));
+    printf("--->\t%d\n", evaluateTapatan(t1, tini, '2', '1', &nIni));
+	printf("--->\t%d\n", evaluateTapatan(t2, tini, '1', '2', &nIni));
+    printf("--->\t%d\n", evaluateTapatan(t2, tini, '2', '1', &nIni));
+    printf("--->\t%d\n", evaluateTapatan(t3, tini, '2', '1', &nIni));
 
     return 0;
 }

@@ -5,7 +5,7 @@
 #include <iterator>
 #include "tabuleiro.hpp"
 #include "tree.hpp"
-#include "VDE.hpp"
+#include "evaluations.hpp"
 #include "decision.hpp"
 #include "move.hpp"
 
@@ -107,14 +107,14 @@ int main() {
 
           // profundidade maxima
           // NOTE: Quanto maior for esse valor, mais difícil será o jogo
-          int max_depth = 38;
+          int max_depth = 6;
 
           system("clear");
           cout << "\n\nWelcome comrade! You're player 2, now go on and beat this piece of software!\n\n" << endl;
 
           printa_tab(tab_atual);
 
-          while(funcaoVDE(tab_atual, game->root->board, '1', '2', &rep) == 0){
+          while(evaluateTapatan(tab_atual, game->root->board, '1', '2', &rep) == 0){
 
 
             /* JOGADA PLAYER */
@@ -177,7 +177,7 @@ int main() {
           cout << "GAME OVER\n" << endl;
 
           // Descobre quem ganhou
-          if(funcaoVDE(choice->board, game->root->board, '2', '1', &rep) > 0)
+          if(evaluateTapatan(choice->board, game->root->board, '2', '1', &rep) > 0)
                 cout << ":)" << endl;
           else
                 cout << ":(" << endl;

@@ -6,7 +6,7 @@
 #include <iostream>
 #include "tabuleiro.hpp"
 #include "tree.hpp"
-#include "VDE.hpp"
+#include "evaluations.hpp"
 
 using namespace std;
 int minimax(Tree *game, Node *current_state, int alpha, int beta, int *rep, bool isMax, int depth, int max_depth);

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "tabuleiro.hpp"
 #include "tree.hpp"
-#include "VDE.hpp"
+#include "evaluations.hpp"
 #include "decision.hpp"
 
 #include <unistd.h>				// Uncomment 4 linux
@@ -73,7 +73,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 			  int beta, int *rep, bool isMax, int depth, int max_depth) {
 
 	// Valoração do tabuleiro atual
-	int score = funcaoVDE(current_state->board, game->root->board, '1', '2', rep);
+	int score = evaluateTapatan(current_state->board, game->root->board, '1', '2', rep);
 
 
 	/* CASOS TERMINAIS */

@@ -10,7 +10,7 @@ Ideia de implementacao de grafo para a representacao do tabuleiro
 * Discussao da tual implementacao das funcoes
     * tabuleiro.cpp
         Aqui deveremos mudar toda forma de implementacao. Pensando na implementacao de grafo, teremos quer ter os campos vertices e
-        arestas a fim de podermos representar o grafo como uma lista de adjacencia. 
+        arestas a fim de podermos representar o grafo como uma lista de adjacencia.
         Teremos possivelmente os seguintes campos:
 
             vertice{
@@ -28,7 +28,7 @@ Ideia de implementacao de grafo para a representacao do tabuleiro
         A ideia é representar o tabuleiro como um grafo, ou seja, como uma lista de adjacencia, no caso, os vertices
         serao representados pelas posicoes do tabuleiro ([0, 8], no caso do Tapatan) e as arestas serao as ligacoes
         entre as posiceos (vertices) adjacentes. Cada vertice poderá ser representado da seguinte forma:
-        
+
         vertice{
             int posicao; //posicao [0, x] dependendo do tabuleiro
             int player; // jogador que ocupa a posicao (1 - jogador 1, 2 - jogador 2, 0 - vazio)
@@ -44,12 +44,12 @@ Ideia de implementacao de grafo para a representacao do tabuleiro
     * node.cpp
         Em node.cpp o metodo contrutor recebe um rtabuleiro, dessa forma, basta mudar a estrutura do tabuleiro
 
-    * tree.cpp 
+    * tree.cpp
         Aqui esta a merda.
 
         Sabemos que na generateChildren chamamos a funcao generateBoards, que gera possiveis tabuleiros de acordo com o tabuleiro atual
         passado como entrada (Node* current_state que possui um atrubuto board, que guarda um tabuleiro, que no caso sera alterado para
-        grafo), e a partir dai varremos todo o tabuleiro gerando as possiveis jogadas. 
+        grafo), e a partir dai varremos todo o tabuleiro gerando as possiveis jogadas.
         Aqui deveremos alterar para trabalharmos com o tabuleiro na forma de um grafo.
 
     * VDE.cpp
@@ -86,3 +86,13 @@ class Vertice
         void addNeighbour(Vertice *newNeighbour);
 
 }
+
+
+Precisamos saber a posição do Ribas sobre:
+    *  Quantos tipos de tabuleiros teremos
+
+
+Da mudança para grafo:
+    - Função para tradução de grafo para matriz de char, util apenas enquanto não temos parte gráfica
+    - Lista de adjacência como descrita acima
+    - Refazer as funções: Move(aparentemente será genérica para jogos de bloqueio e alinhamento), evaluations()

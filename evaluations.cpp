@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include "tabuleiro.hpp"
-#include "VDE.hpp"
+#include "evaluations.hpp"
 
 using namespace std;
 
@@ -42,7 +42,7 @@ using namespace std;
 *           - Incrementava a variavel 'empate' caso ocorresse empate                           *
 ************************************************************************************************/
 
-int funcaoVDE(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
+int evaluateTapatan(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
 {
 
     int cont = 0;
