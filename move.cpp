@@ -6,9 +6,6 @@
 
 using namespace std;
 
-// Seria legal entender isso aqui
-
-//ja sei q to fazendo doidera de ponteiros, vai ser mudado deixa rolar
 /****************************************************************************
 *     tapatanMoves:                                                         *
 *           - Especificacao:                                                *
@@ -33,7 +30,6 @@ using namespace std;
 vector<vector<int>> tapatanMoves(int player_pos)
 {
       vector<vector<int>> possible_mov;
-      //mais uma gambiarra fodida pra consertar uma gamiarra fodida
       vector<int> ij;
 
       switch(player_pos)
@@ -158,9 +154,357 @@ vector<vector<int>> tapatanMoves(int player_pos)
 
 
 
+vector<vector<int>> picariaMoves(int player_pos) {
 
-vector<vector<int>> pongHauKiMoves(int player_pos) {
+  vector<vector<int>> possible_mov;
+  vector<int> ij;
+
+  switch(player_pos)
+  {
+  case 0://(0,0)
+     ij.push_back(0); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 1://(0,1)
+     ij.push_back(0); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 0; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 2://(0,2)
+     ij.push_back(0); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 3://(1,0)
+     ij.push_back(0); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 0; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 4://(1,1)
+     ij.push_back(0); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 0; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 0; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 2;
+     possible_mov.push_back(ij);
+     return possible_mov;
+  case 5://(1,2)
+     ij.push_back(0); ij.push_back(2);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     ij[0] = 0; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 6://(2,0)
+     ij.push_back(2); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 7://(2,1)
+     ij.push_back(2); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 8://(2,2)
+     ij.push_back(2); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+
+     default: return possible_mov;
+  }
+
+}
 
 
+
+vector<vector<int>> threeMensMorrisMoves(int player_pos) {
+
+  vector<vector<int>> possible_mov;
+  vector<int> ij;
+
+  switch(player_pos)
+  {
+  case 0://(0,0)
+     ij.push_back(0); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 1://(0,1)
+     ij.push_back(0); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 0; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 2://(0,2)
+     ij.push_back(0); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 3://(1,0)
+     ij.push_back(0); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 4://(1,1)
+     ij.push_back(0); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 5://(1,2)
+     ij.push_back(0); ij.push_back(2);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 6://(2,0)
+     ij.push_back(2); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 7://(2,1)
+     ij.push_back(2); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 8://(2,2)
+     ij.push_back(2); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+
+     default: return possible_mov;
+  }
+
+}
+
+
+
+vector<vector<int>> altanXaraacajMoves(int player_pos) {
+
+  vector<vector<int>> possible_mov;
+  vector<int> ij;
+
+  switch(player_pos)
+  {
+  case 0://(0,0)
+     ij.push_back(0); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 1://(0,1)
+     ij.push_back(0); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 0; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 2://(0,2)
+     ij.push_back(0); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 3://(1,0)
+     ij.push_back(0); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 0; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 5://(1,2)
+     ij.push_back(0); ij.push_back(2);
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     ij[0] = 0; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 1;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 6://(2,0)
+     ij.push_back(2); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 7://(2,1)
+     ij.push_back(2); ij.push_back(0);
+     possible_mov.push_back(ij);
+
+     ij[0] = 2; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 0;
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+  case 8://(2,2)
+     ij.push_back(2); ij.push_back(1);
+     possible_mov.push_back(ij);
+
+     ij[0] = 1; ij[1] = 2;
+     possible_mov.push_back(ij);
+
+     return possible_mov;
+
+     default: return possible_mov;
+  }
 
 }

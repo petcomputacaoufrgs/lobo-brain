@@ -73,7 +73,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 			  int beta, int *rep, bool isMax, int depth, int max_depth) {
 
 	// Valoração do tabuleiro atual
-	int score = evaluateTapatan(current_state->board, game->root->board, '1', '2', rep);
+	int score = tapatanEvaluation(current_state->board, game->root->board, '1', '2', rep);
 
 
 	/* CASOS TERMINAIS */
@@ -98,7 +98,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 }
 	// Atingiu a profundidade máxima
 	if(depth >= max_depth) {
-		current_state->value = score + depth; // NOTE: Somar o depth faz sentido aqui?
+		current_state->value = score + depth; // NOTE: Somar depth faz sentido aqui?
 		return current_state->value;
 }
 

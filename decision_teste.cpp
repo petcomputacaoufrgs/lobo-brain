@@ -106,15 +106,15 @@ int main() {
           int rep = 0;
 
           // profundidade maxima
-          // NOTE: Quanto maior for esse valor, mais difícil será o jogo
-          int max_depth = 6;
+          // Quanto maior for esse valor, mais difícil será o jogo
+          int max_depth = 1;
 
           system("clear");
           cout << "\n\nWelcome comrade! You're player 2, now go on and beat this piece of software!\n\n" << endl;
 
           printa_tab(tab_atual);
 
-          while(evaluateTapatan(tab_atual, game->root->board, '1', '2', &rep) == 0){
+          while(tapatanEvaluation(tab_atual, game->root->board, '1', '2', &rep) == 0){
 
 
             /* JOGADA PLAYER */
@@ -177,7 +177,7 @@ int main() {
           cout << "GAME OVER\n" << endl;
 
           // Descobre quem ganhou
-          if(evaluateTapatan(choice->board, game->root->board, '2', '1', &rep) > 0)
+          if(tapatanEvaluation(choice->board, game->root->board, '2', '1', &rep) > 0)
                 cout << ":)" << endl;
           else
                 cout << ":(" << endl;
