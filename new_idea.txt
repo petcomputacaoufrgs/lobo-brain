@@ -1,0 +1,45 @@
+NOVA IDEIA A RESPEITO DA IMPLEMENTACAO DE GRAFOS PARA A REPRESENTACAO DO TABULEIRO
+
+Como sabemos, estavamos no dilema em qual a melhor implementacao do tabuleiro e para a funcao VDE. Caso desejamos representar 
+os tabuleiro em forma de grafo, tive uma ideia que mantém a genericidade do algoritmo move e VDE. Um brainstorm basico segue a seguir:
+
+Teremos os seguintes atributos:
+
+    - Uma lista de triplas ordenadas contendo as possiveis posicoes de vitoria das peças (funcao VDE)
+    - Atraves dessa lista, basta realizar uma busca no grafo buscando as posicoes do determinado jogador e conferindo 
+    se base com a lista que esta na VDE
+    - Caso a tripla gerada das posicoes de cada peça do jogador pertença a lista de triplas da funcao VDE quer dizer que houve
+    a vitoria do respectivo jogador
+
+Exemplo Tapatan:
+
+
+Possivel tabuleiro (numerado de 0 a 8):
+
+    1 2 1
+    0 1 0
+    2 2 1
+
+Percebe-se que o jogador 1 vence o jogo
+
+Na funcao VDE teremos a seguinte lista de triplas que contém as posicoes de vitoria:
+
+[(0, 1, 2), (0, 3, 6), (0, 4, 8), (1, 4, 7), (2, 5, 8), (2, 4, 6), (3, 4, 5), (6, 7, 8)]
+
+Se quisermos saber se, por exemplo, o jogador 1 venceu, fazemos uma busca por todo o grafo buscando as posicoes de cada vertice
+(estará como atributo da classe vertice) 
+
+Quando fazemos a busca, fazemos uma tripla com as respectivas posicoes encontradas e depois ordenamos os alores para
+poderem ser encontrados na lista. No caso, no final da busca, irá retornar a seguinte tripla: (0, 4, 8), que é exa
+tamente onde as peças do jogador 1 se encontram no tabuleiro.
+Após gerar a tripla, fazemos ua busca na lista criada, verificando se a tripla está contida na lista. O que é verdadeiro,
+entao temos como retorno a vitoria do jogador 1. Por outro lado, caso o jogador 1 nao tenha uma conicao de vitória, a tripla
+do jogador nao estara presente na lista, logo nao tem condicao de vitoria nem derrota, nem empate, ou seja, o jogo esta em andamento.
+
+Como conlusao, tem-se que o algortimo se torna extremamente genperico, pois basta criar a liista de condicao de vitoria para cada tabuleiro
+do tipo de jogo de bloqueio e alinhamento, mantendo o algoritmo de busca igual. Todavia, o algoritmo se torna ineficiente para tabuleiros
+maiores, mas acho que nao ineficiente o suficiente para os tabuleiros os quais iremos trabalhar.
+Dessa forma, acho valida a discussao desse tipo de implementação. Mas pelo visto, iremos ter que implementar grafo de qualquer forma, entao
+podemos ter novas ideias durante a implementacao.
+
+É NOES
