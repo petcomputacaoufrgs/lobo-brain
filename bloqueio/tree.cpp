@@ -20,6 +20,37 @@ void Tree::setRoot(Node* root)
     this->root = root;
 }
 
+Tabuleiro setCurrentBoard(char player, char enemy, int from, int to, vector<int> playerPos, vector<int> enemyPos){
+
+  // TODO: vai ter que ter um switch nesta caceta
+  Tabuleiro currentBoard = pongHauKiBoard();
+  Vertex* aux = currentBoard->firstPos;
+
+  while(aux != NULL){
+    for(int i = 0; i < playerPos.size(); i++) {
+      if(aux->pos == playerPos[i]) {
+        aux->player = player;
+      }
+      else if(aux->pos == enemyPos[i]) {
+        aux->player = enemy;
+      }
+
+    }
+    aux = aux->next;
+  }
+
+  aux = search(currentBoard, from);
+
+  aux->player = '0';
+
+  aux = search(currentBoard, to);
+
+  aux->player = player;
+
+  return currentBoard;
+
+}
+
 /*****************************************************************************************
 *   generateBoards:                                                                      *
 *       - Especificacao:                                                                 *
@@ -41,40 +72,43 @@ void Tree::setRoot(Node* root)
 *           e adiciona no vetor a ser devolvido                                          *
 ******************************************************************************************/
 
-vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
+
+// EM CONSTRUCAO         AAAAAA
+vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, char enemy)
 {
-    int i,j, player_pos;
-    vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
-
+    int player_pos;
+    vector<int> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
     vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
+    vector<int> player_pos;
 
-    for(i=0;i<3;i++)
-    {
-        for(j=0;j<3;j++)
-        {
-            if(board.posicoes[i][j] == player)//verifica se a posicao do tabuleiro esta sendo ocupada pelo jogador
-            {
-                player_pos = 3*i+j;//realiza uma aritmetica para determinar a posicao do jogador no tabuleiro
+    // varre o grafo em busca dos player pra adicionar as posicao deles no vector
+    Vertex* pos_aux = board->firstPos;
+    while(pos_aux != NULL){
+      if(pos_aux->player == player){
+        player_pos.push_back(pos_aux->pos);
+      }else if(pos_aux->player == enemy){
+        player_pos.push_back(pos_aux->pos);
+      }
+
+    }
+
+    // varre todo grafo de nuebo pra gerar os tab novo
+    Vertex* pos_aux = board->firstPos;
+    while(pos_aux != NULL) {
+
+      if(pos_aux->player == player) {
+
+        possible_mov = searchFreeNeighbours(pos_aux);
+
+        for(vector<int>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++) {
+
+          Tabuleiro newBoard = setCurrentBoard(player, enemy, pos_aux->pos, it, player_pos, enemy_pos);
+          possibleBoards.push_back(newBoard);
 
 
-                /* TODO: SWITCH DE ACORDO COM O JOGO USANDO CÓDIGOS PRé DEFINIDOS*/
-                possible_mov = tapatanMoves(player_pos);
-
-                for(vector<vector<int>>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)//varre todas as posicoes do tabuleiro
-                {
-                    if(board.posicoes[it->at(0)][it->at(1)] == '0')//verifica se a posicao do tabuleiro esta vazia para poder realizar a possivel movimentacao
-                    {
-                        //gambiarra fodida pois n sei cpp quem quiser melhorar pode dale
-                        Tabuleiro newBoard = board;
-                        newBoard.posicoes[it->at(0)][it->at(1)] = player;//gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
-                        newBoard.posicoes[i][j] = '0';//quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
-
-                        possibleBoards.push_back(newBoard);
-                    }
-
-                }
-            }
         }
+
+      }
     }
 
     return possibleBoards;

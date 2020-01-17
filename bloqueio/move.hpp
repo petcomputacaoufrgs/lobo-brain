@@ -2,10 +2,9 @@
 #define MOVE_H
 
 #include <vector>
-#include <string>
 
 using namespace std;
 
-vector<vector<int>> tapatanMoves(int player_pos);
+vector<Vertex*> searchFreeNeighbours(Vertex* v);
 
 #endif

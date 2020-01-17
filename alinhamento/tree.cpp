@@ -57,7 +57,7 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
                 player_pos = 3*i+j;//realiza uma aritmetica para determinar a posicao do jogador no tabuleiro
 
 
-                /* TODO: SWITCH DE ACORDO COM O JOGO USANDO CÓDIGOS PRé DEFINIDOS*/
+                // TODO: SWITCH DE ACORDO COM O JOGO USANDO CÓDIGOS PRé DEFINIDOS
                 possible_mov = tapatanMoves(player_pos);
 
                 for(vector<vector<int>>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)//varre todas as posicoes do tabuleiro

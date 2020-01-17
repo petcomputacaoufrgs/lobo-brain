@@ -19,9 +19,13 @@ using namespace std;
 class Tabuleiro
 {
 	public:
-		Vertex* board;
+		Vertex* firstPos;
 
-		Tabuleiro(Vertex *board);
+		Tabuleiro(Vertex *firstPos);
+
+		Vertex* search(Tabuleiro tab, int pos);
+
+		Tabuleiro pongHauKiBoard();
 };
 
 #endif
