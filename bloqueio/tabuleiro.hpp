@@ -22,10 +22,11 @@ class Tabuleiro
 		Vertex* firstPos;
 
 		Tabuleiro(Vertex *firstPos);
-
-		Vertex* search(Tabuleiro tab, int pos);
-
-		Tabuleiro pongHauKiBoard();
+		Tabuleiro();
 };
+
+Vertex* search(Tabuleiro tab, int pos);
+
+Tabuleiro pongHauKiBoard();
 
 #endif

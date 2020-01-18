@@ -12,6 +12,7 @@ using namespace std;
 *           - Verifica se a partir de um determinado tabuleiro passado como entrada,           *
 *           houve vitoria, derrota ou empate (VDE) do jogador atual, ou seja, retorna o        *
 *           valor heuristico do nodo                                                           *
+*           - Para cada tabuleiro de alinhamento teremos uma funcao de VDE distinta            *                                                         *
 *       -Entrada:                                                                              *
 *           - Recebe como parametro o tabuleiro inicial (da forma que o jogo comecou),         *
 *           o tabuleiro atual (como esta o jogo no momento que a funcao eh chamada),           *

@@ -17,18 +17,26 @@ using namespace std;
 // 0            3
 // |  >  2  <   |
 // 1 ---------- 4
+
+// Construtor
 Tabuleiro::Tabuleiro(Vertex *firstPos)
 {
 	this->firstPos = firstPos;
 }
 
+// Construtor
+Tabuleiro::Tabuleiro()
+{
 
+}
+
+// Funcao de busca para a lista de adjacencia
 Vertex* search(Tabuleiro tab, int pos) {
 
-	Vertex* aux = tab->firstPos;
+	Vertex* aux = tab.firstPos;
 
-	while(tab != NULL) {
-		if(aux->posicao == pos)
+	while(tab.firstPos != NULL) {
+		if(aux->pos == pos)
 			return aux;
 		else
 			aux = aux->next;
@@ -36,6 +44,8 @@ Vertex* search(Tabuleiro tab, int pos) {
 	return NULL;
 }
 
+
+// Gera um novo tabuleiro completamente vazio, apenas com a estrutura do Pong Hsu K'i
 Tabuleiro pongHauKiBoard(){
 
 	Vertex* pos0 = new Vertex(0, '0');
@@ -44,7 +54,9 @@ Tabuleiro pongHauKiBoard(){
 	Vertex* pos3 = new Vertex(3, '0');
 	Vertex* pos4 = new Vertex(4, '0');
 
-	Tabuleiro board = new Tabuleiro(pos0);
+	Tabuleiro board;
+	board.firstPos = pos0;
+
 	pos0->addNeighbour(pos1);
 	pos0->addNeighbour(pos2);
 	pos0->addVertex(pos1);

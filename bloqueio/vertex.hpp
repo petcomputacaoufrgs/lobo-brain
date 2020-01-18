@@ -9,11 +9,11 @@ using namespace std;
 class Vertex
 {
     public:
-        int pos;
+        int pos; // posicao do vertice de acordo com o tabuleiro ([0, x])
         char player;
         vector<Vertex*> neighbours; // lista de adjacencia (cada vertice possui uma lista de vizinhos)
 
-        Vertex* next;
+        Vertex* next; // ponteiro para a proxima posicao da lista de adj.
 
         Vertex(int pos, char player); // na inicializacao do tabuleiro
         // as casa nao ocupadas devem ser inicizalizadas com 0
