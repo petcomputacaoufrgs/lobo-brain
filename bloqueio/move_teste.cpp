@@ -3,24 +3,27 @@
 #include <vector>
 #include <string>
 #include "move.hpp"
+#include "tabuleiro.hpp"
+#include "vertex.hpp"
 
 using namespace std;
 
 
 // aparentemente as funcoes relacionadas a move.cpp estao funcionando corretamente
+// AQUI TA NO GRAU TUDO FUNCIONANDO O FINO DO FINO
 int main()
 {
-    int player_pos = 7;
 
-    vector<vector<int>> possible_mov = tapatanMoves(player_pos);
+    Tabuleiro board  = pongHauKiBoard();
 
-    for (int i = 0; i < possible_mov.size(); i++)
+    board.pongHauKiInitialPositions();
+
+    vector<int> possible_mov = searchFreeNeighbours(board.firstPos->next->next->next);
+
+    for(vector<int>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)
     {
-        for (int j = 0; j < possible_mov[i].size(); j++)
-        {
-            cout << possible_mov[i][j];
-        }
-        cout << endl;
+        cout << (*it) << endl;
+
     }
     return 0;
 }

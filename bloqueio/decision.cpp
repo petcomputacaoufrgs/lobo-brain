@@ -16,20 +16,6 @@ using namespace std;
 
 	/* FUNÇÔES AUXILIARES */
 
-
-void printa_tab(Tabuleiro tab) {
-
-	for(int i=0; i<3; i++) {
-		for(int j=0; j<3; j++) {
-			cout << "| " << tab.posicoes[i][j] << " ";
-		}
-                cout << "|" << endl;
-	}
-
-	cout << "=============\n\n" << endl ;
-
-}
-
 bool empate(int rep) {
 	if(rep == 3) {
 		return true;
@@ -115,7 +101,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 		int best = alpha;
 
 		// Gera as opossiveis jogadas a partir do estado atual do jogo
-		game->generateChildren(current_state, '1');
+		game->generateChildren(current_state, '1', '2');
 
 		// Varre todos os filhos (tabuleiros) gerados
 		for(int i = 0; i < current_state->children.size(); i++){
@@ -144,7 +130,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 		int best = beta;
 
 		// Popula toda a arvore de possibilidades
-		game->generateChildren(current_state, '2');
+		game->generateChildren(current_state, '2', '1');
 
 		// Varre filhos do nodo atual, na procura da batida perfeita
 		for(int i = 0; i < current_state->children.size(); i++){
@@ -180,7 +166,7 @@ Node* decision(Tree *game, Node *current_state, int *rep, int max_depth) {
 	Node* bestChoice;
 
 	// Gera as possiveis jogadas a partir do estado atual do jogo
-	game->generateChildren(current_state, '1');
+	game->generateChildren(current_state, '1', '2');
 
 	// Varre todas as possiveis jogadas selecionando a melhor delas
 	for(int i = 0; i < current_state->children.size(); i++){

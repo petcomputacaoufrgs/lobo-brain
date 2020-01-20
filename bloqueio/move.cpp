@@ -6,7 +6,6 @@
 
 using namespace std;
 
-// TEM ERRO AQUI
 vector<int> searchFreeNeighbours(Vertex* v) {
 
   vector<int> freeNeighbours;
@@ -16,14 +15,10 @@ vector<int> searchFreeNeighbours(Vertex* v) {
     vector<Vertex*> neighbours = v->neighbours;// vizinhos do vertice v
 
     for(vector<Vertex*>::iterator it = neighbours.begin(); it != neighbours.end(); it++) {// percorre todos os vizinhos do vertice v
-
-      if((*it)->player == '0')// verifica se a posicao esta desocupada
+      if((*it)->player == '0'){// verifica se a posicao esta desocupada
         freeNeighbours.push_back((*it)->pos); // NOTE: talvez esteja errado
-
+      }
     }
-
-    return freeNeighbours;
-
   }
-  return freeNeighbours;//aqui nao retorna null
+  return freeNeighbours;
 }

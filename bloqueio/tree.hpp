@@ -19,10 +19,8 @@ class Tree
 
         Tree(Tabuleiro startingBoard);//construtor
         void setRoot(Node* root);//metodo setter para a raiz
-        vector<Tabuleiro> generateBoards(Tabuleiro board, char player);
-        void generateChildren(Node* node, char player);//gera filhos da raiz
-        Tabuleiro setCurrentBoard(char player, char enemy, int from, int to, vector<int> playerPos, vector<int> enemyPos);
-
+        vector<Tabuleiro> generateBoards(Tabuleiro board, char player, char enemy);
+        void generateChildren(Node* node, char player, char enemy);//gera filhos da raiz
 };
 
 #endif

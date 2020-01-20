@@ -2,9 +2,10 @@
 #define MOVE_H
 
 #include <vector>
+#include "vertex.hpp"
 
 using namespace std;
 
-vector<Vertex*> searchFreeNeighbours(Vertex* v);
+vector<int> searchFreeNeighbours(Vertex* v);
 
 #endif

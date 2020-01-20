@@ -16,7 +16,7 @@ all: tree_teste.exe decision_teste.exe
 %.o: %.cpp
 	$(CXX) -c $^ -o $@ $(CXXFLAGS)
 
-tree_teste.exe: tree_teste.o tree.o node.o tabuleiro.o VDE.o move.o
+tree_teste.exe: tree_teste.o tree.o node.o tabuleiro.o move.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 decision_teste.exe: decision_teste.o tree.o node.o tabuleiro.o VDE.o decision.o move.o

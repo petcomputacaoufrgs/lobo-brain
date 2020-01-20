@@ -20,13 +20,21 @@ class Tabuleiro
 {
 	public:
 		Vertex* firstPos;
+		int size;
 
-		Tabuleiro(Vertex *firstPos);
+		Tabuleiro(Vertex *firstPos, int size);
 		Tabuleiro();
+
+		Vertex* search(int pos);
+
+		void pongHauKiInitialPositions();
+		Tabuleiro setCurrentBoard(char player, char enemy, int from, int to, vector<int> playerPos, vector<int> enemyPos);
+
+		void print();
 };
 
-Vertex* search(Tabuleiro tab, int pos);
 
 Tabuleiro pongHauKiBoard();
+
 
 #endif
