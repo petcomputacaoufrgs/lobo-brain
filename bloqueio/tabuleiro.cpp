@@ -138,6 +138,7 @@ void Tabuleiro::print() {
 		}
 
 	}
+	cout << endl;
 	return;
 }
 

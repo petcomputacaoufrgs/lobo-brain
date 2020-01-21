@@ -60,7 +60,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 
 	// Valoração do tabuleiro atual
 	int score = pongHauKiEvaluation(current_state->board, '1', '2', rep);
-
+	
 
 	/* CASOS TERMINAIS */
 
