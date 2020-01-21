@@ -12,7 +12,7 @@ int main()
     Tabuleiro t1 ({ {'1','0','2'},
                     {'2','1','1'},
                     {'2','0','0'}   });
-                    
+
 	Tabuleiro t2 ({ {'1','0','2'},
                     {'2','1','0'},
                     {'2','0','1'}   });
@@ -29,8 +29,8 @@ int main()
     NodeTest->addChildren(NodeSonT);
     NodeTest->addChildren(NodeSonT2);
 
-    // Varre todos os filhos da raiz ('Node') 
-    for(vector<Node>::iterator it = NodeTest->children.begin(); it != NodeTest->children.end(); it++){
+    // Varre todos os filhos da raiz ('Node')
+    for(vector<Node*>::iterator it = NodeTest->children.begin(); it != NodeTest->children.end(); it++){
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++)
                 cout << it->board.posicoes[i][j] << " ";

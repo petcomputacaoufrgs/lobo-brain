@@ -1,25 +1,20 @@
 #include <iostream>
+#include <iterator>
 #include "node.hpp"
 #include "tabuleiro.hpp"
 
 using namespace std;
 
-// As funcoes referentes a classe 'Node' estao funcionando
-// Os nodos estao sendo inseridos corretamente referentes a um determinado pai
+// Certo
 
 int main()
 {
-    Tabuleiro t1 ({ {'1','0','2'},
-                    {'2','1','1'},
-                    {'2','0','0'}   });
-                    
-	Tabuleiro t2 ({ {'1','0','2'},
-                    {'2','1','0'},
-                    {'2','0','1'}   });
+    Tabuleiro t1 = pongHauKiBoard();
 
-    Tabuleiro t3 ({ {'0','1','2'},
-                    {'0','1','2'},
-                    {'2','1','0'}   });
+	  Tabuleiro t2 = pongHauKiBoard();
+    t2.pongHauKiInitialPositions();
+
+    Tabuleiro t3 = pongHauKiBoard();
 
 
     Node* NodeTest = new Node(t1);
@@ -29,14 +24,9 @@ int main()
     NodeTest->addChildren(NodeSonT);
     NodeTest->addChildren(NodeSonT2);
 
-    // Varre todos os filhos da raiz ('Node') 
-    for(vector<Node>::iterator it = NodeTest->children.begin(); it != NodeTest->children.end(); it++){
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++)
-                cout << it->board.posicoes[i][j] << " ";
-            cout << endl;
-        }
-        cout << endl;
+    // Varre todos os filhos da raiz ('Node')
+    for(vector<Node*>::iterator it = NodeTest->children.begin(); it != NodeTest->children.end(); it++){
+        (*it)->board.print();
     }
 
     return 0;

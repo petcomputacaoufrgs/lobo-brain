@@ -7,4 +7,6 @@
 #include "tabuleiro.hpp"
 #include "evaluations.hpp"
 
+int pongHauKiEvaluation(Tabuleiro board, char player, char enemy, int *rep);
+
 #endif

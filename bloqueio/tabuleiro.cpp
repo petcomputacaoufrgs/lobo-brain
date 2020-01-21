@@ -105,17 +105,17 @@ void Tabuleiro::pongHauKiInitialPositions() {
 				aux->player = '0';
 				aux = aux->next;
 			break;
-		
+
 		case 3:
 				aux->player = '2';
 				aux = aux->next;
 			break;
-		
+
 		case 4:
 				aux->player = '1';
 				aux = aux->next;
 			break;
-		
+
 		default:
 			break;
 		}
@@ -133,6 +133,7 @@ void Tabuleiro::print() {
 		for(int i = 0; i < this->size; i++) {
 
 			cout << "\n\tTAB --> " << aux->pos << ": '" << aux->player << "' ";
+			aux = aux->next;
 
 		}
 
@@ -157,18 +158,19 @@ void Tabuleiro::print() {
 *       - Saida:                                                                         *
 *           - Retorna um tabuleiro, ou seja um ponteiro para a posicao 0 da lista de     *
 *           adjacencia do grafo                                                          *
-*                                                                                        *                                        *
+*                                                                                        *
+*				- Observaçoes:                                                                   *
+*           - Podemos mais alem buscar novas otimizacoes para funcoes deste tipo         *
 ******************************************************************************************/
-Tabuleiro Tabuleiro::setCurrentBoard(char player, char enemy, int from, int to, vector<int> playerPos, vector<int> enemyPos){
+void Tabuleiro::setCurrentBoard(char player, char enemy, int from, int to, vector<int> playerPos, vector<int> enemyPos){
 
   // TODO: vai ter que ter um switch nesta caceta
-  Tabuleiro currentBoard = pongHauKiBoard();//inicializa um novo tabuleiro
-  Vertex* aux = currentBoard.firstPos;// inicializa um auxiliar como o
+  Vertex* aux = this->firstPos;// inicializa um auxiliar como o
   // ponteiro para a primeira posicao do tabuleiro passado como parametro
 
   // percorre toda a lista de adjacencia
   while(aux != NULL){
-    // percorre toda a lista das posicoes atuais do jogador, 
+    // percorre toda a lista das posicoes atuais do jogador,
     // juntamente com as posicoes atuais do adversario
     for(int i = 0; i < playerPos.size(); i++) {
       if(aux->pos == playerPos[i]) {// verifica se a posicao esta sendo ocupada pelo jogador
@@ -182,14 +184,36 @@ Tabuleiro Tabuleiro::setCurrentBoard(char player, char enemy, int from, int to, 
     aux = aux->next;
   }
 
-  aux = currentBoard.search(from);
+  aux = this->search(from);
 
   aux->player = '0';
 
-  aux = currentBoard.search(to);
+  aux = this->search(to);
 
   aux->player = player;
 
-  return currentBoard;
+  return;
+}
+
+
+bool Tabuleiro::operator == (const Tabuleiro & board) {
+
+	Vertex* aux_this = this->firstPos;
+	Vertex* aux_board = board.firstPos;
+
+	// ^ = xor
+	if(aux_this == NULL ^ aux_board == NULL)
+			return false;
+
+	while(aux_this != NULL && aux_board != NULL){
+
+		if(aux_this->player != aux_board->player)
+				return false;
+
+		aux_this = aux_this->next;
+		aux_board = aux_board->next;
+	}
+
+	return true;
 
 }

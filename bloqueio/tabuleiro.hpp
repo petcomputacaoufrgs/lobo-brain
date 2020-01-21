@@ -24,11 +24,14 @@ class Tabuleiro
 
 		Tabuleiro(Vertex *firstPos, int size);
 		Tabuleiro();
+		//delete Tabuleiro(const Tabuleiro &old) = 0;
+
+		bool operator == (const Tabuleiro & board);
 
 		Vertex* search(int pos);
 
 		void pongHauKiInitialPositions();
-		Tabuleiro setCurrentBoard(char player, char enemy, int from, int to, vector<int> playerPos, vector<int> enemyPos);
+		void setCurrentBoard(char player, char enemy, int from, int to, vector<int> playerPos, vector<int> enemyPos);
 
 		void print();
 };

@@ -15,7 +15,6 @@ int main()
 {
 
     Tabuleiro board  = pongHauKiBoard();
-
     board.pongHauKiInitialPositions();
 
     vector<int> possible_mov = searchFreeNeighbours(board.firstPos->next->next->next);

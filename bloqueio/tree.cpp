@@ -43,14 +43,13 @@ void Tree::setRoot(Node* root)
 *           e adiciona no vetor a ser devolvido                                          *
 ******************************************************************************************/
 
-
-// EM CONSTRUCAO         AAAAAA
 vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, char enemy)
 {
     vector<int> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
     vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
     vector<int> player_pos;
     vector<int> enemy_pos;
+    Tabuleiro newBoard = pongHauKiBoard();
 
 
     // varre o grafo em busca dos player pra adicionar as posicao deles no vector
@@ -61,8 +60,10 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, char enemy)
       }else if(pos_aux->player == enemy){// verifica se a posicao esta sendo ocupada pelo adversario
         enemy_pos.push_back(pos_aux->pos);
       }
-
+      pos_aux = pos_aux->next;
     }
+
+
 
     // varre todo grafo de nuebo pra gerar os tab novo
     pos_aux = board.firstPos;
@@ -74,13 +75,14 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, char enemy)
 
         for(vector<int>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++) {// varre a lista com as posicoes das possiveis jogadas
 
-          Tabuleiro newBoard;
+          newBoard = pongHauKiBoard();
           newBoard.setCurrentBoard(player, enemy, pos_aux->pos, *it, player_pos, enemy_pos); // gera um novo tabuleiro a partir da nova movimentacao
           possibleBoards.push_back(newBoard); // adiciona o novo tabuleiro na arvore
 
         }
 
       }
+      pos_aux = pos_aux->next;
     }
 
     return possibleBoards;

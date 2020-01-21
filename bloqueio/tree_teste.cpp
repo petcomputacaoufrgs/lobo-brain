@@ -15,16 +15,13 @@ void printChildren(Node* root)
     if(root != NULL){
 
         cout << "\n\n~~~~ ROOT ~~~~\n\n" << endl;
-
-        Vertex* aux = root->board.firstPos;
-
         root->board.print();
 
         cout << "\n\n~~~~ CHILDREN ~~~~\n\n" << endl;
-        
+
         for (vector<Node*>::iterator it = root->children.begin(); it != root->children.end(); it++)
         {
-            printChildren(*it);
+            (*it)->board.print();
         }
     }
 }
@@ -42,9 +39,12 @@ int main()
     // a ideia desse laco é printar todos os tabuleiros possiveis a partir do NodeTest que seria o 'current_state'
     printChildren(treeTest->root);
 
+    cout << endl <<"==============================================================" << endl;
+
     treeTest1->generateChildren(treeTest1->root, '2', '1');
     // a ideia desse laco é printar todos os tabuleiros possiveis a partir do NodeTest que seria o 'current_state'
     printChildren(treeTest1->root);
+
 
     return 0;
 }
