@@ -116,7 +116,7 @@ int main() {
           int max_depth = 1;
 
           system("clear");
-          cout << "\n\nWelcome comrade! You're player 2, now go on and beat this piece of software!\n\n" << endl;
+          cout << "\n\nBem vindo, você é o jogador 2.\n\n" << endl;
 
           tab_atual.print();
 
@@ -126,7 +126,7 @@ int main() {
             /* JOGADA PLAYER */
 
 
-            cout << "\n\tYOUR TURN, MY LORD" << endl;
+            cout << "\n\tSUA RODADA" << endl;
 
             // fica nesse loop até as entradas representarem uma jogada valida
             while(!jogada_valida) {
@@ -158,14 +158,14 @@ int main() {
                             tab_atual.search(to)->player = '2';
                             jogada_valida = true;
                         }else{
-                            cout << "\tTHAT PIECE CANT GO THERE MY CONFEDERATE\n\t  TRY A DIFFERENT ONE!" << endl;
+                            cout << "\tMOVIMENTO INVÁLIDO\n\t\tTENTE OUTRO!" << endl;
                         }
                       }else{
-                        cout << "\tTHERE's ALREADY A PIECE IN THERE!\n\t  TRY A DIFFERENT ONE!" << endl;
+                        cout << "\tJÁ HÁ UMA PEÇA NESTA POSIÇÃO\n\t\tTENTE OUTRA!" << endl;
                       }
                   }
               }else{
-                  cout << "\tYOU DONT HAVE A PIECE IN THERE!\n\t   TRY ANOTHER ONE!" << endl;
+                  cout << "\tESTA POSIÇÃO NÃO CONTÉM UMA PEÇA SUA\n\t\tTENTE OUTRA!" << endl;
               }
 
             }
@@ -174,7 +174,7 @@ int main() {
             jogada_valida = false;
             game = new Tree(tab_atual);
 
-            cout << "\n\tYou moved this:" << endl;
+            cout << "\n\tSua jogada:" << endl;
             tab_atual.print();
 
 
@@ -184,7 +184,7 @@ int main() {
             choice = decision(game, game->root, &rep, max_depth);
             tab_atual = choice->board;
 
-            cout << "\n\tYour binary opponent made this move:" << endl;
+            cout << "\n\tJogada da máquina:" << endl;
             tab_atual.print();
 
           }
@@ -195,7 +195,7 @@ int main() {
 
           // Descobre quem ganhou
           if(pongHauKiEvaluation(choice->board, '2', '1', &rep) > 0)
-                cout << ":)" << endl;
+                cout << "" << endl;
           else
                 cout << ":(" << endl;
 
