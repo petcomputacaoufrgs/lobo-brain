@@ -113,7 +113,7 @@ int main() {
 
           // profundidade maxima
           // Quanto maior for esse valor, mais difícil será o jogo
-          int max_depth = 1;
+          int max_depth = 20;
 
           system("clear");
           cout << "\n\nBem vindo, você é o jogador 2.\n\n" << endl;

@@ -41,10 +41,12 @@ void Tree::setRoot(Node* root)
 *           e adiciona no vetor a ser devolvido                                          *
 ******************************************************************************************/
 
-vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
+vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
 {
     int i,j, player_pos;
     vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
+
+    vector<vector<int>> aux_vet;
 
     vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
 
@@ -59,6 +61,10 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
 
                 // TODO: SWITCH DE ACORDO COM O JOGO USANDO CÓDIGOS PRé DEFINIDOS
                 possible_mov = tapatanMoves(player_pos);
+                if(jump) {
+                  aux_vet = tapatanJumpMoves(player_pos, board);
+                  possible_mov.insert(possible_mov.end(), aux_vet.begin(), aux_vet.end());
+                }
 
                 for(vector<vector<int>>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)//varre todas as posicoes do tabuleiro
                 {
@@ -95,14 +101,14 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player)
 *       - Observacao:                                                                    *
 *           - Os nodos filhos sao alocados dinamicamente na memoria, por isso é void     *
 ******************************************************************************************/
-void Tree::generateChildren(Node* current_state, char player)
+void Tree::generateChildren(Node* current_state, char player, bool jump)
 {
     vector<Tabuleiro> possibleBoards;
     Node* newChild;
     Tabuleiro board;
 
     //Gera os possiveis tabuleiros a partir da posicao corrente (jogadas do player)
-    possibleBoards = this->generateBoards(current_state->board, player);
+    possibleBoards = this->generateBoards(current_state->board, player, jump);
 
     //Adiciona os filhos (Node que contem board) no respectivo Node pai
     for (vector<Tabuleiro>::iterator it = possibleBoards.begin(); it != possibleBoards.end(); it++)

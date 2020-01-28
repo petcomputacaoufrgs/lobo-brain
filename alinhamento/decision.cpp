@@ -20,13 +20,14 @@ using namespace std;
 void printa_tab(Tabuleiro tab) {
 
 	for(int i=0; i<3; i++) {
+		cout << '\t';
 		for(int j=0; j<3; j++) {
 			cout << "| " << tab.posicoes[i][j] << " ";
 		}
                 cout << "|" << endl;
 	}
 
-	cout << "=============\n\n" << endl ;
+	cout << "\t=============\n\n" << endl ;
 
 }
 
@@ -69,7 +70,7 @@ bool empate(int rep) {
 *                                                                                        *
 ******************************************************************************************/
 
-int minimax(Tree *game, Node *current_state, int alpha,
+int minimax(Tree *game, Node *current_state, bool jump, int alpha,
 			  int beta, int *rep, bool isMax, int depth, int max_depth) {
 
 	// Valoração do tabuleiro atual
@@ -115,12 +116,12 @@ int minimax(Tree *game, Node *current_state, int alpha,
 		int best = alpha;
 
 		// Gera as opossiveis jogadas a partir do estado atual do jogo
-		game->generateChildren(current_state, '1');
+		game->generateChildren(current_state, '1', jump);
 
 		// Varre todos os filhos (tabuleiros) gerados
 		for(int i = 0; i < current_state->children.size(); i++){
 
-			int possible_choice = minimax(game, current_state->children[i],
+			int possible_choice = minimax(game, current_state->children[i], jump,
 								          alpha, beta, rep, !isMax, depth + 1, max_depth);
 
 			// Encontra o melhor valor heuristico ate o estado atual do jogo
@@ -144,13 +145,13 @@ int minimax(Tree *game, Node *current_state, int alpha,
 		int best = beta;
 
 		// Popula toda a arvore de possibilidades
-		game->generateChildren(current_state, '2');
+		game->generateChildren(current_state, '2', jump);
 
 		// Varre filhos do nodo atual, na procura da batida perfeita
 		for(int i = 0; i < current_state->children.size(); i++){
 
 			// Recursao, comecando pela esquerda dps filhos e incrementando profundidade
-			int possible_choice = minimax(game, current_state->children[i],
+			int possible_choice = minimax(game, current_state->children[i], jump,
 																			alpha, beta, rep, !isMax, depth + 1, max_depth);
 
 			// Verifica se o resultado da recursao foi melhor do que aquele que se tem
@@ -169,7 +170,7 @@ int minimax(Tree *game, Node *current_state, int alpha,
 
 
 
-Node* decision(Tree *game, Node *current_state, int *rep, int max_depth) {
+Node* decision(Tree *game, Node *current_state, bool jump, int *rep, int max_depth) {
 
 	// nossos infinitos
 	int alpha = -10000;
@@ -180,13 +181,13 @@ Node* decision(Tree *game, Node *current_state, int *rep, int max_depth) {
 	Node* bestChoice;
 
 	// Gera as possiveis jogadas a partir do estado atual do jogo
-	game->generateChildren(current_state, '1');
+	game->generateChildren(current_state, '1', jump);
 
 	// Varre todas as possiveis jogadas selecionando a melhor delas
 	for(int i = 0; i < current_state->children.size(); i++){
 
 			// Encontra a melhor jogada atraves do retorno do valor heuristico
-			currentChoice = minimax(game, current_state->children[i],
+			currentChoice = minimax(game, current_state->children[i], jump,
 			alpha, beta, rep, false, 1, max_depth);
 
 			// Verifica se é a melhor jogada a ser realizada
