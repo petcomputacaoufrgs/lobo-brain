@@ -2,6 +2,7 @@
 #define TABULEIRO_H
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -15,13 +16,14 @@ using namespace std;
 *			- Tabuleiro exemplo (<vetor>);        *
 *                                                 *
 ***************************************************/
-class Tabuleiro 
+class Tabuleiro
 {
 	public:
 		vector<vector<char>> posicoes;
-		
+
 		Tabuleiro();
 		Tabuleiro(vector<vector<char>> posicoes);
+		void getHash();
 };
 
 #endif

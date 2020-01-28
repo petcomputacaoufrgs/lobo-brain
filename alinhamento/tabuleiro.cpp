@@ -1,4 +1,7 @@
 #include "tabuleiro.hpp"
+#include <vector>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -19,4 +22,17 @@ Tabuleiro::Tabuleiro(vector<vector<char>> posicoes)
 Tabuleiro::Tabuleiro()
 {
 
+}
+
+void Tabuleiro::getHash() {
+
+	hash<string> hash_aux;
+	hash<string> hash;
+
+	// varre as linhas
+	for(int i = 0; i < this->posicoes.size(); i++) {
+			string aux(this->posicoes[i].begin(), this->posicoes[i].end());
+			hash(aux);
+			cout << hash << endl;
+	}
 }
