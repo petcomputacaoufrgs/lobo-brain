@@ -41,14 +41,14 @@ using namespace std;
 //         int max_depth = 3;
 //
 //         // Printa input
-//         cout << "\n\n\t >> IN\n\t=============" << endl;
+//         cout << "\n\n >> IN\n=============" << endl;
 //         start.print();
 //
 //         // escolha de jogada
 //         choice = decision(test_tree, test_tree->root, &rep, max_depth);
 //
 //         // Printa output
-//         cout << "\n\n\t >> OUT (" << choice->value << ")\n\t=============" << endl;
+//         cout << "\n\n >> OUT (" << choice->value << ")\n=============" << endl;
 //         choice->board.print();
 //
 //         cout << endl << endl;

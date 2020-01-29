@@ -40,19 +40,19 @@ int main() {
         bool jump = true;
 
         // Printa input
-        cout << "\n\n\t >> IN\n\t=============" << endl;
+        cout << "\n\n >> IN\n=============" << endl;
         printa_tab(start);
 
         // escolha de jogada
         choice = decision(test_tree, test_tree->root, jump, &rep, max_depth);
 
         // Printa output
-        cout << "\n\n\t >> OUT (" << choice->value << ")\n\t=============" << endl;
+        cout << "\n\n >> OUT (" << choice->value << ")\n=============" << endl;
         printa_tab(choice->board);
 
 
         /* vou fazer uns testes com hash aqui pra depois
-            implementar RL se der merda tira */
+            implementar RL */
 
 
         hash<string> hash;
@@ -60,8 +60,6 @@ int main() {
         cout << "\n\n\thash 020:\t\t" << hash("020") << endl;
         cout << "\n\n\thash 002:\t\t" << hash("002") << endl;
         cout << "\n\n\thash 020 ^ hash 002:\t" << (hash("212") ^ hash("000") ^ hash("121")) << "\n\n" << endl;
-
-        choice->board.getHash();
 
 
         return 0;
