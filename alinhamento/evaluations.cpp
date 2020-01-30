@@ -45,6 +45,9 @@ using namespace std;
 int tapatanEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
 {
 
+    vector<vector<char>> t = tab.getPositions();
+    vector<vector<char>> t_ini = tab_ini.getPositions();
+
     int cont = 0;
 
     //testa empate
@@ -53,7 +56,7 @@ int tapatanEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char opone
         for(int j=0; j<3; j++)
         {
 
-            if(tab.posicoes[i][j] == tab_ini.posicoes[i][j])
+            if(t[i][j] == t_ini[i][j])
             {
                 cont++;
             }
@@ -72,65 +75,65 @@ int tapatanEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char opone
 
 
     //testa vitoria
-    if (tab.posicoes[0][0] == jogador)
+    if (t[0][0] == jogador)
     {
-      if (tab.posicoes[0][1] == jogador && tab.posicoes[0][2] == jogador ||
-            tab.posicoes[1][0] == jogador && tab.posicoes[2][0] == jogador ||
-            tab.posicoes[1][1] == jogador && tab.posicoes[2][2] == jogador)
+      if (t[0][1] == jogador && t[0][2] == jogador ||
+            t[1][0] == jogador && t[2][0] == jogador ||
+            t[1][1] == jogador && t[2][2] == jogador)
         {
             return 100;
         }
     }
-    else if (tab.posicoes[0][2] == jogador)
+    else if (t[0][2] == jogador)
     {
-        if (tab.posicoes[1][1] == jogador && tab.posicoes[2][0] == jogador ||
-            tab.posicoes[1][2] == jogador && tab.posicoes[2][2] == jogador)
+        if (t[1][1] == jogador && t[2][0] == jogador ||
+            t[1][2] == jogador && t[2][2] == jogador)
         {
             return 100;
         }
     }
-    else if (tab.posicoes[1][1] == jogador)
+    else if (t[1][1] == jogador)
     {
-        if(tab.posicoes[0][1] == jogador && tab.posicoes[2][1] == jogador ||
-            tab.posicoes[1][0] == jogador && tab.posicoes[1][2] == jogador) {
+        if(t[0][1] == jogador && t[2][1] == jogador ||
+            t[1][0] == jogador && t[1][2] == jogador) {
             return 100;
         }
     }
-    else if (tab.posicoes[2][0] == jogador)
+    else if (t[2][0] == jogador)
     {
-        if(tab.posicoes[2][1] == jogador && tab.posicoes[2][2] == jogador) {
+        if(t[2][1] == jogador && t[2][2] == jogador) {
             return 100;
         }
     }
 
 	//testa derrota
-	if (tab.posicoes[0][0] == oponente)
+	if (t[0][0] == oponente)
     {
-      if (tab.posicoes[0][1] == oponente && tab.posicoes[0][2] == oponente ||
-            tab.posicoes[1][0] == oponente && tab.posicoes[2][0] == oponente ||
-            tab.posicoes[1][1] == oponente && tab.posicoes[2][2] == oponente)
+      if (t[0][1] == oponente && t[0][2] == oponente ||
+            t[1][0] == oponente && t[2][0] == oponente ||
+            t[1][1] == oponente && t[2][2] == oponente)
         {
             return -100;
         }
     }
-    else if (tab.posicoes[0][2] == oponente)
+    else if (t[0][2] == oponente)
     {
-        if (tab.posicoes[1][1] == oponente && tab.posicoes[2][0] == oponente ||
-            tab.posicoes[1][2] == oponente && tab.posicoes[2][2] == oponente)
+        if (t[1][1] == oponente && t[2][0] == oponente ||
+            t[1][2] == oponente && t[2][2] == oponente)
         {
             return -100;
         }
     }
-    else if (tab.posicoes[1][1] == oponente)
+    else if (t[1][1] == oponente)
     {
-        if(tab.posicoes[0][1] == oponente && tab.posicoes[2][1] == oponente ||
-            tab.posicoes[1][0] == oponente && tab.posicoes[1][2] == oponente) {
+        if(t[0][1] == oponente && t[2][1] == oponente ||
+            t[1][0] == oponente && t[1][2] == oponente) {
             return -100;
         }
     }
-    else if (tab.posicoes[2][0] == oponente)
+    else if (t[2][0] == oponente)
     {
-        if(tab.posicoes[2][1] == oponente && tab.posicoes[2][2] == oponente) {
+        if(t[2][1] == oponente && t[2][2] == oponente) {
             return -100;
         }
     }
@@ -142,6 +145,9 @@ int tapatanEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char opone
 int picariaEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
 {
 
+  vector<vector<char>> t = tab.getPositions();
+  vector<vector<char>> t_ini = tab_ini.getPositions();
+
     int cont = 0;
 
     //testa empate
@@ -150,7 +156,7 @@ int picariaEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char opone
         for(int j=0; j<3; j++)
         {
 
-            if(tab.posicoes[i][j] == tab_ini.posicoes[i][j])
+            if(t[i][j] == t_ini[i][j])
             {
                 cont++;
             }
@@ -169,65 +175,65 @@ int picariaEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char opone
 
 
     //testa vitoria
-    if (tab.posicoes[0][0] == jogador)
+    if (t[0][0] == jogador)
     {
-      if (tab.posicoes[0][1] == jogador && tab.posicoes[0][2] == jogador ||
-            tab.posicoes[1][0] == jogador && tab.posicoes[2][0] == jogador ||
-            tab.posicoes[1][1] == jogador && tab.posicoes[2][2] == jogador)
+      if (t[0][1] == jogador && t[0][2] == jogador ||
+            t[1][0] == jogador && t[2][0] == jogador ||
+            t[1][1] == jogador && t[2][2] == jogador)
         {
             return 100;
         }
     }
-    else if (tab.posicoes[0][2] == jogador)
+    else if (t[0][2] == jogador)
     {
-        if (tab.posicoes[1][1] == jogador && tab.posicoes[2][0] == jogador ||
-            tab.posicoes[1][2] == jogador && tab.posicoes[2][2] == jogador)
+        if (t[1][1] == jogador && t[2][0] == jogador ||
+            t[1][2] == jogador && t[2][2] == jogador)
         {
             return 100;
         }
     }
-    else if (tab.posicoes[1][1] == jogador)
+    else if (t[1][1] == jogador)
     {
-        if(tab.posicoes[0][1] == jogador && tab.posicoes[2][1] == jogador ||
-            tab.posicoes[1][0] == jogador && tab.posicoes[1][2] == jogador) {
+        if(t[0][1] == jogador && t[2][1] == jogador ||
+            t[1][0] == jogador && t[1][2] == jogador) {
             return 100;
         }
     }
-    else if (tab.posicoes[2][0] == jogador)
+    else if (t[2][0] == jogador)
     {
-        if(tab.posicoes[2][1] == jogador && tab.posicoes[2][2] == jogador) {
+        if(t[2][1] == jogador && t[2][2] == jogador) {
             return 100;
         }
     }
 
 	//testa derrota
-	if (tab.posicoes[0][0] == oponente)
+	if (t[0][0] == oponente)
     {
-      if (tab.posicoes[0][1] == oponente && tab.posicoes[0][2] == oponente ||
-            tab.posicoes[1][0] == oponente && tab.posicoes[2][0] == oponente ||
-            tab.posicoes[1][1] == oponente && tab.posicoes[2][2] == oponente)
+      if (t[0][1] == oponente && t[0][2] == oponente ||
+            t[1][0] == oponente && t[2][0] == oponente ||
+            t[1][1] == oponente && t[2][2] == oponente)
         {
             return -100;
         }
     }
-    else if (tab.posicoes[0][2] == oponente)
+    else if (t[0][2] == oponente)
     {
-        if (tab.posicoes[1][1] == oponente && tab.posicoes[2][0] == oponente ||
-            tab.posicoes[1][2] == oponente && tab.posicoes[2][2] == oponente)
+        if (t[1][1] == oponente && t[2][0] == oponente ||
+            t[1][2] == oponente && t[2][2] == oponente)
         {
             return -100;
         }
     }
-    else if (tab.posicoes[1][1] == oponente)
+    else if (t[1][1] == oponente)
     {
-        if(tab.posicoes[0][1] == oponente && tab.posicoes[2][1] == oponente ||
-            tab.posicoes[1][0] == oponente && tab.posicoes[1][2] == oponente) {
+        if(t[0][1] == oponente && t[2][1] == oponente ||
+            t[1][0] == oponente && t[1][2] == oponente) {
             return -100;
         }
     }
-    else if (tab.posicoes[2][0] == oponente)
+    else if (t[2][0] == oponente)
     {
-        if(tab.posicoes[2][1] == oponente && tab.posicoes[2][2] == oponente) {
+        if(t[2][1] == oponente && t[2][2] == oponente) {
             return -100;
         }
     }
@@ -239,6 +245,9 @@ int picariaEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char opone
 int threeMensMorrisEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
 {
 
+  vector<vector<char>> t = tab.getPositions();
+  vector<vector<char>> t_ini = tab_ini.getPositions();
+
     int cont = 0;
 
     //testa empate
@@ -247,7 +256,7 @@ int threeMensMorrisEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, ch
         for(int j=0; j<3; j++)
         {
 
-            if(tab.posicoes[i][j] == tab_ini.posicoes[i][j])
+            if(t[i][j] == t_ini[i][j])
             {
                 cont++;
             }
@@ -266,65 +275,65 @@ int threeMensMorrisEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, ch
 
 
     //testa vitoria
-    if (tab.posicoes[0][0] == jogador)
+    if (t[0][0] == jogador)
     {
-      if (tab.posicoes[0][1] == jogador && tab.posicoes[0][2] == jogador ||
-            tab.posicoes[1][0] == jogador && tab.posicoes[2][0] == jogador ||
-            tab.posicoes[1][1] == jogador && tab.posicoes[2][2] == jogador)
+      if (t[0][1] == jogador && t[0][2] == jogador ||
+            t[1][0] == jogador && t[2][0] == jogador ||
+            t[1][1] == jogador && t[2][2] == jogador)
         {
             return 100;
         }
     }
-    else if (tab.posicoes[0][2] == jogador)
+    else if (t[0][2] == jogador)
     {
-        if (tab.posicoes[1][1] == jogador && tab.posicoes[2][0] == jogador ||
-            tab.posicoes[1][2] == jogador && tab.posicoes[2][2] == jogador)
+        if (t[1][1] == jogador && t[2][0] == jogador ||
+            t[1][2] == jogador && t[2][2] == jogador)
         {
             return 100;
         }
     }
-    else if (tab.posicoes[1][1] == jogador)
+    else if (t[1][1] == jogador)
     {
-        if(tab.posicoes[0][1] == jogador && tab.posicoes[2][1] == jogador ||
-            tab.posicoes[1][0] == jogador && tab.posicoes[1][2] == jogador) {
+        if(t[0][1] == jogador && t[2][1] == jogador ||
+            t[1][0] == jogador && t[1][2] == jogador) {
             return 100;
         }
     }
-    else if (tab.posicoes[2][0] == jogador)
+    else if (t[2][0] == jogador)
     {
-        if(tab.posicoes[2][1] == jogador && tab.posicoes[2][2] == jogador) {
+        if(t[2][1] == jogador && t[2][2] == jogador) {
             return 100;
         }
     }
 
 	//testa derrota
-	if (tab.posicoes[0][0] == oponente)
+	if (t[0][0] == oponente)
     {
-      if (tab.posicoes[0][1] == oponente && tab.posicoes[0][2] == oponente ||
-            tab.posicoes[1][0] == oponente && tab.posicoes[2][0] == oponente ||
-            tab.posicoes[1][1] == oponente && tab.posicoes[2][2] == oponente)
+      if (t[0][1] == oponente && t[0][2] == oponente ||
+            t[1][0] == oponente && t[2][0] == oponente ||
+            t[1][1] == oponente && t[2][2] == oponente)
         {
             return -100;
         }
     }
-    else if (tab.posicoes[0][2] == oponente)
+    else if (t[0][2] == oponente)
     {
-        if (tab.posicoes[1][1] == oponente && tab.posicoes[2][0] == oponente ||
-            tab.posicoes[1][2] == oponente && tab.posicoes[2][2] == oponente)
+        if (t[1][1] == oponente && t[2][0] == oponente ||
+            t[1][2] == oponente && t[2][2] == oponente)
         {
             return -100;
         }
     }
-    else if (tab.posicoes[1][1] == oponente)
+    else if (t[1][1] == oponente)
     {
-        if(tab.posicoes[0][1] == oponente && tab.posicoes[2][1] == oponente ||
-            tab.posicoes[1][0] == oponente && tab.posicoes[1][2] == oponente) {
+        if(t[0][1] == oponente && t[2][1] == oponente ||
+            t[1][0] == oponente && t[1][2] == oponente) {
             return -100;
         }
     }
-    else if (tab.posicoes[2][0] == oponente)
+    else if (t[2][0] == oponente)
     {
-        if(tab.posicoes[2][1] == oponente && tab.posicoes[2][2] == oponente) {
+        if(t[2][1] == oponente && t[2][2] == oponente) {
             return -100;
         }
     }
@@ -336,6 +345,9 @@ int threeMensMorrisEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, ch
 int altanXaraacajEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial)
 {
 
+  vector<vector<char>> t = tab.getPositions();
+  vector<vector<char>> t_ini = tab_ini.getPositions();
+
     int cont = 0;
 
     //testa empate
@@ -344,7 +356,7 @@ int altanXaraacajEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char
         for(int j=0; j<3; j++)
         {
 
-            if(tab.posicoes[i][j] == tab_ini.posicoes[i][j])
+            if(t[i][j] == t_ini[i][j])
             {
                 cont++;
             }
@@ -363,35 +375,35 @@ int altanXaraacajEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char
 
 
     //testa vitoria
-    if (tab.posicoes[0][0] == jogador)
+    if (t[0][0] == jogador)
     {
-      if (tab.posicoes[0][1] == jogador && tab.posicoes[0][2] == jogador ||
-            tab.posicoes[1][0] == jogador && tab.posicoes[2][0] == jogador)
+      if (t[0][1] == jogador && t[0][2] == jogador ||
+            t[1][0] == jogador && t[2][0] == jogador)
         {
             return 100;
         }
     }
-    else if (tab.posicoes[2][2] == jogador)
+    else if (t[2][2] == jogador)
     {
-        if(tab.posicoes[2][1] == jogador && tab.posicoes[2][0] == jogador ||
-            tab.posicoes[1][2] == jogador && tab.posicoes[0][2] == jogador) {
+        if(t[2][1] == jogador && t[2][0] == jogador ||
+            t[1][2] == jogador && t[0][2] == jogador) {
             return 100;
         }
     }
 
 	//testa derrota
-  if (tab.posicoes[0][0] == oponente)
+  if (t[0][0] == oponente)
   {
-    if (tab.posicoes[0][1] == oponente && tab.posicoes[0][2] == oponente ||
-          tab.posicoes[1][0] == oponente && tab.posicoes[2][0] == oponente)
+    if (t[0][1] == oponente && t[0][2] == oponente ||
+          t[1][0] == oponente && t[2][0] == oponente)
       {
           return -100;
       }
   }
-  else if (tab.posicoes[2][2] == oponente)
+  else if (t[2][2] == oponente)
   {
-      if(tab.posicoes[2][1] == oponente && tab.posicoes[2][0] == oponente ||
-          tab.posicoes[1][2] == oponente && tab.posicoes[0][2] == oponente) {
+      if(t[2][1] == oponente && t[2][0] == oponente ||
+          t[1][2] == oponente && t[0][2] == oponente) {
           return -100;
       }
   }

@@ -18,12 +18,20 @@ using namespace std;
 ***************************************************/
 class Tabuleiro
 {
-	public:
+	private:
 		vector<vector<char>> posicoes;
+		unsigned int hash;
+
+	public:
 
 		Tabuleiro();
 		Tabuleiro(vector<vector<char>> posicoes);
-		void getHash();
+
+		vector<vector<char>> getPositions();
+		void setPositions(vector<vector<char>>);
+		void setPosition(int i, int j, char player);
+
+		unsigned int getHash();
 };
 
 #endif

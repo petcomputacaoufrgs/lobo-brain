@@ -25,6 +25,8 @@ int main() {
                           {'0', '2', '1'},
                           {'1', '2', '0'}});
 
+        cout << start.getHash() << endl;
+
         Node* choice;
 
         // gera arvore do inicio
@@ -37,7 +39,7 @@ int main() {
         int max_depth = 3;
 
         // se pode pular peças
-        bool jump = true;
+        bool jump = false;
 
         // Printa input
         cout << "\n\n\t >> IN\n\t=============" << endl;
@@ -50,21 +52,8 @@ int main() {
         cout << "\n\n\t >> OUT (" << choice->value << ")\n\t=============" << endl;
         printa_tab(choice->board);
 
-
-        /* vou fazer uns testes com hash aqui pra depois
-            implementar RL se der merda tira */
-
-
-        hash<string> hash;
-
-        cout << "\n\n\thash 020:\t\t" << hash("020") << endl;
-        cout << "\n\n\thash 002:\t\t" << hash("002") << endl;
-        cout << "\n\n\thash 020 ^ hash 002:\t" << (hash("212") ^ hash("000") ^ hash("121")) << "\n\n" << endl;
-
-        choice->board.getHash();
-
-
-        return 0;
+        // choice->board.setHash();
+        cout << choice->board.getHash() << endl;
 
 }
 
@@ -111,6 +100,8 @@ int main() {
 //           // Inicializando tabuleiro
 //           Tabuleiro tab_atual = start;
 //
+//           vector<vector<char>> t_a = tab_atual.getPositions();
+//
 //           Node* choice;
 //
 //           vector<vector<int>> possible_mov;
@@ -143,18 +134,18 @@ int main() {
 //
 //               // aguarda entradas e verifica se são válidas
 //               from = receive_coord(false, 0, 2);
-//               if(tab_atual.posicoes[from[0]] [from[1]] == '2') {
+//               if(t_a[from[0]] [from[1]] == '2') {
 //                   while(!jogada_valida) {
 //                       to = receive_coord(true, 0, 2);
-//                       if(tab_atual.posicoes[to[0]] [to[1]] == '0') {
+//                       if(t_a[to[0]] [to[1]] == '0') {
 //
 //                         int player_pos = 3*from[0] + from[1];
 //                         possible_mov = tapatanMoves(player_pos);
 //
 //                         // Se a casa está no vetor possible_mov, então a jogada é válida
 //                         if(find(begin(possible_mov), end(possible_mov), to) != end(possible_mov)) {
-//                             tab_atual.posicoes[from[0]] [from[1]] = '0';
-//                             tab_atual.posicoes[to[0]] [to[1]] = '2';
+//                             t_a[from[0]] [from[1]] = '0';
+//                             t_a[to[0]] [to[1]] = '2';
 //                             jogada_valida = true;
 //                         }else{
 //                             cout << "\tMOVIMENTO INVÁLIDO\n\t\tTENTE OUTRO!" << endl;

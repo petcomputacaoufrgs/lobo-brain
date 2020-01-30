@@ -158,82 +158,84 @@ vector<vector<int>> tapatanJumpMoves(int player_pos, Tabuleiro board)
       vector<vector<int>> possible_mov;
       vector<int> ij;
 
+      vector<vector<char>> t = board.getPositions();
+
       switch (player_pos) {
           case 0:
-            if(board.posicoes[0][1] != '0') {
+            if(t[0][1] != '0') {
               ij.push_back(0); ij.push_back(2);
               possible_mov.push_back(ij);
-            }else if(board.posicoes[1][0] != '0') {
+            }else if(t[1][0] != '0') {
               ij.push_back(2); ij.push_back(0);
               possible_mov.push_back(ij);
-            }else if(board.posicoes[1][1] != '0') {
+            }else if(t[1][1] != '0') {
               ij.push_back(2); ij.push_back(2);
               possible_mov.push_back(ij);
             }
             return possible_mov;
 
           case 1:
-              if(board.posicoes[1][1] != '0') {
+              if(t[1][1] != '0') {
                 ij.push_back(2); ij.push_back(1);
                 possible_mov.push_back(ij);
               }
               return possible_mov;
 
           case 2:
-            if(board.posicoes[0][1] != '0') {
+            if(t[0][1] != '0') {
               ij.push_back(0); ij.push_back(0);
               possible_mov.push_back(ij);
-            }else if(board.posicoes[1][2] != '0') {
+            }else if(t[1][2] != '0') {
               ij.push_back(2); ij.push_back(2);
               possible_mov.push_back(ij);
-            }else if(board.posicoes[1][1] != '0') {
+            }else if(t[1][1] != '0') {
               ij.push_back(2); ij.push_back(0);
               possible_mov.push_back(ij);
             }
             return possible_mov;
 
           case 3:
-            if(board.posicoes[1][1] != '0') {
+            if(t[1][1] != '0') {
               ij.push_back(1); ij.push_back(2);
               possible_mov.push_back(ij);
             }
             return possible_mov;
 
           case 5:
-            if(board.posicoes[1][1] != '0') {
+            if(t[1][1] != '0') {
               ij.push_back(1); ij.push_back(0);
               possible_mov.push_back(ij);
             }
             return possible_mov;
 
           case 6:
-            if(board.posicoes[1][0] != '0') {
+            if(t[1][0] != '0') {
               ij.push_back(0); ij.push_back(0);
               possible_mov.push_back(ij);
-            }else if(board.posicoes[2][1] != '0') {
+            }else if(t[2][1] != '0') {
               ij.push_back(2); ij.push_back(2);
               possible_mov.push_back(ij);
-            }else if(board.posicoes[1][1] != '0') {
+            }else if(t[1][1] != '0') {
               ij.push_back(0); ij.push_back(2);
               possible_mov.push_back(ij);
             }
             return possible_mov;
 
           case 7:
-            if(board.posicoes[1][1] != '0') {
+            if(t[1][1] != '0') {
               ij.push_back(0); ij.push_back(1);
               possible_mov.push_back(ij);
             }
             return possible_mov;
 
           case 8:
-            if(board.posicoes[2][1] != '0') {
+            if(t[2][1] != '0') {
               ij.push_back(2); ij.push_back(0);
               possible_mov.push_back(ij);
-            }else if(board.posicoes[1][2] != '0') {
+            }else if(t[1][2] != '0') {
               ij.push_back(0); ij.push_back(2);
               possible_mov.push_back(ij);
-            }else if(board.posicoes[1][1] != '0') {
+            }else if(t[1][1] != '0') {
               ij.push_back(0); ij.push_back(0);
               possible_mov.push_back(ij);
             }

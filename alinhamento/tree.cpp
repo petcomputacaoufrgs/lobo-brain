@@ -50,17 +50,19 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
 
     vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
 
+    vector<vector<char>> t = board.getPositions();
+
     for(i=0;i<3;i++)
     {
         for(j=0;j<3;j++)
         {
-            if(board.posicoes[i][j] == player)//verifica se a posicao do tabuleiro esta sendo ocupada pelo jogador
+            if(t[i][j] == player)//verifica se a posicao do tabuleiro esta sendo ocupada pelo jogador
             {
                 player_pos = 3*i+j;//realiza uma aritmetica para determinar a posicao do jogador no tabuleiro
 
-
                 // TODO: SWITCH DE ACORDO COM O JOGO USANDO CÓDIGOS PRé DEFINIDOS
                 possible_mov = tapatanMoves(player_pos);
+
                 if(jump) {
                   aux_vet = tapatanJumpMoves(player_pos, board);
                   possible_mov.insert(possible_mov.end(), aux_vet.begin(), aux_vet.end());
@@ -68,12 +70,15 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
 
                 for(vector<vector<int>>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)//varre todas as posicoes do tabuleiro
                 {
-                    if(board.posicoes[it->at(0)][it->at(1)] == '0')//verifica se a posicao do tabuleiro esta vazia para poder realizar a possivel movimentacao
+                    if(t[it->at(0)][it->at(1)] == '0')//verifica se a posicao do tabuleiro esta vazia para poder realizar a possivel movimentacao
                     {
+
                         //gambiarra fodida pois n sei cpp quem quiser melhorar pode dale
                         Tabuleiro newBoard = board;
-                        newBoard.posicoes[it->at(0)][it->at(1)] = player;//gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
-                        newBoard.posicoes[i][j] = '0';//quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
+                        //gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
+                        newBoard.setPosition(it->at(0), it->at(1), player);
+                        //quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
+                        newBoard.setPosition(i, j, '0');
 
                         possibleBoards.push_back(newBoard);
                     }

@@ -19,10 +19,12 @@ using namespace std;
 
 void printa_tab(Tabuleiro tab) {
 
+	vector<vector<char>> t = tab.getPositions();
+
 	for(int i=0; i<3; i++) {
 		cout << '\t';
 		for(int j=0; j<3; j++) {
-			cout << "| " << tab.posicoes[i][j] << " ";
+			cout << "| " << t[i][j] << " ";
 		}
                 cout << "|" << endl;
 	}
