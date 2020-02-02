@@ -21,6 +21,8 @@ void printa_tab(Tabuleiro tab) {
 
 	vector<vector<char>> t = tab.getPositions();
 
+	cout << "\t=============" << endl ;
+
 	for(int i=0; i<3; i++) {
 		cout << '\t';
 		for(int j=0; j<3; j++) {
@@ -29,7 +31,7 @@ void printa_tab(Tabuleiro tab) {
                 cout << "|" << endl;
 	}
 
-	cout << "\t=============\n\n" << endl ;
+	cout << "\t=============" << endl ;
 
 }
 
@@ -104,6 +106,13 @@ int minimax(Tree *game, Node *current_state, bool jump, int alpha,
 		current_state->value = score + depth; // NOTE: Somar depth faz sentido aqui?
 		return current_state->value;
 }
+
+
+	/* TESTANDO O HASHER */
+
+
+	cout << "\n\n\t#" << current_state->board.getHash() << ":\n";
+	printa_tab(current_state->board);
 
 
 	/* CASOS NÃO TERMINAIS */

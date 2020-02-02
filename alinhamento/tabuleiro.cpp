@@ -1,4 +1,5 @@
 #include "tabuleiro.hpp"
+#include "siphasher.hpp"
 #include <vector>
 #include <iostream>
 
@@ -33,30 +34,23 @@ Tabuleiro::Tabuleiro()
 
 unsigned int Tabuleiro::getHash() {
 
-	/* numeros primos pro  hashing */
-	vector<unsigned int> p = {8219, 7103, 9209, 4789, 3547};
-
-	/* unsingned para fazer wrapping e nao dar merda caso overflow */
-	unsigned ihash = p[4];
-
 	/* só pra nao encurtar linha */
 	vector<vector<char>> m = this->posicoes;
 
-	unsigned index = 0;
+	/* inicializando hasher */
+	SipHasher hasher;
 
 	/* varre as linhas */
 	for(int i = 0; i < m.size(); i++) {
 
-			vector<char> s = m[i];
-
-			for(int k = 0; k < s.size(); k++) {
-				/* o mod ta ai pra ser genérico pra qualquer tamanho de tab, wrapping */
-				ihash = p[0] * ((unsigned) s[i] + index) ^ ihash * p[3];
+			/* varre cada linha jogando o char pro hasher */
+			for(int k = 0; k < m[i].size(); k++) {
+				hasher << m[i][k];
 			}
 
-			index++;
 	}
-	return ihash;
+
+	return hasher.finish();
 }
 
 /* positons related */

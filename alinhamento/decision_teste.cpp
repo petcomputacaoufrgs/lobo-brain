@@ -25,8 +25,6 @@ int main() {
                           {'0', '2', '1'},
                           {'1', '2', '0'}});
 
-        cout << start.getHash() << endl;
-
         Node* choice;
 
         // gera arvore do inicio
@@ -39,21 +37,20 @@ int main() {
         int max_depth = 3;
 
         // se pode pular peças
-        bool jump = false;
+        bool jump = true;
 
         // Printa input
-        cout << "\n\n\t >> IN\n\t=============" << endl;
+        cout << "\n\n\t >> IN <<\n\n\t#"
+             << choice->board.getHash() << ":" << endl;
         printa_tab(start);
 
         // escolha de jogada
         choice = decision(test_tree, test_tree->root, jump, &rep, max_depth);
 
         // Printa output
-        cout << "\n\n\t >> OUT (" << choice->value << ")\n\t=============" << endl;
+        cout << "\n\n\t >> OUT (" << choice->value << ") <<\n\n\t#"
+             << choice->board.getHash() << ":" << endl;
         printa_tab(choice->board);
-
-        // choice->board.setHash();
-        cout << choice->board.getHash() << endl;
 
 }
 
