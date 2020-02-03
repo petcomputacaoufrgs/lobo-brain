@@ -12,9 +12,46 @@
 using namespace std;
 
 
-  /* TESTE INDIVIDUAL E NAO INTERATIVO */
+
+// TESTE INDIVIDUAL E NAO INYERATIVO PARA INSERÇÃO DE PEÇAS
+int main(){
+  Tabuleiro start ({{'1', '0', '2'},
+                    {'2', '2', '1'},
+                    {'0', '0', '1'}});
+
+  Node* choice;
+  // numero de jogadas de insercao
+  int insercoes = 6;
+  // gera arvore do inicio
+  Tree* test_tree = new Tree(start);
+
+  // repeticoes inicias
+  int rep = 0;
+
+  // profundidade maxima
+  int max_depth = 3;
+
+  // se pode pular peças
+  bool jump = false;
+  // se esta na fase de insercao
+  bool insert = true;
+
+  // Printa input
+  cout << "\n\n >> IN\n=============" << endl;
+  printa_tab(start);
 
 
+  // escolha de jogada
+  choice = decision(test_tree, test_tree->root, jump, insert, &rep, max_depth);
+
+  // Printa output
+  cout << "\n\n >> OUT (" << choice->value << ")\n=============" << endl;
+  printa_tab(choice->board);
+
+}
+
+/* 
+//TESTE INDIVIDUAL E NAO INTERATIVO PARA O JUMP
 int main() {
 
         // tab.posicoes na posicao inicial
@@ -51,8 +88,8 @@ int main() {
         printa_tab(choice->board);
 
 
-        /* vou fazer uns testes com hash aqui pra depois
-            implementar RL */
+        //vou fazer uns testes com hash aqui pra depois
+        //implementar RL 
 
 
         hash<string> hash;
@@ -65,8 +102,7 @@ int main() {
         return 0;
 
 }
-
-
+*/
   /* TESTE INTERATIVO */
 
 

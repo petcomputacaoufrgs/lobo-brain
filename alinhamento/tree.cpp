@@ -86,6 +86,42 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
     return possibleBoards;
 }
 
+/*****************************************************************************************
+*   generateBoardsInsertion:                                                             *
+*       - Especificacao:                                                                 *
+*           - Gera os possiveis tabuleiros (jogadas) a partir de um tabuleiro            *
+*           atual dado,*ou seja, gera as possiveis jogadas que a maquina                 *
+*           pode fazer a partir de um estado de jogo Utiliza-se portanto, a inserção     *
+*           das paças neste estado atual.                                                *
+*                                                                                        *
+*       - Entardas:                                                                      *
+*           - Recebe como entrada um tabuleiro (estado atual do jogo) e o jogador atual  *
+*       - Saida:                                                                         *
+*           - Retorna um ponteiro para a raiz de um                                      *
+*           conjunto de possiveis tabuleiros gerados                                     *
+*                                                                                        *                                         *
+******************************************************************************************/
+vector<Tabuleiro> Tree::generateBoardsInsertion(Tabuleiro board, char player){
+    int i,j, player_pos;
+    vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
+
+    for(i=0;i<3;i++)
+    {
+        for(j=0;j<3;j++)
+        {
+            if(board.posicoes[i][j] == '0')// verifica se a posicao do tabuleiro esta vazia para inserir a peça
+            {
+                Tabuleiro newBoard = board;
+                newBoard.posicoes[i][j] = player;//gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
+                possibleBoards.push_back(newBoard);
+            }
+
+        }
+    }
+
+    return possibleBoards;
+}
+
 
 
 
@@ -101,14 +137,18 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
 *       - Observacao:                                                                    *
 *           - Os nodos filhos sao alocados dinamicamente na memoria, por isso é void     *
 ******************************************************************************************/
-void Tree::generateChildren(Node* current_state, char player, bool jump)
+void Tree::generateChildren(Node* current_state, char player, bool jump, bool insert)
 {
     vector<Tabuleiro> possibleBoards;
     Node* newChild;
     Tabuleiro board;
 
     //Gera os possiveis tabuleiros a partir da posicao corrente (jogadas do player)
-    possibleBoards = this->generateBoards(current_state->board, player, jump);
+    // Verifica se deve ocorrer a inserção de peças no tabuleiro
+    if(insert)
+        possibleBoards = this->generateBoardsInsertion(current_state->board, player);
+    else
+        possibleBoards = this->generateBoards(current_state->board, player, jump);
 
     //Adiciona os filhos (Node que contem board) no respectivo Node pai
     for (vector<Tabuleiro>::iterator it = possibleBoards.begin(); it != possibleBoards.end(); it++)

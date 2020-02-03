@@ -20,7 +20,8 @@ class Tree
         Tree(Tabuleiro startingBoard);//construtor
         void setRoot(Node* root);//metodo setter para a raiz
         vector<Tabuleiro> generateBoards(Tabuleiro board, char player, bool jump);
-        void generateChildren(Node* node, char player, bool jump);//gera filhos da raiz
+        vector<Tabuleiro> generateBoardsInsertion(Tabuleiro board, char player);
+        void generateChildren(Node* node, char player, bool jump, bool insert);//gera filhos da raiz
 
 };
 
