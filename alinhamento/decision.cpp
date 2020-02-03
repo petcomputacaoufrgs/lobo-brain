@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
-#include "tabuleiro.hpp"
+#include "state.hpp"
 #include "tree.hpp"
 #include "evaluations.hpp"
 #include "decision.hpp"
@@ -13,30 +13,10 @@
 
 using namespace std;
 
-
-	/* FUNÇÔES AUXILIARES */
-
-
-void printa_tab(Tabuleiro tab) {
-
-	vector<vector<char>> t = tab.getPositions();
-
-	cout << "\t=============" << endl ;
-
-	for(int i=0; i<3; i++) {
-		cout << '\t';
-		for(int j=0; j<3; j++) {
-			cout << "| " << t[i][j] << " ";
-		}
-                cout << "|" << endl;
-	}
-
-	cout << "\t=============" << endl ;
-
-}
+/* FUNÇÕES AUXILIARES */
 
 bool empate(int rep) {
-	if(rep == 3) {
+	if(rep >= 3) {
 		return true;
 	}
 	return false;
@@ -78,7 +58,7 @@ int minimax(Tree *game, Node *current_state, bool jump, int alpha,
 			  int beta, int *rep, bool isMax, int depth, int max_depth) {
 
 	// Valoração do tabuleiro atual
-	int score = tapatanEvaluation(current_state->board, game->root->board, '1', '2', rep);
+	int score = tapatanEvaluation(current_state->state, '1', '2', rep);
 
 
 	/* CASOS TERMINAIS */
@@ -88,31 +68,33 @@ int minimax(Tree *game, Node *current_state, bool jump, int alpha,
 	if(score == 100) {
 		current_state->value = score - depth;
 		return current_state->value;
-}
+	}
 
 	// Perdeu
 	if(score == -100) {
 		current_state->value = score + depth;
 		return current_state->value;
-}
+	}
 
 	// Nem quem ganhar vai perder e nem quem perder vai ganhar
 	if(empate(*rep)) {
 		current_state->value = 0;
 		return current_state->value;
 }
+
 	// Atingiu a profundidade máxima
 	if(depth >= max_depth) {
-		current_state->value = score + depth; // NOTE: Somar depth faz sentido aqui?
+		current_state->value = depth - max_depth;
 		return current_state->value;
-}
+	}
+
 
 
 	/* TESTANDO O HASHER */
 
 
-	cout << "\n\n\t#" << current_state->board.getHash() << ":\n";
-	printa_tab(current_state->board);
+	// cout << "\n\n\t#" << current_state->state.getHash() << ":\n";
+	// current_state->state.print();
 
 
 	/* CASOS NÃO TERMINAIS */

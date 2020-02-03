@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "tree.hpp"
-#include "tabuleiro.hpp"
+#include "state.hpp"
 #include "move.hpp"
 #include "node.hpp"
 #include "decision.hpp"
@@ -9,9 +9,9 @@
 using namespace std;
 
 //Metodo construtor da arvore
-Tree::Tree(Tabuleiro startingBoard)
+Tree::Tree(State startingState)
 {
-    Node* rootNode = new Node(startingBoard);
+    Node* rootNode = new Node(startingState);
     this->setRoot(rootNode);
 }
 //Metodo setter da arvore
@@ -41,16 +41,16 @@ void Tree::setRoot(Node* root)
 *           e adiciona no vetor a ser devolvido                                          *
 ******************************************************************************************/
 
-vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
+vector<State> Tree::generateStates(State state, char player, bool jump)
 {
     int i,j, player_pos;
     vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
 
     vector<vector<int>> aux_vet;
 
-    vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
+    vector<State> possibleStates;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
 
-    vector<vector<char>> t = board.getPositions();
+    vector<vector<char>> t = state.getBoard();
 
     for(i=0;i<3;i++)
     {
@@ -64,7 +64,7 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
                 possible_mov = tapatanMoves(player_pos);
 
                 if(jump) {
-                  aux_vet = tapatanJumpMoves(player_pos, board);
+                  aux_vet = tapatanJumpMoves(player_pos, state);
                   possible_mov.insert(possible_mov.end(), aux_vet.begin(), aux_vet.end());
                 }
 
@@ -74,13 +74,13 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
                     {
 
                         //gambiarra fodida pois n sei cpp quem quiser melhorar pode dale
-                        Tabuleiro newBoard = board;
+                        State newState = state;
                         //gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
-                        newBoard.setPosition(it->at(0), it->at(1), player);
+                        newState.setPosition(it->at(0), it->at(1), player);
                         //quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
-                        newBoard.setPosition(i, j, '0');
+                        newState.setPosition(i, j, '0');
 
-                        possibleBoards.push_back(newBoard);
+                        possibleStates.push_back(newState);
                     }
 
                 }
@@ -88,7 +88,7 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
         }
     }
 
-    return possibleBoards;
+    return possibleStates;
 }
 
 
@@ -108,15 +108,15 @@ vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
 ******************************************************************************************/
 void Tree::generateChildren(Node* current_state, char player, bool jump)
 {
-    vector<Tabuleiro> possibleBoards;
+    vector<State> possibleStates;
     Node* newChild;
-    Tabuleiro board;
+    State state;
 
     //Gera os possiveis tabuleiros a partir da posicao corrente (jogadas do player)
-    possibleBoards = this->generateBoards(current_state->board, player, jump);
+    possibleStates = this->generateStates(current_state->state, player, jump);
 
     //Adiciona os filhos (Node que contem board) no respectivo Node pai
-    for (vector<Tabuleiro>::iterator it = possibleBoards.begin(); it != possibleBoards.end(); it++)
+    for (vector<State>::iterator it = possibleStates.begin(); it != possibleStates.end(); it++)
     {
         newChild = new Node(*it);
         current_state->addChildren(newChild);

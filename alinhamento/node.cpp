@@ -1,13 +1,13 @@
 #include <iostream>
 #include "node.hpp"
-#include "tabuleiro.hpp"
+#include "state.hpp"
 
 using namespace std;
 
-Node::Node(Tabuleiro board)
+Node::Node(State state)
 {
 
-    this->board = board;
+    this->state = state;
 
     this->parent = NULL;
 }

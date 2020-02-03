@@ -153,12 +153,12 @@ vector<vector<int>> tapatanMoves(int player_pos)
 }
 
 
-vector<vector<int>> tapatanJumpMoves(int player_pos, Tabuleiro board)
+vector<vector<int>> tapatanJumpMoves(int player_pos, State state)
 {
       vector<vector<int>> possible_mov;
       vector<int> ij;
 
-      vector<vector<char>> t = board.getPositions();
+      vector<vector<char>> t = state.getBoard();
 
       switch (player_pos) {
           case 0:

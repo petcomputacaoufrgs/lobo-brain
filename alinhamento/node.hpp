@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "tabuleiro.hpp"
+#include "state.hpp"
 
 using namespace std;
 
@@ -13,9 +13,9 @@ class Node
         int value;
         Node *parent;
         vector<Node*> children;
-        Tabuleiro board;
+        State state;
 
-        Node(Tabuleiro board);
+        Node(State state);
 
         void addChildren(Node* newChildren);
 };

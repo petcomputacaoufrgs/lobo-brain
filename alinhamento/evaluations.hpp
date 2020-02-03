@@ -4,12 +4,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "tabuleiro.hpp"
+#include "state.hpp"
 #include "evaluations.hpp"
 
-int tapatanEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial);
-int picariaEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial);
-int threeMensMorrisEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial);
-int altanXaraacajEvaluation(Tabuleiro tab, Tabuleiro tab_ini, char jogador, char oponente, int *repeticoes_inicial);
+int tapatanEvaluation(State state, char jogador, char oponente, int *rep);
+int picariaEvaluation(State state, State state_ini, char jogador, char oponente, int *rep);
+int threeMensMorrisEvaluation(State state, State state_ini, char jogador, char oponente, int *rep);
+int altanXaraacajEvaluation(State state, State state_ini, char jogador, char oponente, int *rep);
 
 #endif

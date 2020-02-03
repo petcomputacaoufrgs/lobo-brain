@@ -3,11 +3,11 @@
 
 #include <vector>
 #include <string>
-#include "tabuleiro.hpp"
+#include "state.hpp"
 
 using namespace std;
 
 vector<vector<int>> tapatanMoves(int player_pos);
-vector<vector<int>> tapatanJumpMoves(int player_pos, Tabuleiro board);
+vector<vector<int>> tapatanJumpMoves(int player_pos, State state);
 
 #endif
