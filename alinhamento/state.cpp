@@ -1,6 +1,7 @@
 #include "state.hpp"
 #include "siphasher.hpp"
 #include "evaluations.hpp"
+#include "tree.hpp"
 #include <vector>
 #include <iostream>
 
@@ -71,6 +72,23 @@ unsigned int State::getHash() {
 	return hasher.finish();
 }
 
+// Retorna hashes
+vector<unsigned int> State::getPossibleNextStates(char player, bool jump) {
+
+		Tree* t = new Tree();
+		vector<State> possibleStates;
+		vector<unsigned int> hashes;
+
+		possibleStates = t->generateStates(*this, player, jump);
+
+		for (vector<State>::iterator it = possibleStates.begin(); it != possibleStates.end(); it++) {
+				hashes.push_back(it->getHash());
+		}
+
+		return hashes;
+
+}
+
 /* positons related */
 
 vector<vector<char>> State::getBoard() {
@@ -86,6 +104,7 @@ void State::setPosition(int i, int j, char player) {
 	this->board[i][j] = player;
 	this->hash = this->getHash();
 }
+
 
 void State::print() {
 

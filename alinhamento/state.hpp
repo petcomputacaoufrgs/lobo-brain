@@ -33,6 +33,7 @@ class State
 
 		unsigned int getHash();
 		void print();
+		vector<unsigned int> getPossibleNextStates(char player, bool jump);
 };
 
 vector<vector<char>> initialBoard();
