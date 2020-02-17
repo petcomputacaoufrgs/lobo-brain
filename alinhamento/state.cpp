@@ -1,6 +1,7 @@
 #include "state.hpp"
 #include "siphasher.hpp"
 #include "evaluations.hpp"
+#include "tree.hpp"
 #include <vector>
 #include <iostream>
 
@@ -85,6 +86,30 @@ void State::setBoard(vector<vector<char>> board) {
 void State::setPosition(int i, int j, char player) {
 	this->board[i][j] = player;
 	this->hash = this->getHash();
+}
+
+/*
+Essa funcão vai ser usada pra saber quais hashes devem
+ser procurados na Q-table
+*/
+vector<unsigned int> State::getPossibleMovesHashes(char player, bool jump) {
+
+	Tree* obj = new Tree();
+	vector<State> states = obj->generateStates(*this, player, jump);
+	vector<unsigned int> hashes;
+
+	for(vector<State>::iterator it = states.begin(); it != states.end(); it++) {
+		hashes.push_back((*it).getHash());
+	}
+
+	// Testing results
+	cout << "Hashes:" << endl;
+	for(int i = 0; i < hashes.size(); i++) {
+		cout << "\t#" << hashes[i] << endl;
+	}
+
+	return hashes;
+
 }
 
 void State::print() {

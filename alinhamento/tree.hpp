@@ -17,6 +17,7 @@ class Tree
     public:
         Node* root;
 
+        Tree();
         Tree(State startingState);//construtor
         void setRoot(Node* root);//metodo setter para a raiz
         vector<State> generateStates(State state, char player, bool jump);

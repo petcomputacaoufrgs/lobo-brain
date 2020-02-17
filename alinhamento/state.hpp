@@ -3,8 +3,10 @@
 
 #include <vector>
 #include <string>
+#include "agent.hpp"
 
 using namespace std;
+typedef vector<vector<char>> Tabuleiro;
 
 
 /**************************************************
@@ -19,20 +21,39 @@ using namespace std;
 class State
 {
 	private:
-		vector<vector<char>> board;
-		unsigned int hash;
+		Agent p1;
+		Agent p2;
+		char playerSymbol;
+		bool isEnd;
+		Tabuleiro board;
+
+		unsigned int hash; // talvez de pra tirar
 
 	public:
 
 		State();
-		State(vector<vector<char>> board);
-
-		vector<vector<char>> getBoard();
-		void setBoard(vector<vector<char>>);
+		State(Agent p1, Agent p2, char playerSymbol, bool isEnd, Tabuleiro board);
+		void setBoard(Tabuleiro board);
 		void setPosition(int i, int j, char player);
-
 		unsigned int getHash();
 		void print();
+		vector<unsigned int> getPossibleMovesHashes(char player, bool jump);
+
+		Tabuleiro getBoard();
+
+		char winner();//verifica se o jogo houve vencedor, empatou, ou nao terminou
+
+		vector<vector<int>> availablePositions();//verifica as possiveis posicoes para jogar. retorna um vetor de tuplas
+
+		void updateState(vector<int> position);//atualiza o estado do jogo, se o jogador 1 ou 2 joga, atualizando a movimentação
+
+		void giveReward(); // da a recompensa no final de cada jogo, atraves do metodo feedReward
+
+		void reset();//reseta todos atributos da classe State
+
+		void play_train(int rounds); //treina o algoritmo
+
+		void play_human();//joga contra o humano
 };
 
 vector<vector<char>> initialBoard();

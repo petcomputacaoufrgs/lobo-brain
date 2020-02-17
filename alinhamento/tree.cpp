@@ -8,6 +8,11 @@
 
 using namespace std;
 
+// Construtor vazio
+Tree::Tree() {
+
+}
+
 //Metodo construtor da arvore
 Tree::Tree(State startingState)
 {
