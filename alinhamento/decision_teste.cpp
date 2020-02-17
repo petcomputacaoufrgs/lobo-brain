@@ -36,6 +36,7 @@ int main() {
         // se pode pular peças
         bool jump = false;
 
+<<<<<<< HEAD
         int rep = 0;
 
         start.getPossibleMovesHashes('1', jump);
@@ -55,6 +56,31 @@ int main() {
              << choice->state.getHash() << ":" << endl;
         choice->state.print();
 
+=======
+        // repeticoes
+        int rep = 0;
+
+        // Teste
+        vector<unsigned int> h = start.getPossibleNextStates('1', jump);
+        cout << "\nPossibleNextStates:" << endl;
+        for(int i = 0; i < h.size(); i++) {
+          cout << "\t#" << h[i] << endl;
+        }
+
+        // Printa input
+        cout << "\n\n\t >> IN <<\n\n\t#"
+             << start.getHash() << ":" << endl;
+        start.print();
+
+        // escolha de jogada
+        choice = decision(test_tree, test_tree->root, jump, &rep, max_depth);
+
+        // Printa output
+        cout << "\n\n\t >> OUT (" << choice->value << ") <<\n\n\t#"
+             << choice->state.getHash() << ":" << endl;
+        choice->state.print();
+
+>>>>>>> 87a75b766080944872e976bca697e3f73e5f44ab
 }
 
 
@@ -122,10 +148,13 @@ int main() {
 //           system("clear");
 //           cout << "\n\nBem vindo, você é o jogador 2.\n\n" << endl;
 //
+<<<<<<< HEAD
 //           // TESTES PARA ESCOLHA DE REPRESENTACAO Q-Tabuleiro
 //           cout << "\n\tsize hash = " << sizeof(choice->state.getHash()) << endl;
 //           cout << "\n\tsize pos = " << sizeof(choice->state.getBoard()[0][0]) * 2 << endl;
 //
+=======
+>>>>>>> 87a75b766080944872e976bca697e3f73e5f44ab
 //           cout << "\t#" << state_atual.getHash() << endl;
 //           state_atual.print();
 //

@@ -37,6 +37,7 @@ class State
 		void setPosition(int i, int j, char player);
 		unsigned int getHash();
 		void print();
+<<<<<<< HEAD
 		vector<unsigned int> getPossibleMovesHashes(char player, bool jump);
 
 		Tabuleiro getBoard();
@@ -54,6 +55,9 @@ class State
 		void play_train(int rounds); //treina o algoritmo
 
 		void play_human();//joga contra o humano
+=======
+		vector<unsigned int> getPossibleNextStates(char player, bool jump);
+>>>>>>> 87a75b766080944872e976bca697e3f73e5f44ab
 };
 
 vector<vector<char>> initialBoard();

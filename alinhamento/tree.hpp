@@ -17,7 +17,11 @@ class Tree
     public:
         Node* root;
 
+<<<<<<< HEAD
         Tree();
+=======
+        Tree(); // construtor vazio
+>>>>>>> 87a75b766080944872e976bca697e3f73e5f44ab
         Tree(State startingState);//construtor
         void setRoot(Node* root);//metodo setter para a raiz
         vector<State> generateStates(State state, char player, bool jump);

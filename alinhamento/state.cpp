@@ -72,6 +72,23 @@ unsigned int State::getHash() {
 	return hasher.finish();
 }
 
+// Retorna hashes
+vector<unsigned int> State::getPossibleNextStates(char player, bool jump) {
+
+		Tree* t = new Tree();
+		vector<State> possibleStates;
+		vector<unsigned int> hashes;
+
+		possibleStates = t->generateStates(*this, player, jump);
+
+		for (vector<State>::iterator it = possibleStates.begin(); it != possibleStates.end(); it++) {
+				hashes.push_back(it->getHash());
+		}
+
+		return hashes;
+
+}
+
 /* positons related */
 
 vector<vector<char>> State::getBoard() {
@@ -88,6 +105,7 @@ void State::setPosition(int i, int j, char player) {
 	this->hash = this->getHash();
 }
 
+<<<<<<< HEAD
 /*
 Essa funcão vai ser usada pra saber quais hashes devem
 ser procurados na Q-table
@@ -111,6 +129,8 @@ vector<unsigned int> State::getPossibleMovesHashes(char player, bool jump) {
 	return hashes;
 
 }
+=======
+>>>>>>> 87a75b766080944872e976bca697e3f73e5f44ab
 
 void State::print() {
 
