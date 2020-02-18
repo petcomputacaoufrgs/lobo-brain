@@ -2,10 +2,12 @@
 #include "siphasher.hpp"
 #include "evaluations.hpp"
 #include "tree.hpp"
+#include "agent.hpp"
 #include <vector>
 #include <iostream>
 
 using namespace std;
+typedef vector<vector<char>> Tabuleiro;
 
 
 /**************************************************
@@ -20,13 +22,16 @@ using namespace std;
 
 
 // referência
-State start ({    {'2', '1', '2'},
-									{'0', '0', '0'},
-									{'1', '2', '1'}});
+State start(
+			{	{'2', '1', '2'},
+				{'0', '0', '0'},
+				{'1', '2', '1'}
+			});
 
 vector<vector<char>> initialBoard() {
 		return start.getBoard();
 }
+
 
 
 /*
@@ -36,21 +41,18 @@ vector<vector<char>> initialBoard() {
 /*
 
 
-/* contrutores */
-
-State::State(vector<vector<char>> board)
+/* Class Contructor */
+State::State(Agent p1, Agent p2, char player_symbol, bool is_end, Tabuleiro board)
 {
+	this->p1 = Agent(p1);
+	this->p2 = Agent(p2);
+	this->player_symbol = player_symbol;
+	this->is_end = is_end;
 	this->board = board;
 	this->hash = this->getHash();
 }
 
-State::State()
-{
-
-}
-
 /* hash related */
-
 unsigned int State::getHash() {
 
 	/* só pra nao encurtar linha */
@@ -72,22 +74,6 @@ unsigned int State::getHash() {
 	return hasher.finish();
 }
 
-// Retorna hashes
-vector<unsigned int> State::getPossibleNextStates(char player, bool jump) {
-
-		Tree* t = new Tree();
-		vector<State> possibleStates;
-		vector<unsigned int> hashes;
-
-		possibleStates = t->generateStates(*this, player, jump);
-
-		for (vector<State>::iterator it = possibleStates.begin(); it != possibleStates.end(); it++) {
-				hashes.push_back(it->getHash());
-		}
-
-		return hashes;
-
-}
 
 /* positons related */
 
@@ -105,7 +91,23 @@ void State::setPosition(int i, int j, char player) {
 	this->hash = this->getHash();
 }
 
-<<<<<<< HEAD
+void State::print() {
+
+	vector<vector<char>> t = this->getBoard();
+
+	cout << "\t=============" << endl ;
+
+	for(int i=0; i<3; i++) {
+		cout << '\t';
+		for(int j=0; j<3; j++) {
+			cout << "| " << t[i][j] << " ";
+		}
+                cout << "|" << endl;
+	}
+
+	cout << "\t=============" << endl ;
+
+}
 /*
 Essa funcão vai ser usada pra saber quais hashes devem
 ser procurados na Q-table
@@ -129,23 +131,34 @@ vector<unsigned int> State::getPossibleMovesHashes(char player, bool jump) {
 	return hashes;
 
 }
-=======
->>>>>>> 87a75b766080944872e976bca697e3f73e5f44ab
 
-void State::print() {
-
-	vector<vector<char>> t = this->getBoard();
-
-	cout << "\t=============" << endl ;
-
-	for(int i=0; i<3; i++) {
-		cout << '\t';
-		for(int j=0; j<3; j++) {
-			cout << "| " << t[i][j] << " ";
-		}
-                cout << "|" << endl;
-	}
-
-	cout << "\t=============" << endl ;
+char winner(){
 
 }
+
+vector<vector<int>> availablePositions(){
+
+}
+
+void updateState(vector<int> position){
+
+}
+
+void giveReward(){
+
+}
+
+void reset(){
+
+}
+
+void play_train(int rounds){
+
+}
+
+void play_human(){
+
+}
+
+
+

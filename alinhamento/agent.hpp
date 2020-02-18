@@ -15,9 +15,11 @@ class Agent{
 
     public:
 
+        Agent();
+
 		Agent(float alpha, float gamma, char player);
 
-        vector<int> win_rate; // record the win rate of all games played
+        vector<int> win_rate(); // record the win rate of all games played
 
         Tabuleiro chooseAction(Tabuleiro current_board); // generates all actions through the curret state
 
@@ -41,12 +43,7 @@ class Agent{
         // maps a board (current state board) to another board 
         // (action) and then maps it to a float value
         map<Tabuleiro, map<Tabuleiro, float>> Q; 
--
-        vector<Tabuleiro> states; // record all positions taken
-
-
-
-          
+        vector<Tabuleiro> states; // record all positions taken      
 
 };
 #endif
