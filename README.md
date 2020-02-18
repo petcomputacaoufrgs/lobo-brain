@@ -1,4 +1,8 @@
-## LoBo Games
+## LoBo Brain - Reinforcement Learning
 
-Implementação da função custo através de métodos de Reinforcement Learning (Q-Learning) a fim de
-auxiliar na tomada de decisões das jogadas que envolvem os jogos do projeto LoBo Games.
+Este projeto contém o código fonte escrito em C++, apenas com as bibliotecas nativas da linguagem. Além disso, foram utilizados métodos de inteligência artificial, como Reinforcement Learning, a fim de gerar o centro de tomadas de decisões dos jogos do projeto LoBo Games.
+
+
+Para replicar o resultado dos experimentos, é necessário:
+  * -
+  * -
