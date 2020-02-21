@@ -45,7 +45,7 @@ void Tree::setRoot(Node* root)
 *           e aqui na generate a gente verifica quais movimentos sao possiveis           *
 *           e adiciona no vetor a ser devolvido                                          *
 ******************************************************************************************/
-
+ 
 vector<State> Tree::generateStates(State state, char player, bool jump)
 {
     int i,j, player_pos;

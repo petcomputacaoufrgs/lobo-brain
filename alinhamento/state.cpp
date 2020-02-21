@@ -11,7 +11,7 @@ typedef vector<vector<char>> Tabuleiro;
 
 
 /**************************************************
-*	Estrutura tabuleiro:                          *
+*	Estrutura tabuleiro:                          * 
 * 		-Armazena um vetor de vetor de char       *
 * 		que representa as posicoes do tabuleiro   *
 *                                                 *
@@ -136,8 +136,273 @@ char winner(){
 
 }
 
-vector<vector<int>> availablePositions(){
+vector<vector<int>> possibleMoves(int player_pos){
+	vector<vector<int>> possible_mov;
+    vector<int> ij;
 
+    switch(player_pos)
+    {
+		case 0://(0,0)
+			ij.push_back(0); ij.push_back(1);
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 0;
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 1;
+			possible_mov.push_back(ij);
+		return possible_mov;
+
+		case 1://(0,1)
+			ij.push_back(0); ij.push_back(0);
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 1;
+			possible_mov.push_back(ij);
+
+			ij[0] = 0; ij[1] = 2;
+			possible_mov.push_back(ij);
+		return possible_mov;
+
+		case 2://(0,2)
+			ij.push_back(0); ij.push_back(1);
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 1;
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 2;
+			possible_mov.push_back(ij);
+		return possible_mov;
+
+		case 3://(1,0)
+			ij.push_back(0); ij.push_back(0);
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 1;
+			possible_mov.push_back(ij);
+
+			ij[0] = 2; ij[1] = 0;
+			possible_mov.push_back(ij);
+		return possible_mov;
+
+		case 4://(1,1)
+			ij.push_back(0); ij.push_back(0);
+			possible_mov.push_back(ij);
+
+			ij[0] = 0; ij[1] = 1;
+			possible_mov.push_back(ij);
+
+			ij[0] = 0; ij[1] = 2;
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 0;
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 2;
+			possible_mov.push_back(ij);
+
+			ij[0] = 2; ij[1] = 0;
+			possible_mov.push_back(ij);
+
+			ij[0] = 2; ij[1] = 1;
+			possible_mov.push_back(ij);
+
+			ij[0] = 2; ij[1] = 2;
+			possible_mov.push_back(ij);
+		return possible_mov;
+
+		case 5://(1,2)
+			ij.push_back(0); ij.push_back(2);
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 1;
+			possible_mov.push_back(ij);
+
+			ij[0] = 2; ij[1] = 2;
+			possible_mov.push_back(ij);
+		return possible_mov;
+
+		case 6://(2,0)
+			ij.push_back(2); ij.push_back(1);
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 0;
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 1;
+			possible_mov.push_back(ij);
+		return possible_mov;
+
+		case 7://(2,1)
+			ij.push_back(2); ij.push_back(0);
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 1;
+			possible_mov.push_back(ij);
+
+			ij[0] = 2; ij[1] = 2;
+			possible_mov.push_back(ij);
+		return possible_mov;
+
+		case 8://(2,2)
+			ij.push_back(2); ij.push_back(1);
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 1;
+			possible_mov.push_back(ij);
+
+			ij[0] = 1; ij[1] = 2;
+			possible_mov.push_back(ij);
+		return possible_mov;
+
+		default: return possible_mov;
+   }
+}
+
+
+
+vector<vector<int>> possibleJumpMoves(int player_pos, State state)
+{
+      vector<vector<int>> possible_mov;
+      vector<int> ij;
+
+      vector<vector<char>> t = state.getBoard();
+
+      switch (player_pos) {
+          case 0:
+            if(t[0][1] != '0') {
+              ij.push_back(0); ij.push_back(2);
+              possible_mov.push_back(ij);
+            }else if(t[1][0] != '0') {
+              ij.push_back(2); ij.push_back(0);
+              possible_mov.push_back(ij);
+            }else if(t[1][1] != '0') {
+              ij.push_back(2); ij.push_back(2);
+              possible_mov.push_back(ij);
+            }
+            return possible_mov;
+
+          case 1:
+              if(t[1][1] != '0') {
+                ij.push_back(2); ij.push_back(1);
+                possible_mov.push_back(ij);
+              }
+              return possible_mov;
+
+          case 2:
+            if(t[0][1] != '0') {
+              ij.push_back(0); ij.push_back(0);
+              possible_mov.push_back(ij);
+            }else if(t[1][2] != '0') {
+              ij.push_back(2); ij.push_back(2);
+              possible_mov.push_back(ij);
+            }else if(t[1][1] != '0') {
+              ij.push_back(2); ij.push_back(0);
+              possible_mov.push_back(ij);
+            }
+            return possible_mov;
+
+          case 3:
+            if(t[1][1] != '0') {
+              ij.push_back(1); ij.push_back(2);
+              possible_mov.push_back(ij);
+            }
+            return possible_mov;
+
+          case 5:
+            if(t[1][1] != '0') {
+              ij.push_back(1); ij.push_back(0);
+              possible_mov.push_back(ij);
+            }
+            return possible_mov;
+
+          case 6:
+            if(t[1][0] != '0') {
+              ij.push_back(0); ij.push_back(0);
+              possible_mov.push_back(ij);
+            }else if(t[2][1] != '0') {
+              ij.push_back(2); ij.push_back(2);
+              possible_mov.push_back(ij);
+            }else if(t[1][1] != '0') {
+              ij.push_back(0); ij.push_back(2);
+              possible_mov.push_back(ij);
+            }
+            return possible_mov;
+
+          case 7:
+            if(t[1][1] != '0') {
+              ij.push_back(0); ij.push_back(1);
+              possible_mov.push_back(ij);
+            }
+            return possible_mov;
+
+          case 8:
+            if(t[2][1] != '0') {
+              ij.push_back(2); ij.push_back(0);
+              possible_mov.push_back(ij);
+            }else if(t[1][2] != '0') {
+              ij.push_back(0); ij.push_back(2);
+              possible_mov.push_back(ij);
+            }else if(t[1][1] != '0') {
+              ij.push_back(0); ij.push_back(0);
+              possible_mov.push_back(ij);
+            }
+            return possible_mov;
+
+          default: return possible_mov;
+
+      }
+}
+
+
+
+vector<Tabuleiro> State::generateBoards(char player, bool jump)
+{
+    int i,j, player_pos;
+    vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
+
+    vector<vector<int>> aux_vet;
+
+    vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
+
+	Tabuleiro t = this->getBoard();
+
+    for(i=0;i<3;i++)
+    {
+        for(j=0;j<3;j++)
+        {
+            if(t[i][j] == player)//verifica se a posicao do tabuleiro esta sendo ocupada pelo jogador
+            {
+                player_pos = 3*i+j;//realiza uma aritmetica para determinar a posicao do jogador no tabuleiro
+
+                possible_mov = possibleMoves(player_pos);
+
+                if(jump) {
+                  aux_vet = possibleJumpMoves(player_pos, *this);
+                  possible_mov.insert(possible_mov.end(), aux_vet.begin(), aux_vet.end());
+                }
+
+                for(vector<vector<int>>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)//varre todas as posicoes do tabuleiro
+                {
+                    if(t[it->at(0)][it->at(1)] == '0')//verifica se a posicao do tabuleiro esta vazia para poder realizar a possivel movimentacao
+                    {
+
+                        Tabuleiro new_board = this->getBoard();
+                        //gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
+                        new_board[it->at(0)] [it->at(1)] = player;
+                        //quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
+                        new_board[i][j] = '0';
+
+                        possibleBoards.push_back(new_board);
+                    }
+
+                }
+            }
+        }
+    }
+
+    return possibleBoards;
 }
 
 void updateState(vector<int> position){

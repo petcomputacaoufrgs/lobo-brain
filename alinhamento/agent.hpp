@@ -2,6 +2,7 @@
 #define AGENT_H
 
 #include <vector>
+#include <tuple>
 #include <string>
 #include <map>
 #include "siphasher.hpp"
@@ -40,10 +41,11 @@ class Agent{
         float epsilon; // 1 - alpha
         char player; // represents the player
 
-        // maps a board (current state board) to another board 
+        // maps a board (current state board) to another board
         // (action) and then maps it to a float value
-        map<Tabuleiro, map<Tabuleiro, float>> Q; 
-        vector<Tabuleiro> states; // record all positions taken      
+        vector<tuple<Tabuleiro, Tabuleiro, float>> Q;
+        vector<Tabuleiro> states; // record all positions taken
+
 
 };
 #endif
