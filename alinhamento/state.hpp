@@ -17,20 +17,20 @@ typedef vector<vector<char>> Tabuleiro;
 * 		- Uso:                                    *
 *			- Tabuleiro exemplo (<vetor>);        *
 *                                                 *
-***************************************************/ 
+***************************************************/
 class State
 {
 	private:
 		Agent p1;
 		Agent p2;
-		char player_symbol;
-		bool is_end;
+		char playing_symbol;
+		bool finished;
 		Tabuleiro board;
 		unsigned int hash; // talvez de pra tirar
 
 	public:
 
-		State(Agent p1, Agent p2, char player_symbol, bool is_end, Tabuleiro board);//class constructor
+		State(Agent p1, Agent p2, char playing_symbol, bool finished, Tabuleiro board);//class constructor
 		void setBoard(Tabuleiro board);
 		void setPosition(int i, int j, char player);
 		unsigned int getHash();
@@ -42,7 +42,7 @@ class State
 
 		vector<vector<int>> availablePositions();//verifica as possiveis posicoes para jogar. retorna um vetor de tuplas
 
-		vector<Tabuleiro> generateBoards(char player, bool jump);// gera os possiveis tabuleiros de movimentacao de determinada peca
+		vector<Tabuleiro> possibleBoards(char player, bool jump);// gera os possiveis tabuleiros de movimentacao de determinada peca
 
 		void updateState(vector<int> position);//atualiza o estado do jogo, se o jogador 1 ou 2 joga, atualizando a movimentação
 

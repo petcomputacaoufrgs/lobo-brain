@@ -11,7 +11,7 @@ typedef vector<vector<char>> Tabuleiro;
 
 
 /**************************************************
-*	Estrutura tabuleiro:                          * 
+*	Estrutura tabuleiro:                          *
 * 		-Armazena um vetor de vetor de char       *
 * 		que representa as posicoes do tabuleiro   *
 *                                                 *
@@ -262,8 +262,7 @@ vector<vector<int>> possibleMoves(int player_pos){
 
 
 
-vector<vector<int>> possibleJumpMoves(int player_pos, State state)
-{
+vector<vector<int>> possibleJumpMoves(int player_pos, State state) {
       vector<vector<int>> possible_mov;
       vector<int> ij;
 
@@ -357,16 +356,14 @@ vector<vector<int>> possibleJumpMoves(int player_pos, State state)
 
 
 
-vector<Tabuleiro> State::generateBoards(char player, bool jump)
+vector<Tabuleiro> State::possibleBoards(char player, bool jump)
 {
     int i,j, player_pos;
     vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
-
     vector<vector<int>> aux_vet;
-
     vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
 
-	Tabuleiro t = this->getBoard();
+		Tabuleiro t = this->getBoard();
 
     for(i=0;i<3;i++)
     {
@@ -378,6 +375,7 @@ vector<Tabuleiro> State::generateBoards(char player, bool jump)
 
                 possible_mov = possibleMoves(player_pos);
 
+								// appending possible moves from the jump engine, if using
                 if(jump) {
                   aux_vet = possibleJumpMoves(player_pos, *this);
                   possible_mov.insert(possible_mov.end(), aux_vet.begin(), aux_vet.end());
@@ -424,6 +422,3 @@ void play_train(int rounds){
 void play_human(){
 
 }
-
-
-

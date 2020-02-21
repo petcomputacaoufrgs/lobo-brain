@@ -9,8 +9,12 @@
 #include "state.hpp"
 
 using namespace std;
-typedef vector<vector<char>> Tabuleiro;
 
+/*
+  Useful definitions
+*/
+typedef vector<vector<char>> Tabuleiro;
+typedef tuple<Tabuleiro, Tabuleiro, float> Qtuple;
 
 class Agent{
 
@@ -18,7 +22,7 @@ class Agent{
 
         Agent();
 
-		Agent(float alpha, float gamma, char player);
+		Agent(float alpha, float gamma, char player, bool jump);
 
         vector<int> win_rate(); // record the win rate of all games played
 
@@ -37,13 +41,16 @@ class Agent{
     private:
 
         float alpha; // represents the learning rate
-        float gamma; // represents the exploration\ rate
-        float epsilon; // 1 - alpha
-        char player; // represents the player
+        float gamma; // discout rate
+        float epsilon; // greedy action possibility
+        char symbol; // represents the player symbol
+        bool jump;  // whether jump engine is on or off
+
+        State *currentState; // pointer to the current state;
 
         // maps a board (current state board) to another board
         // (action) and then maps it to a float value
-        vector<tuple<Tabuleiro, Tabuleiro, float>> Q;
+        vector<Qtuple> Q;
         vector<Tabuleiro> states; // record all positions taken
 
 
