@@ -23,7 +23,7 @@ class State
 	private:
 		Agent p1;
 		Agent p2;
-		char playing_symbol;
+		char playing_symbol;	// acho que isso nao precisa existir
 		bool finished;
 		Tabuleiro board;
 		unsigned int hash; // talvez de pra tirar

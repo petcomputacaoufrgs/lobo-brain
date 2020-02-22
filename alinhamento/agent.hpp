@@ -22,36 +22,37 @@ class Agent{
 
         Agent();
 
-		Agent(float alpha, float gamma, char player, bool jump);
+		    Agent(float alpha, float gamma, char player, bool jump);
 
-        vector<int> win_rate(); // record the win rate of all games played
+        float winRate(); // record the win rate of all games played
 
-        Tabuleiro chooseAction(Tabuleiro current_board); // generates all actions through the curret state
-
-        void addState(vector<int> state); // add new state to the state array
+        void takeAction();
 
         void feedReward(float reward);
 
         void reset();
 
-        int savePolicy();//salva a politica atraves de MDP
+        int savePolicy(string policyName);//salva a politica atraves de MDP
 
-        void loadPolicy();// carrega a politica
+        int loadPolicy(string policyName);// carrega a politica
 
     private:
 
         float alpha; // represents the learning rate
         float gamma; // discout rate
         float epsilon; // greedy action possibility
+
         char symbol; // represents the player symbol
         bool jump;  // whether jump engine is on or off
 
-        State *currentState; // pointer to the current state;
+        State *current_state; // pointer to the current state;
 
         // maps a board (current state board) to another board
         // (action) and then maps it to a float value
         vector<Qtuple> Q;
-        vector<Tabuleiro> states; // record all positions taken
+        vector<Tabuleiro> states; // record all actions taken
+
+        vector<float> rewards;
 
 
 };

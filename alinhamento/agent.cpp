@@ -2,6 +2,7 @@
 #include <string>
 #include <tuple>
 #include <random>
+#include <numeric>
 #include "siphasher.hpp"
 #include "state.hpp"
 #include "agent.hpp"
@@ -50,11 +51,22 @@ Agent::Agent(float alpha, float gamma, char player){
     this->states = {};
 }
 
-vector<int> win_rate(){
-
+float winRate(){
+  return (accumulate(this.rewards.begin(), this.rewards.end(), .0) / this.reward.size()) * 100;
 }
 
-Tabuleiro Agent::chooseAction(Tabuleiro current_board){
+/*
+  Here we will take an action based on the Ɛ-greedy strategy
+*/
+void Agent::takeAction(){
+
+    /*
+      First, we'll choose what's the next action to take.
+      It sets the 'target_board' variable that will be used later.
+    */
+
+    Tabuleiro current_board = this->current_state.getBoard();
+    Tabuleiro target_board;
 
     // Ɛ-greedy strategy
     if(randomProb() >= this.epsilon) {
@@ -80,7 +92,7 @@ Tabuleiro Agent::chooseAction(Tabuleiro current_board){
 
         }
 
-        return get<1>(Q[highestQindex]);
+        target_board = get<1>(Q[highestQindex]);
 
     }else{
 
@@ -88,13 +100,18 @@ Tabuleiro Agent::chooseAction(Tabuleiro current_board){
           | exploration, random action |
       */
 
-      vector<Tabuleiro> possibleBoards = this->currentState.possibleBoards(this.symbol, this.jump);
-      return possibleBoards[randomInt(0, possibleBoards.size() - 1)];
+      vector<Tabuleiro> possible_boards = this->current_state.possibleBoards(this.symbol, this.jump);
+      target_board = possibleBoards[randomInt(0, possible_boards.size() - 1)];
     }
 
-}
+    /*
+      Now that we decided to what board we're going, we should update
+      the state and push the chosen board to the 'states vector'
+    */
+    this->current_state.setBoard(target_board);
+    this.states.push_back(target_board);
 
-void addState(vector<int> state){
+    return;
 
 }
 
@@ -110,6 +127,6 @@ int savePolicy(){
 
 }
 
-void loadPolicy(){
+int loadPolicy(){
 
 }
