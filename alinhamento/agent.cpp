@@ -43,16 +43,17 @@ Agent::Agent(){
 
 }
 
-Agent::Agent(float alpha, float gamma, char player){
+Agent::Agent(float alpha, float gamma, char player, bool jump){
 
     this->alpha = alpha;
     this->gamma = gamma;
-    this->player = player;
+    this->symbol = player;
     this->states = {};
+
 }
 
-float winRate(){
-  return (accumulate(this.rewards.begin(), this.rewards.end(), .0) / this.reward.size()) * 100;
+float Agent::winRate(){
+  return (accumulate(this->rewards.begin(), this->rewards.end(), .0) / this->rewards.size()) * 100;
 }
 
 /*
@@ -65,17 +66,17 @@ void Agent::takeAction(){
       It sets the 'target_board' variable that will be used later.
     */
 
-    Tabuleiro current_board = this->current_state.getBoard();
+    Tabuleiro current_board = this->current_state.getBoard(); //erro aqui
     Tabuleiro target_board;
 
     // Ɛ-greedy strategy
-    if(randomProb() >= this.epsilon) {
+    if(randomProb() >= this->epsilon) {
 
         /*
             | exploitation, greedy action |
         */
 
-        vector<Qtuple> Q = this.Q;
+        vector<Qtuple> Q = this->Q;
 
         float highestQ = -1.;
         int highestQindex = -1;
@@ -94,6 +95,7 @@ void Agent::takeAction(){
 
         target_board = get<1>(Q[highestQindex]);
 
+
     }else{
 
       /*
@@ -101,7 +103,7 @@ void Agent::takeAction(){
       */
 
       vector<Tabuleiro> possible_boards = this->current_state.possibleBoards(this.symbol, this.jump);
-      target_board = possibleBoards[randomInt(0, possible_boards.size() - 1)];
+      target_board = possible_boards[randomInt(0, possible_boards.size() - 1)];
     }
 
     /*
@@ -109,7 +111,7 @@ void Agent::takeAction(){
       the state and push the chosen board to the 'states vector'
     */
     this->current_state.setBoard(target_board);
-    this.states.push_back(target_board);
+    this->states.push_back(target_board);
 
     return;
 
@@ -119,8 +121,8 @@ void feedReward(float reward){
 
 }
 
-void reset(){
-
+void Agent::reset(){
+  this->states = {};
 }
 
 int savePolicy(){

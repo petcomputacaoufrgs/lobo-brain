@@ -45,7 +45,7 @@ class Agent{
         char symbol; // represents the player symbol
         bool jump;  // whether jump engine is on or off
 
-        State *current_state; // pointer to the current state;
+        State* current_state; // pointer to the current state;
 
         // maps a board (current state board) to another board
         // (action) and then maps it to a float value

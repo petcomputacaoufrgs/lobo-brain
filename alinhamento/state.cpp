@@ -28,7 +28,7 @@ State start(
 				{'1', '2', '1'}
 			});
 
-vector<vector<char>> initialBoard() {
+Tabuleiro initialBoard() {
 		return start.getBoard();
 }
 
@@ -42,12 +42,12 @@ vector<vector<char>> initialBoard() {
 
 
 /* Class Contructor */
-State::State(Agent p1, Agent p2, char player_symbol, bool is_end, Tabuleiro board)
+State::State(Agent p1, Agent p2, char player_symbol, bool finished, Tabuleiro board)
 {
 	this->p1 = Agent(p1);
 	this->p2 = Agent(p2);
-	this->player_symbol = player_symbol;
-	this->is_end = is_end;
+	this->playing_symbol = player_symbol;
+	this->finished = finished;
 	this->board = board;
 	this->hash = this->getHash();
 }
@@ -77,11 +77,11 @@ unsigned int State::getHash() {
 
 /* positons related */
 
-vector<vector<char>> State::getBoard() {
+Tabuleiro State::getBoard() {
 	return this->board;
 }
 
-void State::setBoard(vector<vector<char>> board) {
+void State::setBoard(Tabuleiro board) {
 	this->board = board;
 	this->hash = this->getHash();
 }
@@ -132,7 +132,131 @@ vector<unsigned int> State::getPossibleMovesHashes(char player, bool jump) {
 
 }
 
-char winner(){
+float State::winner(int *rep){
+	Tabuleiro t = this->getBoard();
+	Tabuleiro t_ini = initialBoard();
+
+	int cont = 0;
+	char jogador = this->playing_symbol;
+	char oponente;
+
+	if(playing_symbol == '1'){
+		oponente = '2';
+	}else{
+		oponente = '1';
+	}
+	/*
+		===============================
+								TIE
+		===============================
+	*/
+	for (int i=0; i<3; i++)
+	{
+			for(int j=0; j<3; j++)
+			{
+
+					if(t[i][j] == t_ini[i][j])
+					{
+							cont++;
+							// cout << "cont = " << cont << endl;
+					}
+			}
+	}
+
+	// Tabuleiro igual ao do comeco -> empate
+	// Retorna 0 e incrementa repeticoes do tab inicial
+	if (cont == 9)
+	{
+			(*rep)++;
+			if (*rep >= 3) {
+					return 0;
+			}
+	}
+
+	/*
+		===============================
+								WIN
+		===============================
+	*/
+
+	if (t[0][0] == jogador)
+	{
+		if (t[0][1] == jogador && t[0][2] == jogador ||
+					t[1][0] == jogador && t[2][0] == jogador ||
+					t[1][1] == jogador && t[2][2] == jogador)
+			{
+					return 1.0;
+			}
+	}
+	else if (t[0][2] == jogador)
+	{
+			if (t[1][1] == jogador && t[2][0] == jogador ||
+					t[1][2] == jogador && t[2][2] == jogador)
+			{
+					return 1.0;
+			}
+	}
+	else if (t[1][1] == jogador)
+	{
+			if(t[0][1] == jogador && t[2][1] == jogador ||
+					t[1][0] == jogador && t[1][2] == jogador) {
+					return 1.0;
+			}
+	}
+	else if (t[2][0] == jogador)
+	{
+			if(t[2][1] == jogador && t[2][2] == jogador) {
+					return 1.0;
+			}
+	}
+
+	/*
+		===============================
+								LOSE
+		===============================
+	*/
+
+if (t[0][0] == oponente)
+	{
+		if (t[0][1] == oponente && t[0][2] == oponente ||
+					t[1][0] == oponente && t[2][0] == oponente ||
+					t[1][1] == oponente && t[2][2] == oponente)
+			{
+					return -1.0;
+			}
+	}
+	else if (t[0][2] == oponente)
+	{
+			if (t[1][1] == oponente && t[2][0] == oponente ||
+					t[1][2] == oponente && t[2][2] == oponente)
+			{
+					return -1.0;
+			}
+	}
+	else if (t[1][1] == oponente)
+	{
+			if(t[0][1] == oponente && t[2][1] == oponente ||
+					t[1][0] == oponente && t[1][2] == oponente) {
+					return -1.0;
+			}
+	}
+	else if (t[2][0] == oponente)
+	{
+			if(t[2][1] == oponente && t[2][2] == oponente) {
+					return -1.0;
+			}
+	}
+
+	/*
+		===============================
+							NÃO TERMINAL
+		===============================
+		acho q é aqui que entraria o
+		Q-learning, pra poder retornar
+		um valor
+	*/
+
+	return 0;
 
 }
 
@@ -356,12 +480,14 @@ vector<vector<int>> possibleJumpMoves(int player_pos, State state) {
 
 
 
-vector<Tabuleiro> State::possibleBoards(char player, bool jump)
+vector<Tabuleiro> State::possibleBoards(bool jump)
 {
     int i,j, player_pos;
     vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
     vector<vector<int>> aux_vet;
     vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
+
+		char player = this->playing_symbol;
 
 		Tabuleiro t = this->getBoard();
 
@@ -403,16 +529,37 @@ vector<Tabuleiro> State::possibleBoards(char player, bool jump)
     return possibleBoards;
 }
 
-void updateState(vector<int> position){
 
+//talvez aqui esteja faltando algo
+void State::updateState(){
+	if(this->playing_symbol == '1'){
+		this->playing_symbol = '2';
+	}else{
+		this->playing_symbol = '1';
+	}
 }
 
-void giveReward(){
 
+// talvez tenha que mudar
+void State::giveReward(int *rep){
+	int result = this->winner(rep);
+
+	if(result == 1){
+		this->p1.feedReward(1.0);
+		this->p2.feedReward(0.0);
+	}else if(result == 2){
+		this->p1.feedReward(0.0);
+		this->p1.feedReward(1.0);
+	}else if(result == 0){
+		this->p1.feedReward(0.1);
+		this->p2.feedReward(0.5);
+	}
 }
 
-void reset(){
-
+void State::reset(){
+	this->setBoard(initialBoard());
+	this->finished = false;
+	this->playing_symbol = '1';
 }
 
 void play_train(int rounds){

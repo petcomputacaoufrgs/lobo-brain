@@ -21,8 +21,8 @@ typedef vector<vector<char>> Tabuleiro;
 class State
 {
 	private:
-		Agent p1;
-		Agent p2;
+		Agent p1();
+		Agent p2();
 		char playing_symbol;	// acho que isso nao precisa existir
 		bool finished;
 		Tabuleiro board;
@@ -38,15 +38,15 @@ class State
 		vector<unsigned int> getPossibleMovesHashes(char player, bool jump);
 		Tabuleiro getBoard();
 
-		char winner();//verifica se o jogo houve vencedor, empatou, ou nao terminou
+		float winner(int *rep);//verifica se o jogo houve vencedor, empatou, ou nao terminou
 
 		vector<vector<int>> availablePositions();//verifica as possiveis posicoes para jogar. retorna um vetor de tuplas
 
-		vector<Tabuleiro> possibleBoards(char player, bool jump);// gera os possiveis tabuleiros de movimentacao de determinada peca
+		vector<Tabuleiro> possibleBoards(bool jump);// gera os possiveis tabuleiros de movimentacao de determinada peca
 
-		void updateState(vector<int> position);//atualiza o estado do jogo, se o jogador 1 ou 2 joga, atualizando a movimentação
+		void updateState();//atualiza o estado do jogo, se o jogador 1 ou 2 joga, atualizando a movimentação
 
-		void giveReward(); // da a recompensa no final de cada jogo, atraves do metodo feedReward
+		void giveReward(int *rep); // da a recompensa no final de cada jogo, atraves do metodo feedReward
 
 		void reset();//reseta todos atributos da classe State
 
