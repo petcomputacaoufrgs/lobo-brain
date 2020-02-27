@@ -132,7 +132,10 @@ vector<unsigned int> State::getPossibleMovesHashes(char player, bool jump) {
 
 }
 
-float State::winner(int *rep){
+// da pra embutir o contador de repeticoes dentro
+//	da propria classe e tirar o parametro
+
+int State::winner(int *rep){
 	Tabuleiro t = this->getBoard();
 	Tabuleiro t_ini = initialBoard();
 
@@ -169,6 +172,7 @@ float State::winner(int *rep){
 	{
 			(*rep)++;
 			if (*rep >= 3) {
+					this->finished = true;
 					return 0;
 			}
 	}
@@ -185,7 +189,8 @@ float State::winner(int *rep){
 					t[1][0] == jogador && t[2][0] == jogador ||
 					t[1][1] == jogador && t[2][2] == jogador)
 			{
-					return 1.0;
+					this->finished = true;
+					return 1;
 			}
 	}
 	else if (t[0][2] == jogador)
@@ -193,20 +198,23 @@ float State::winner(int *rep){
 			if (t[1][1] == jogador && t[2][0] == jogador ||
 					t[1][2] == jogador && t[2][2] == jogador)
 			{
-					return 1.0;
+					this->finished = true;
+					return 1;
 			}
 	}
 	else if (t[1][1] == jogador)
 	{
 			if(t[0][1] == jogador && t[2][1] == jogador ||
 					t[1][0] == jogador && t[1][2] == jogador) {
-					return 1.0;
+					this->finished = true;
+					return 1;
 			}
 	}
 	else if (t[2][0] == jogador)
 	{
 			if(t[2][1] == jogador && t[2][2] == jogador) {
-					return 1.0;
+					this->finished = true;
+					return 1;
 			}
 	}
 
@@ -222,7 +230,8 @@ if (t[0][0] == oponente)
 					t[1][0] == oponente && t[2][0] == oponente ||
 					t[1][1] == oponente && t[2][2] == oponente)
 			{
-					return -1.0;
+					this->finished = true;
+					return 2;
 			}
 	}
 	else if (t[0][2] == oponente)
@@ -230,20 +239,23 @@ if (t[0][0] == oponente)
 			if (t[1][1] == oponente && t[2][0] == oponente ||
 					t[1][2] == oponente && t[2][2] == oponente)
 			{
-					return -1.0;
+					this->finished = true;
+					return 2;
 			}
 	}
 	else if (t[1][1] == oponente)
 	{
 			if(t[0][1] == oponente && t[2][1] == oponente ||
 					t[1][0] == oponente && t[1][2] == oponente) {
-					return -1.0;
+					this->finished = true;
+					return 2;
 			}
 	}
 	else if (t[2][0] == oponente)
 	{
 			if(t[2][1] == oponente && t[2][2] == oponente) {
-					return -1.0;
+					this->finished = true;
+					return 2;
 			}
 	}
 
@@ -256,8 +268,8 @@ if (t[0][0] == oponente)
 		um valor
 	*/
 
+	this->finished = false;
 	return 0;
-
 }
 
 vector<vector<int>> possibleMoves(int player_pos){
@@ -480,8 +492,7 @@ vector<vector<int>> possibleJumpMoves(int player_pos, State state) {
 
 
 
-vector<Tabuleiro> State::possibleBoards(bool jump)
-{
+vector<Tabuleiro> State::possibleBoards(bool jump) {
     int i,j, player_pos;
     vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
     vector<vector<int>> aux_vet;
@@ -544,16 +555,19 @@ void State::updateState(){
 void State::giveReward(int *rep){
 	int result = this->winner(rep);
 
-	if(result == 1){
-		this->p1.feedReward(1.0);
-		this->p2.feedReward(0.0);
-	}else if(result == 2){
-		this->p1.feedReward(0.0);
-		this->p1.feedReward(1.0);
-	}else if(result == 0){
-		this->p1.feedReward(0.1);
-		this->p2.feedReward(0.5);
+	if(this.finished) {
+		if(result == 1){
+			this->p1.feedReward(1.0);
+			this->p2.feedReward(0.0);
+		}else if(result == 2){
+			this->p1.feedReward(0.0);
+			this->p1.feedReward(1.0);
+		}else if(result == 0){
+			this->p1.feedReward(0.1);
+			this->p2.feedReward(0.5);
+		}
 	}
+	return;
 }
 
 void State::reset(){
@@ -568,4 +582,8 @@ void play_train(int rounds){
 
 void play_human(){
 
+}
+
+boolean State::isFinished() {
+	return this.finished;
 }

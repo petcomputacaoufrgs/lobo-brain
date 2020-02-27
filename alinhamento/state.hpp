@@ -27,10 +27,11 @@ class State
 		bool finished;
 		Tabuleiro board;
 		unsigned int hash; // talvez de pra tirar
+		int episodes;
 
 	public:
 
-		State(Agent p1, Agent p2, char playing_symbol, bool finished, Tabuleiro board);//class constructor
+		State(Agent p1, Agent p2, char playing_symbol, bool finished, Tabuleiro board, int episodes);//class constructor
 		void setBoard(Tabuleiro board);
 		void setPosition(int i, int j, char player);
 		unsigned int getHash();
@@ -38,7 +39,7 @@ class State
 		vector<unsigned int> getPossibleMovesHashes(char player, bool jump);
 		Tabuleiro getBoard();
 
-		float winner(int *rep);//verifica se o jogo houve vencedor, empatou, ou nao terminou
+		int winner(int *rep);//verifica se o jogo houve vencedor, empatou, ou nao terminou
 
 		vector<vector<int>> availablePositions();//verifica as possiveis posicoes para jogar. retorna um vetor de tuplas
 
@@ -53,6 +54,8 @@ class State
 		void play_train(int rounds); //treina o algoritmo
 
 		void play_human();//joga contra o humano
+
+		boolean isFinished();
 };
 
 Tabuleiro initialBoard();

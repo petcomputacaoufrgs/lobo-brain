@@ -22,7 +22,7 @@ class Agent{
 
         Agent();
 
-		    Agent(float alpha, float gamma, char player, bool jump);
+		    Agent(State initial_state, float alpha, float gamma, char player, bool jump);
 
         float winRate(); // record the win rate of all games played
 
