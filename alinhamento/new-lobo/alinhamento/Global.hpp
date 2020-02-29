@@ -38,4 +38,8 @@ void print_map(map<string, float> myMap); // Prints the Q-Table
 
 bool exists(map<string, float> Q, string state_hash); // Check if 'state_hash' exists in Q-Table
 
+Board getLastBoardFromHash(string transition_hash);
+
+Board getNextBoardFromHash(string transition_hash);
+
 #endif

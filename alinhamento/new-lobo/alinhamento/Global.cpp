@@ -183,3 +183,29 @@ bool exists(map<string, float> Q, string state_hash){
         return true;
     }
 }
+
+Board getLastBoardFromHash(string transition_hash){
+    string last_hash = transition_hash.substr(0, 9);
+    Board last_state;
+    int k = 0;
+    for(int i=0;i<3;i++){ 
+        for(int j=0;j<3;j++){
+            last_state[i][j] = last_hash[k];
+            k++;
+        }
+        k++;
+    }
+}
+
+Board getNextBoardFromHash(string transition_hash){
+    string next_hash = transition_hash.substr(9, 9);
+    Board next_state;
+    int k = 0;
+    for(int i=0;i<3;i++){ 
+        for(int j=0;j<3;j++){
+            next_state[i][j] = next_hash[k];
+            k++;
+        }
+        k++;
+    }
+}
