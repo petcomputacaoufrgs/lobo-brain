@@ -25,5 +25,8 @@ int main(){
     cin.get();
 
     cout << "Training..." << endl;
-    setup.train(10);
+    setup.train(3);
+    cout << "Finished!" << endl;
+
+    return 0;
 }

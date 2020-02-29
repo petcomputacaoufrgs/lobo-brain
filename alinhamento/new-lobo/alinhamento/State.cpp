@@ -109,9 +109,11 @@ int State::winner(){
 	char oponente;
 
 	if(player_symbol == '1'){
-		oponente = '2';
-	}else{
+		jogador = '2';
 		oponente = '1';
+	}else{
+		jogador = '1';
+		oponente = '2';
 	}
 	/***************************
 				TIE
@@ -234,7 +236,7 @@ int State::winner(){
 // and that represents the actions
 vector<vector<int>> State::possible_moves(int player_position){
     vector<vector<int>> possible_mov;
-    vector<int> ij (2);
+    vector<int> ij;
 
     switch(player_position)
     {
@@ -419,14 +421,20 @@ vector<vector<int>> State::player_search(){
 // isso aqui é uma gambiarra pra arrumar um bagulho, mas tem forma facil de arrumar isso
 vector<vector<int>> State::if_available(vector<vector<int>> possible_positions){
 	Board state = this->getBoard();
-	vector<vector<int>> positions;
+	vector<vector<int>> positions; // return of the function
+
+	// Search for available positions to take a move
 	for(vector<vector<int>>::iterator it = possible_positions.begin(); it != possible_positions.end(); it++){	
+		// check if the position is available
 		if (state[it->at(0)][it->at(1)] == '0'){
 			positions.push_back((*it));
 		}
 	}
 	return positions;
 }
+
+// Update the state of the game
+// Switch the current player and updates the hashes
 void State::update_state(vector<int> current_position, vector<int> move_position){
 
 	this->setLastHash(this->state);
@@ -444,7 +452,7 @@ void State::update_state(vector<int> current_position, vector<int> move_position
 
 }
 
-
+// Reset the states' class
 void State::reset(){
     this->state = initial_state;
     this->p1 = '1';
@@ -457,7 +465,7 @@ void State::reset(){
     this->setTransitionHash(current_board_hash, current_board_hash); // set the transition board hash
 }
 
-
+// Prints the board
 void State::show_board(){
     vector<vector<char>> t = this->getBoard();
 	cout << "\t=============" << endl ;

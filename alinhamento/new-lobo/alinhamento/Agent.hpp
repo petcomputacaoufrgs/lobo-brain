@@ -21,7 +21,7 @@ class Agent{
 
         vector<vector<int>> choose_action(); // choose a action based in the current state
 
-        void give_reward(); // according monte carlo method, the reward is given at the end of the game
+        void give_reward(int who_win); // according monte carlo method, the reward is given at the end of the game
 
         void add_state(string state);
 
