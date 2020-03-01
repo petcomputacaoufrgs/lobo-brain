@@ -1,6 +1,6 @@
 # USO
-# make tree_teste.exe
-# make decision_teste.exe
+# make test_train.exe
+# make test._play.exe
 # ...etc
 
 CXX = g++
@@ -10,13 +10,16 @@ CXXFLAGS = -std=c++11 -g
 LDFLAGS = 
 
 # Comando default: adicione os testes aqui
-all: State.exe Agent.exe Global.exe
+all: test_train.exe test_play.exe State.exe Agent.exe Global.exe
 
 # Comando generico de .o
 %.o: %.cpp
 	$(CXX) -c $^ -o $@ $(CXXFLAGS)
 
-teste.exe: Agent.o State.o Global.o
+test_train.exe: test_train.o Agent.o State.o Global.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+test_play.exe: test_play.o Agent.o State.o Global.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 # Limpa os arquivos construidos

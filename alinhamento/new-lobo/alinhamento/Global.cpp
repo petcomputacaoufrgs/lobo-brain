@@ -62,8 +62,8 @@ void Global::train(int rounds){
                     this->p2->give_reward(2);
                 }
 
-                this->p1->reset('1', 0.2, 0.7, 0.3);
-                this->p2->reset('2', 0.2, 0.7, 0.3);
+                this->p1->reset('1', 0, 0.7, 0.3);
+                this->p2->reset('2', 0, 0.7, 0.3);
                 break;
             }else{
                 // If the game is not over
