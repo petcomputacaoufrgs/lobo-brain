@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 #include "Global.hpp"
 #include "Agent.hpp"
@@ -49,7 +50,7 @@ float Agent::find_best_action(string transition_hash){
 
     }
 
-    cout << "CURRENT BEST ACTION HASH: " << highest_q_state << endl;
+    //cout << "CURRENT BEST ACTION HASH: " << highest_q_state << endl;
     return highest_q;
 }
 
@@ -74,13 +75,13 @@ vector<vector<int>> Agent::choose_action(){
         // AQUI PODE SER QUE DE PROBLEMA 
         // COM OS VALORES DOS HASHES DE TRANSIÇAO
 
-        cout << endl << "EXPLOIT..." << endl;
+        //cout << endl << "EXPLOIT..." << endl;
         float best_action_value = -999;
 
         for(vector<vector<int>>::iterator ita = player_positions.begin(); ita != player_positions.end(); ita++){
             current_position = (*ita);
 
-            cout << "CURRENT POSITION: " << current_position.at(0) << ";" << current_position.at(1) << endl;
+            //cout << "CURRENT POSITION: " << current_position.at(0) << ";" << current_position.at(1) << endl;
             
             int arith = 3*current_position.at(0)+current_position.at(1); 
 
@@ -90,7 +91,7 @@ vector<vector<int>> Agent::choose_action(){
 
             if(!positions.empty()){
                 for (vector<vector<int>>::iterator it = positions.begin();it != positions.end(); it++){
-                    cout << "POSSIVEL JOGADA: " << it->at(0) << ";" << it->at(1) << endl;
+                    //cout << "POSSIVEL JOGADA: " << it->at(0) << ";" << it->at(1) << endl;
                     
                     // get the current board
                     Board next_board = this->current_state->getBoard();
@@ -99,20 +100,20 @@ vector<vector<int>> Agent::choose_action(){
                     next_board[current_position.at(0)][current_position.at(1)] = '0';
                     next_board[it->at(0)][it->at(1)] = this->player_symbol;
                     
-                    cout << "POSSIVEL TABULEIRO COM ESSA JOGADA" << endl;
-                    show_board(next_board);
+                    //cout << "POSSIVEL TABULEIRO COM ESSA JOGADA" << endl;
+                    //show_board(next_board);
 
                     string next_board_hash = getBoardHash(next_board);
-                    cout << "NEXT BOARD HASH: " << next_board_hash << endl;
+                    //cout << "NEXT BOARD HASH: " << next_board_hash << endl;
 
                     // Updates the transition hash
                     string transition_hash = getTransitionHash(this->current_state->getCurrentHash(), next_board_hash);
-                    cout << "TRANSITION HASH: " << transition_hash << endl;
+                    //cout << "TRANSITION HASH: " << transition_hash << endl;
 
                     float action_value = this->find_best_action(transition_hash);
 
-                    cout << "CURRENT BEST ACTION VALUE: " << action_value << endl;
-                    cout << endl;
+                    //cout << "CURRENT BEST ACTION VALUE: " << action_value << endl;
+                    //cout << endl;
 
                     // choose the best action and update the data
                     if(action_value > best_action_value){
@@ -125,13 +126,13 @@ vector<vector<int>> Agent::choose_action(){
                 }
             }
         }
-        cout << "DECISAO DE JOGADA EXPLOIT: " << endl << "FROM: " << pair_from_to.at(0).at(0) << ";"<< pair_from_to.at(0).at(1) << endl << 
-        "TO: "<< pair_from_to.at(1).at(0) << ";" << pair_from_to.at(1).at(1) <<  endl << endl;
+        //cout << "DECISAO DE JOGADA EXPLOIT: " << endl << "FROM: " << pair_from_to.at(0).at(0) << ";"<< pair_from_to.at(0).at(1) << endl << 
+        //"TO: "<< pair_from_to.at(1).at(0) << ";" << pair_from_to.at(1).at(1) <<  endl << endl;
         
 
     }else{
         //exploration, random action
-        cout << endl << "EXPLORE..." << endl;
+        //cout << endl << "EXPLORE..." << endl;
 
         // Search for positions that the player can try a move
         // If the positions vector is empty, thus the position tanken
@@ -154,12 +155,12 @@ vector<vector<int>> Agent::choose_action(){
 
         int action_idx = 0;
 
-        cout << "FROM: " << from.at(0) << ";" << from.at(1) << endl;
+        //cout << "FROM: " << from.at(0) << ";" << from.at(1) << endl;
         
         // Generates an index to take a random action
         action_idx = random_int(positions.size());
         
-        cout << "ACTION IDX: " << action_idx << endl;
+        //cout << "ACTION IDX: " << action_idx << endl;
         
         // Takes an random action
         action =  positions.at(action_idx);
@@ -168,13 +169,45 @@ vector<vector<int>> Agent::choose_action(){
         pair_from_to.at(0) = from;
         pair_from_to.at(1) = action;
 
-        cout << "DECISAO DE JOGADA EXPLORE: " << endl << "FROM: " << pair_from_to.at(0).at(0) << ";"<< pair_from_to.at(0).at(1) << endl <<
-        "TO: "<< pair_from_to.at(1).at(0) << ";" << pair_from_to.at(1).at(1) <<  endl << endl;
+        //cout << "DECISAO DE JOGADA EXPLORE: " << endl << "FROM: " << pair_from_to.at(0).at(0) << ";"<< pair_from_to.at(0).at(1) << endl <<
+        //"TO: "<< pair_from_to.at(1).at(0) << ";" << pair_from_to.at(1).at(1) <<  endl << endl;
 
     }
 
     return pair_from_to;
 
+}
+
+vector<vector<int>> Agent::choose_human_action(){
+    int row;
+    int col;
+    vector<vector<int>> action;
+    Board current_board = this->current_state->getBoard();
+    while(true){
+        cout << "Input your piece position row: ";
+        cin >> row;
+        cin.clear();
+        cout << "Input your piece position col: ";
+        cin >> col;
+        cin.clear();
+
+        if(current_board.at(row).at(col) == '2'){
+            vector<int> from = {row, col};
+
+            cout << "Input your move position row: ";
+            cin >> row;
+            cin.clear();
+            cout << "Input your move position col: ";
+            cin >> col;
+            cin.clear();
+
+            if(current_board.at(row).at(col) == '0'){
+                vector<int> to = {row, col};
+                action = {from, to};
+                return action;
+            }   
+        }
+    }
 }
 
 // Give the reward based on the winner of the game
@@ -207,20 +240,20 @@ void Agent::feed_reward(float reward){
         if(exists(this->Q, (*it)) == false){
             this->Q.insert({(*it), 0});
         }
-        cout << "REWARD: " << reward << endl;
+        //cout << "REWARD: " << reward << endl;
         // finding the best action
         float best_next_q_value = find_best_action((*it));
 
         // calculating delta
         float delta = this->alpha * (reward + (this->gamma * best_next_q_value) - this->Q.at((*it)));
 
-        cout << "DELTA: " << delta << endl;
+        //cout << "DELTA: " << delta << endl;
         // updating the Q-value
         map <string, float>::iterator key = this->Q.find((*it));
         if(key != Q.end())
             key->second += delta;
 
-        cout << "CHAVE VALOR: " << (*it) << ";" << this->Q[(*it)] << endl;
+        //cout << "CHAVE VALOR: " << (*it) << ";" << this->Q[(*it)] << endl;
     }
 }
 
@@ -233,5 +266,30 @@ void Agent::reset(char player, float alpha, float gamma, float epsilon){
     this->states = {};
 }
 
+// Saves the policy based on Q-Table
+void Agent::save_policy(ofstream *q_table){
+    for(map<string, float >::const_iterator it = this->Q.begin(); it != this->Q.end(); ++it){
+    	*q_table << it->first << "\t"<<","  << it->second << "," << "\n";
+	}  
+}
+
+// Loads the policy based on a .csv file
+void Agent::load_policy(string file_name){
+    ifstream q_table;
+
+    q_table.open(file_name);
+
+    string line1;
+    string line2;
+
+    while(!q_table.eof()){
+        q_table >> line1;
+        q_table >> line2;
+        cout << line1 << endl;
+        cout << line2 << endl;
+        this->Q[line1.substr(0, 18)] = (float)stod(line2.substr(1, line1.size() - 2));
+        cout << this->Q[line1.substr(0, 18)] << endl;
+    }
+}
 
 

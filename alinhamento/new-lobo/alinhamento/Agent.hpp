@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <fstream>
 #include "State.hpp"
 
 using namespace std;
@@ -21,6 +22,8 @@ class Agent{
 
         vector<vector<int>> choose_action(); // choose a action based in the current state
 
+        vector<vector<int>> choose_human_action();
+
         void give_reward(int who_win); // according monte carlo method, the reward is given at the end of the game
 
         void add_state(string state);
@@ -28,6 +31,10 @@ class Agent{
         void feed_reward(float reward); // backpropagation (Q-learnign brain XD)
 
         void reset(char player, float alpha, float gamma, float epsilon);
+
+        void save_policy(ofstream *q_table);
+
+        void load_policy(string file_name);
 
         State* current_state;
 
