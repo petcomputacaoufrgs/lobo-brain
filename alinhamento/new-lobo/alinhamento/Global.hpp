@@ -29,6 +29,8 @@ float random_prob();// Generates a random number between [0, 1]
 
 int random_int(int max); // Generates a random integer between [0, max)
 
+int randomInt(int from, int to);
+
 string getBoardHash(Board state); // Get the board's hash
 
 string getTransitionHash(string last_board_hash, string next_board_hash); // Get the transition hash

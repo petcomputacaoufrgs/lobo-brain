@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
     //cin.get();
 
     cout << "Training..." << endl;
-    setup.train(10000);
+    setup.train(50000);
     cout << "Finished!" << endl;
 
     cout << endl << "Q-TABLE: " << endl << endl;

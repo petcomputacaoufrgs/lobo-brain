@@ -65,9 +65,10 @@ vector<vector<int>> Agent::choose_action(){
     vector<int> from (2);
     vector<int> action (2);
     vector<vector<int>> pair_from_to = {{0, 0}, {0, 0}};
-
+    
     vector<vector<int>> player_positions = this->current_state->player_search();
 
+    //cout << player_positions.size() << endl;
     // ε-greedy strategy
     if(random_prob() < this->epsilon){
         //exploitation, greedy action
@@ -139,10 +140,12 @@ vector<vector<int>> Agent::choose_action(){
         // doesnt have possible moves
         do{
             // Generates a random choose of the piece
-            player_pos_idx = random_int(player_positions.size());
+            player_pos_idx = randomInt(0, player_positions.size() - 1);
 
+            //cout << "INDICE: " << player_pos_idx << endl;
             // Takes a random position to try a move
             from = player_positions.at(player_pos_idx);
+            //cout << from.at(0) << ";" << from.at(1) << endl;
             int arith = 3*from.at(0)+from.at(1); 
 
             // Generates possible moves from this position
@@ -151,14 +154,17 @@ vector<vector<int>> Agent::choose_action(){
             // Search for available positions
             positions = this->current_state->if_available(possible_positions);
             
+            //cout << "INDICE: " << player_pos_idx << endl;
         }while(positions.empty());
-
+        //cout << "saiu do while" << positions.size() << endl;
         int action_idx = 0;
 
         //cout << "FROM: " << from.at(0) << ";" << from.at(1) << endl;
         
         // Generates an index to take a random action
-        action_idx = random_int(positions.size());
+        do{
+            action_idx = randomInt(0, positions.size() -1);
+        }while(action_idx > positions.size() -1);
         
         //cout << "ACTION IDX: " << action_idx << endl;
         

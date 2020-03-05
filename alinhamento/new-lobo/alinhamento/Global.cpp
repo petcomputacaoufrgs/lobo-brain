@@ -21,7 +21,7 @@ void Global::train(int rounds){
         this->state->reset();
         //cout << "NOVO JOGO " << endl;
         //cin.get();
-        if(i % 10 == 0){
+        if(i % 1000 == 0){
             cout << "Rounds: " << i << endl;
         }
         while(this->state->is_end == false){
@@ -193,6 +193,15 @@ int random_int(int max){
     return randomNumber;
 }
 
+// returns a random int between "from" and "to"
+int randomInt(int from, int to) {
+    static random_device dev;
+    static mt19937 rng(dev());
+    static uniform_int_distribution<mt19937::result_type> dist6(from, to); // [from, to]
+    //cout << "RETORNO RAND DENTRO DUNCAO: "<< dist6(rng) << endl;
+    return dist6(rng);
+}
+
 // Get the board hash
 string getBoardHash(Board state){
     string board_hash;
@@ -258,6 +267,7 @@ Board getLastBoardFromHash(string transition_hash){
         }
         k++;
     }
+    return last_state;
 }
 
 // Converts a hash to a Board
@@ -272,4 +282,5 @@ Board getNextBoardFromHash(string transition_hash){
         }
         k++;
     }
+    return next_state;
 }
