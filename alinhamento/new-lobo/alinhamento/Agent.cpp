@@ -24,6 +24,7 @@ Agent::Agent(State* current_state, char player, float alpha, float gamma, float 
     this->gamma = gamma;
     this->epsilon = epsilon;
     this->states = {};
+    //cout << this->epsilon << endl;
 }
 
 /**************

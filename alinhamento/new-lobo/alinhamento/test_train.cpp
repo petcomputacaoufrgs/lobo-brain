@@ -30,6 +30,7 @@ int main(int argc, char* argv[]){
     //cin.get();
 
     cout << "Training..." << endl;
+    cout << setup.p1->epsilon << endl;
     setup.train(100000);
     cout << "Finished!" << endl;
 

@@ -16,15 +16,18 @@ Global::Global(Agent* p1, Agent* p2, State* state){
 
 // Train the algorithm
 void Global::train(int rounds){
+    cout << this->p1->epsilon << endl;
     int win = 0;
     for(int i=0;i<rounds;i++){
         this->state->reset();
         if(i % 1000 == 0){
             cout << "Rounds: " << i << endl;
-            if(this->p1->epsilon > 0.1){
-               this->p1->epsilon -= 0.005;
-               this->p2->epsilon -= 0.005;
+            cout << this->p1->epsilon << endl;
+            if(this->p1->epsilon < 1){
+               this->p1->epsilon += 0.02;
+               this->p2->epsilon += 0.005;
             }
+            cout << this->p1->epsilon << endl;
         }
         while(this->state->is_end == false){
             // Player 1 plays
@@ -55,8 +58,8 @@ void Global::train(int rounds){
                     // Give reward to p2 (2 represents that lose)
                     this->p2->give_reward(2);
                 }
-                this->p1->reset('1', 0, 0.7, 0.3);
-                this->p2->reset('2', 0, 0.7, 0.3);
+                this->p1->reset('1', 0.2, 0.7, this->p1->epsilon);
+                this->p2->reset('2', 0.2, 0.7, this->p2->epsilon);
                 break;
             }else{
                 // If the game is not over
@@ -87,8 +90,8 @@ void Global::train(int rounds){
                         this->p2->give_reward(1);
                     }
                     
-                    this->p1->reset('1', 0.2, 0.7, 0.3);
-                    this->p2->reset('2', 0.2, 0.7, 0.3);
+                    this->p1->reset('1', 0.2, 0.9, this->p1->epsilon);
+                    this->p2->reset('2', 0.2, 0.9, this->p2->epsilon);
                     break;
                 }
             }
@@ -123,8 +126,8 @@ void Global::play(){
                 cout << "PLAYER 2 WINS!!" << endl;
             
 
-            this->p1->reset('1', 0.2, 0.7, 0.3);
-            this->p2->reset('2', 0.2, 0.7, 0.3);
+            this->p1->reset('1', 0.2, 0.7, 1);
+            this->p2->reset('2', 0.2, 0.7, 1);
             break;
         }else{
             // If the game is not over
@@ -150,8 +153,8 @@ void Global::play(){
                 else
                     cout << "PLAYER 2 WINS!!" << endl;
 
-                this->p1->reset('1', 0.2, 0.7, 0.3);
-                this->p2->reset('2', 0.2, 0.7, 0.3);
+                this->p1->reset('1', 0.2, 0.7, 1);
+                this->p2->reset('2', 0.2, 0.7, 1);
                 break;
             }
         }
