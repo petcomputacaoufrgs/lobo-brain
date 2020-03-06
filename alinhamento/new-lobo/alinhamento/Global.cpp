@@ -19,24 +19,22 @@ void Global::train(int rounds){
     int win = 0;
     for(int i=0;i<rounds;i++){
         this->state->reset();
-        //cout << "NOVO JOGO " << endl;
-        //cin.get();
         if(i % 1000 == 0){
             cout << "Rounds: " << i << endl;
+            if(this->p1->epsilon > 0.1){
+               this->p1->epsilon -= 0.005;
+               this->p2->epsilon -= 0.005;
+            }
         }
         while(this->state->is_end == false){
             // Player 1 plays
             // p1 action is a [from, to] vector based on the action taken
 
-            //cout << endl << "P1 IS PLAYING..." << endl << endl;
-
-            vector<vector<int>> p1_action = this->p1->choose_action();//choose a action to take based in exploration or exploitation
-            // take action and update board statgdb e
-            this->state->update_state(p1_action.at(0), p1_action.at(1));
+            //choose a action to take based in exploration or exploitation
+            vector<vector<int>> p1_action = this->p1->choose_action();
             
-            //cout << "ESTADO DO JOGO ATUALIZADO PARA: " << endl;
-            //this->state->show_board();
-            //cout << "TRANSITION HASH: " << this->state->getTransitionHash() << endl << endl; 
+            // take action and update board statgdb e
+            this->state->update_state(p1_action.at(0), p1_action.at(1)); 
 
             // add the transition state to the states vector
             this->p1->add_state(this->state->getTransitionHash());
@@ -45,23 +43,18 @@ void Global::train(int rounds){
             win = this->state->winner();
             if (this->state->is_end == true){
                 //ended with p1 either win or draw
-                //cout << "JOGO ACABOU COM P1 VECENDO OU EMPATANDO" << endl;
-                //this->state->show_board(); // to visualize the boards
 
                 if(win == 0){
                     // Give reward to p1 (0 represents a tie)
                     this->p1->give_reward(0);
-                    // gGve reward to p2 (0 represents a tie)
+                    // Give reward to p2 (0 represents a tie)
                     this->p2->give_reward(0);
                 }else{
                     // Give reward to p1 (1 represents that won)
-                    //cout << "REWARD PARA P1..." << endl;
                     this->p1->give_reward(1);
                     // Give reward to p2 (2 represents that lose)
-                    //cout << endl << "REWARD PARA P2..." << endl;
                     this->p2->give_reward(2);
                 }
-
                 this->p1->reset('1', 0, 0.7, 0.3);
                 this->p2->reset('2', 0, 0.7, 0.3);
                 break;
@@ -69,15 +62,10 @@ void Global::train(int rounds){
                 // If the game is not over
                 // Player 2 plays
                 // p2 action is a [from, to] vector based on the action taken
-                //cout << endl << "P2 IS PLAYING !!!" << endl << endl;
                 vector<vector<int>> p2_action = this->p2->choose_action();//choose a action to take based in exploration or exploitation
 
                 // take action and update board state
                 this->state->update_state(p2_action.at(0), p2_action.at(1));
-
-                //cout << "ESTADO DO JOGO ATUALIZADO PARA: " << endl;
-                //this->state->show_board();
-                //cout << "TRANSITION HASH: " << this->state->getTransitionHash() << endl;
 
                 // add the transition state to the states vector
                 this->p2->add_state(this->state->getTransitionHash());
@@ -86,8 +74,6 @@ void Global::train(int rounds){
                 win = this->state->winner();
                 if (this->state->is_end == true){
                     //ended with p2 either win or draw
-                    //cout << "JOGO ACABOU COM P2 VECENDO OU EMPATANDO" << endl; 
-                    //this->state->show_board(); // to visualize the boards
 
                     if(win == 0){
                         // Give reward to p1 (0 represents a tie)
@@ -96,10 +82,8 @@ void Global::train(int rounds){
                         this->p2->give_reward(0);
                      }else{
                         // Give reward to p1 (1 represents that won)
-                        //cout << "REWARD PARA P1..." << endl;
                         this->p1->give_reward(2);
-                        // gGve reward to p2 (2 represents that lose)
-                        //cout << endl << "REWARD PARA P2..." << endl;
+                        // Give reward to p2 (2 represents that lose)
                         this->p2->give_reward(1);
                     }
                     
@@ -198,7 +182,6 @@ int randomInt(int from, int to) {
     static random_device dev;
     static mt19937 rng(dev());
     static uniform_int_distribution<mt19937::result_type> dist6(from, to); // [from, to]
-    //cout << "RETORNO RAND DENTRO DUNCAO: "<< dist6(rng) << endl;
     return dist6(rng);
 }
 
@@ -210,7 +193,6 @@ string getBoardHash(Board state){
             board_hash += state[i][j]; // append char to a string
         }
     }
-
     return board_hash;
 }
 
@@ -238,7 +220,6 @@ void print_map(map<string, float> myMap){
 	for(map<string, float >::const_iterator it = myMap.begin();
     it != myMap.end(); ++it)
 	{
-		//cout << "PRINTANDO MAP..." << endl;
     	cout << "<"<<it->first << ";"  << it->second << ">"<<"\n";
 	}
 }

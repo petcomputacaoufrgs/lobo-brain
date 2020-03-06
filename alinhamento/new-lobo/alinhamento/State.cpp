@@ -118,23 +118,18 @@ int State::winner(){
 	/***************************
 				TIE
 	****************************/
-	for (int i=0; i<3; i++)
-	{
-		for(int j=0; j<3; j++)
-		{
+	for (int i=0; i<3; i++){
+		for(int j=0; j<3; j++){
 
-			if(t[i][j] == t_ini[i][j])
-			{
+			if(t[i][j] == t_ini[i][j]){
 				cont++;
-				// cout << "cont = " << cont << endl;
 			}
 		}
 	}
 
 	// Tabuleiro igual ao do comeco -> empate
 	// Retorna 0 e incrementa repeticoes do tab inicial
-	if (cont == 9)
-	{
+	if (cont == 9){
 		(this->rep)++;
 		if (this->rep >= 3) {
 			this->is_end = true;
@@ -145,8 +140,7 @@ int State::winner(){
 	/***************************
 				WIN
 	****************************/
-	if (t[0][0] == jogador)
-	{
+	if (t[0][0] == jogador){
 		if (t[0][1] == jogador && t[0][2] == jogador ||
 			t[1][0] == jogador && t[2][0] == jogador ||
 			t[1][1] == jogador && t[2][2] == jogador)
@@ -155,8 +149,7 @@ int State::winner(){
 			return 1;
 		}
 	}
-	else if (t[0][2] == jogador)
-	{
+	else if (t[0][2] == jogador){
 		if (t[1][1] == jogador && t[2][0] == jogador ||
 			t[1][2] == jogador && t[2][2] == jogador)
 		{
@@ -164,8 +157,7 @@ int State::winner(){
 			return 1;
 		}
 	}
-	else if (t[1][1] == jogador)
-	{
+	else if (t[1][1] == jogador){
 	    if(t[0][1] == jogador && t[2][1] == jogador ||
 		   t[1][0] == jogador && t[1][2] == jogador) 
         {
@@ -173,8 +165,7 @@ int State::winner(){
 			return 1;
 		}
 	}
-	else if (t[2][0] == jogador)
-	{
+	else if (t[2][0] == jogador){
 		if(t[2][1] == jogador && t[2][2] == jogador) 
         {
 			this->is_end = true;
@@ -195,8 +186,7 @@ int State::winner(){
 			return 2;
 		}
 	}
-	else if (t[0][2] == oponente)
-	{
+	else if (t[0][2] == oponente){
 		if (t[1][1] == oponente && t[2][0] == oponente ||
 			t[1][2] == oponente && t[2][2] == oponente)
 		{
@@ -204,8 +194,7 @@ int State::winner(){
 			return 2;
 		}
 	}
-	else if (t[1][1] == oponente)
-	{
+	else if (t[1][1] == oponente){
 		if(t[0][1] == oponente && t[2][1] == oponente ||
 		   t[1][0] == oponente && t[1][2] == oponente) 
         {
@@ -213,8 +202,7 @@ int State::winner(){
             return 2;
 	    }
 	}
-	else if (t[2][0] == oponente)
-	{
+	else if (t[2][0] == oponente){
 		if(t[2][1] == oponente && t[2][2] == oponente) 
         {
 			this->is_end = true;
@@ -403,16 +391,13 @@ vector<Board> State::possible_boards(char player){
 vector<vector<int>> State::player_search(){
 	vector<vector<int>> player_positions;
 	vector<int> ij (2);
-	//cout << this->player_symbol << endl;
 	for(int i=0; i < this->state.size(); i++){
 		for(int j=0;j < this->state[i].size(); j++){
-			//cout << this->state[i][j] << endl;
 			if(this->state[i][j] == this->player_symbol){
 				ij.at(0) = i;
 				ij.at(1) = j;
 				player_positions.push_back(ij);
 			}
-			
 		}
 	}
 	return player_positions;

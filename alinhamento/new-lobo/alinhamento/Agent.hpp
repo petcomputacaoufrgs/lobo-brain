@@ -36,15 +36,17 @@ class Agent{
 
         void load_policy(string file_name);
 
+        float win_rate();
+
         State* current_state;
 
         // states_value table (Q-table) that 
         // maps a state transition to a value
         map<string, float> Q; 
+        float epsilon;
     private:
         float alpha;
         float gamma;
-        float epsilon;
         char player_symbol;
 
         vector<string> states; // keep all positions (board hashes) taken
