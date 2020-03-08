@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
 
     cout << "Training..." << endl;
     cout << setup.p1->epsilon << endl;
-    setup.train(100000);
+    setup.train(150000);
     cout << "Finished!" << endl;
 
     cout << endl << "Q-TABLE: " << endl << endl;

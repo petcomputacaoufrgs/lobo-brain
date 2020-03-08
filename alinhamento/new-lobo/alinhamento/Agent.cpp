@@ -31,7 +31,7 @@ Agent::Agent(State* current_state, char player, float alpha, float gamma, float 
     METHODS
 ***************/
 float Agent::find_best_action(string transition_hash){
-    float highest_q = -999.0;
+    float highest_q = 0;
     string highest_q_state = "";
 
     //finding best action
@@ -44,11 +44,6 @@ float Agent::find_best_action(string transition_hash){
             }
         }
         it++;
-    }
-    if(highest_q == -999.0){
-        highest_q = 0;
-        highest_q_state = transition_hash;
-
     }
     return highest_q;
 }
@@ -90,6 +85,8 @@ vector<vector<int>> Agent::choose_action(){
                     // make the move
                     next_board[current_position.at(0)][current_position.at(1)] = '0';
                     next_board[it->at(0)][it->at(1)] = this->player_symbol;
+                    
+                    //show_board(next_board);
 
                     string next_board_hash = getBoardHash(next_board);
 
@@ -109,6 +106,7 @@ vector<vector<int>> Agent::choose_action(){
                     }
                 }
             }
+
         }
     }else{
         //exploration, random action

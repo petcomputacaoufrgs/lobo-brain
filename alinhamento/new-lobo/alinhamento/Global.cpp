@@ -24,7 +24,7 @@ void Global::train(int rounds){
             cout << "Rounds: " << i << endl;
             cout << this->p1->epsilon << endl;
             if(this->p1->epsilon < 1){
-               this->p1->epsilon += 0.02;
+               this->p1->epsilon += 0.01;
                this->p2->epsilon += 0.005;
             }
             cout << this->p1->epsilon << endl;

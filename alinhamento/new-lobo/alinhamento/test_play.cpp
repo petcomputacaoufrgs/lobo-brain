@@ -19,8 +19,8 @@ vector<vector<int>> choose_action(){
 int main(){
 
     State current_state = State('1', '2');
-    Agent p1 = Agent(&current_state, '1', 0.2, 0, 0.3);
-    Agent p2 = Agent(&current_state, '2', 0.2, 0, 0.3);
+    Agent p1 = Agent(&current_state, '1', 0.2, 0, 1);
+    Agent p2 = Agent(&current_state, '2', 0.2, 0, 1);
     Global setup = Global(&p1, &p2, &current_state);
 
     cout << endl << "LOADING POLICY..." << endl;
