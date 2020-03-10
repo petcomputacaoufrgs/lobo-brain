@@ -18,16 +18,19 @@ Global::Global(Agent* p1, Agent* p2, State* state){
 void Global::train(int rounds){
     cout << this->p1->epsilon << endl;
     int win = 0;
+    int count_win = 0;
+    int num_rounds = 0;
     for(int i=0;i<rounds;i++){
         this->state->reset();
         if(i % 1000 == 0){
+            num_rounds+=1000;
             cout << "Rounds: " << i << endl;
-            cout << this->p1->epsilon << endl;
-            if(this->p1->epsilon < 1){
-               this->p1->epsilon += 0.01;
-               this->p2->epsilon += 0.005;
-            }
-            cout << this->p1->epsilon << endl;
+            //cout << this->p1->epsilon << endl;
+            //if(this->p1->epsilon < 0.95){
+               //this->p1->epsilon += 0.01;
+               //this->p2->epsilon += 0.01;
+            //}
+            cout << (float)count_win/num_rounds << endl;
         }
         while(this->state->is_end == false){
             // Player 1 plays
@@ -46,7 +49,7 @@ void Global::train(int rounds){
             win = this->state->winner();
             if (this->state->is_end == true){
                 //ended with p1 either win or draw
-
+                count_win++;
                 if(win == 0){
                     // Give reward to p1 (0 represents a tie)
                     this->p1->give_reward(0);
@@ -90,8 +93,8 @@ void Global::train(int rounds){
                         this->p2->give_reward(1);
                     }
                     
-                    this->p1->reset('1', 0.2, 0.9, this->p1->epsilon);
-                    this->p2->reset('2', 0.2, 0.9, this->p2->epsilon);
+                    this->p1->reset('1', 0.2, 0.7, this->p1->epsilon);
+                    this->p2->reset('2', 0.2, 0.7, this->p2->epsilon);
                     break;
                 }
             }

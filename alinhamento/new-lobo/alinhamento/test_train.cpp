@@ -17,7 +17,7 @@ int main(int argc, char* argv[]){
     ofstream q_table;
     State current_state = State('1', '2');
     Agent p1 = Agent(&current_state, '1', 0.2, 0.7, 0.3);
-    Agent p2 = Agent(&current_state, '2', 0.2, 0.7, 0.3);
+    Agent p2 = Agent(&current_state, '2', 0.2, 0.7, 0);
     Global setup = Global(&p1, &p2, &current_state);
     
 
@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
 
     cout << "Training..." << endl;
     cout << setup.p1->epsilon << endl;
-    setup.train(150000);
+    setup.train(50000);
     cout << "Finished!" << endl;
 
     cout << endl << "Q-TABLE: " << endl << endl;
