@@ -10,11 +10,13 @@
 
 using namespace std;
 
-string file_name = "q-table.csv";
+string q_file_name = "q-table.csv";
+string winrate_file_name = "winrate.csv";
 
 int main(int argc, char* argv[]){
 
     ofstream q_table;
+    ofstream winrate_file;
     State current_state = State('1', '2');
     Agent p1 = Agent(&current_state, '1', 0.2, 0.7, 0.3);
     Agent p2 = Agent(&current_state, '2', 0.2, 0.7, 0);
@@ -35,12 +37,17 @@ int main(int argc, char* argv[]){
     cout << "Finished!" << endl;
 
     cout << endl << "Q-TABLE: " << endl << endl;
-    print_map(setup.p1->Q);
+    //print_map(setup.p1->Q);
 
     cout << endl << "SAVING POLICY..." << endl;
-    q_table.open(file_name);
+    q_table.open(q_file_name);
     setup.p1->save_policy(&q_table);
     q_table.close();
+
+    cout << endl << "SAVING WINRATE..." << endl;
+    winrate_file.open(winrate_file_name);
+    setup.p1->save_winrate(&winrate_file);
+    winrate_file.close();
 
     return 0;
 }

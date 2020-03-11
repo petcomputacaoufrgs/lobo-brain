@@ -277,4 +277,11 @@ float Agent::win_rate(){
     return (float)i/Q.size();;
 }
 
+// Saves the policy based on Q-Table
+void Agent::save_winrate(ofstream *winrate_file){
+    for(map<int, float >::const_iterator it = this->winrate.begin(); it != this->winrate.end(); ++it){
+    	*winrate_file << it->first  << ","  << it->second << "," << "\n";
+	}  
+}
+
 

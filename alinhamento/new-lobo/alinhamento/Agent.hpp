@@ -38,11 +38,15 @@ class Agent{
 
         float win_rate();
 
+        void save_winrate(ofstream *winrate);
+
         State* current_state;
 
         // states_value table (Q-table) that 
         // maps a state transition to a value
         map<string, float> Q; 
+
+        map<int, float> winrate;
         float epsilon;
     private:
         float alpha;
