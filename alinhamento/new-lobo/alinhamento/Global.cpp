@@ -21,16 +21,16 @@ void Global::train(int rounds){
     int count_win = 0;
     int num_rounds = 0;
     map<int, float> winrate;
-    for(int i=0;i<rounds;i++){
+    for(int i=1;i<=rounds;i++){
         this->state->reset();
         if(i % 100 == 0){
             num_rounds = 100;
             float winrate_variable = (float)count_win/num_rounds;
             cout << "WinRate: " << winrate_variable << endl;
             this->p1->winrate.insert({i, winrate_variable});
-            if(this->p1->epsilon < .95){
-               this->p1->epsilon += .002;
-            }
+            //if(this->p1->epsilon < .95){
+              // this->p1->epsilon += .002;
+            //}
             count_win = 0;
         }
         if(i % 1000 == 0){
