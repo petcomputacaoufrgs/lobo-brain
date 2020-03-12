@@ -28,9 +28,9 @@ void Global::train(int rounds){
             float winrate_variable = (float)count_win/num_rounds;
             cout << "WinRate: " << winrate_variable << endl;
             this->p1->winrate.insert({i, winrate_variable});
-            //if(this->p1->epsilon < .95){
-              // this->p1->epsilon += .002;
-            //}
+            if(this->p1->epsilon < .95){
+              this->p1->epsilon += .002;
+            }
             count_win = 0;
         }
         if(i % 1000 == 0){
