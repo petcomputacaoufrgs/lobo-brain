@@ -16,7 +16,6 @@ Global::Global(Agent* p1, Agent* p2, State* state){
 
 // Train the algorithm
 void Global::train(int rounds){
-    cout << this->p1->epsilon << endl;
     int win = 0;
     int count_win = 0;
     int num_rounds = 0;
@@ -26,8 +25,9 @@ void Global::train(int rounds){
         if(i % 100 == 0){
             num_rounds = 100;
             float winrate_variable = (float)count_win/num_rounds;
-            cout << "WinRate: " << winrate_variable << endl;
             this->p1->winrate.insert({i, winrate_variable});
+            if(i%1000 == 0)
+                cout << "WinRate: " << winrate_variable << endl;
             if(this->p1->epsilon < .95){
               this->p1->epsilon += .002;
             }
