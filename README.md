@@ -18,22 +18,22 @@ Para replicar o resultado dos experimentos, é necessário:
     ```
     make test_train.exe
     ```
-   - Para jogar contra a máquina:
+  - Para jogar contra a máquina:
     ```
     make test_play.exe
     ```
 * Executar os arquivos .exe
   - Para treino do algoritmo (50000 rounds):
     
-     ```
-     ./test_train.exe
-     ```
+    ```
+    ./test_train.exe
+    ```
     
-   - Para jogar contra a máquina
+  - Para jogar contra a máquina
    
-      ```
-      ./test_play.exe
-      ```
+    ```
+    ./test_play.exe
+    ```
 ### Tipos de tabuleiros suportados
 * Tapatan;
  <img src="https://www.yourkidsot.com/uploads/2/4/0/3/24030117/s780171065908427913_p57_i1_w1654.png" height="400" width="300">
