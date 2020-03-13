@@ -8,7 +8,7 @@ Diversos jogos de tabuleiro e métodos de aprendizado por reforço são treinado
 ### Contruído através de
  * C++
  * Python
-
+### Intruções de execução
 Para replicar o resultado dos experimentos, é necessário:
 * Compilar o código em C++ (necessário gcc) - Preferencialmente Linux
   - Para treino do algoritmo (50000 rounds):
