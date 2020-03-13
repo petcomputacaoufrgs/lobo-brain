@@ -5,8 +5,6 @@ Este projeto contém o código fonte escrito em C++, apenas com as bibliotecas n
 ### Motivação
 Diversos jogos de tabuleiro e métodos de aprendizado por reforço são treinados via Q-Learning. O agente pode ser treinado através de episódios, podendo, portanto, jogar contra outra máquina ou contra um ser humano. 
 
-Este projeto foin realizado a fim de realizar alguns levantamentos sobre os métodos de aprendizagem abordados.
-
 ### Contruído através de
  * C++
  * Python
