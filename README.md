@@ -36,5 +36,8 @@ Para replicar o resultado dos experimentos, é necessário:
 * Tapatan;
  <img src="https://www.yourkidsot.com/uploads/2/4/0/3/24030117/s780171065908427913_p57_i1_w1654.png" height="200" width="150">
  
+* Pong Hau K'i (apenas pelo algoritmo mimimax - jogo de bloqueio);
+ <img src="https://i.pinimg.com/736x/ab/f2/41/abf241ae7a831cfc3e0cbf8033f64fea.jpg" height="200" width="150">
+ 
 
  
