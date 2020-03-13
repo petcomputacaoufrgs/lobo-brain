@@ -1,6 +1,6 @@
 ## LoBo Brain - Minimax vs Reinforcement Learning
 
-Este projeto contém o código fonte escrito em C++, apenas com as bibliotecas nativas da linguagem. Além disso, foram utilizados métodos de inteligência artificial, como Reinforcement Learning, a fim de gerar o centro de tomada de decisões dos jogos do projeto LoBo Games.
+Este projeto contém o código fonte escrito em C++, apenas com as bibliotecas nativas da linguagem. Além disso, foram utilizados métodos de inteligência artificial, como _Reinforcement Learning_ e _Minimax Algorithm With Alpha-Beta Pruning_, a fim de gerar o centro de tomada de decisões dos jogos do projeto LoBo Games.
 
 ### Motivação
 Diversos jogos de tabuleiro e métodos de aprendizado por reforço são treinados via Q-Learning. O agente pode ser treinado através de episódios, podendo, portanto, jogar contra outra máquina ou contra um ser humano. 
