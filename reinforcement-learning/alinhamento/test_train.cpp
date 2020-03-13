@@ -12,11 +12,13 @@ using namespace std;
 
 string q_file_name = "q-table.csv";
 string winrate_file_name = "winrate.csv";
+string reward_file_name = "reward.csv";
 
 int main(int argc, char* argv[]){
 
     ofstream q_table;
     ofstream winrate_file;
+    ofstream reward_file;
     State current_state = State('1', '2');
     Agent p1 = Agent(&current_state, '1', 0.2, 0.7, 0.3);
     Agent p2 = Agent(&current_state, '2', 0.2, 0.7, 0);
@@ -32,7 +34,7 @@ int main(int argc, char* argv[]){
     //cin.get();
 
     cout << "Training..." << endl;
-    setup.train(150000);
+    setup.train(50000);
     cout << "Finished!" << endl;
 
     cout << endl << "Q-TABLE: " << endl << endl;
@@ -47,6 +49,11 @@ int main(int argc, char* argv[]){
     winrate_file.open(winrate_file_name);
     setup.p1->save_winrate(&winrate_file);
     winrate_file.close();
+
+    cout << endl << "SAVING CUMULATIVE REWARD..." << endl;
+    reward_file.open(reward_file_name);
+    setup.p1->save_cumulative_reward(&reward_file);
+    reward_file.close();
 
     return 0;
 }

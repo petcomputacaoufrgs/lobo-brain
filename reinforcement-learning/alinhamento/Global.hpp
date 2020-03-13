@@ -23,6 +23,10 @@ class Global{
 };
 
 /**********************
+    GLOBAL VARIABLES
+***********************/
+
+/**********************
     GLOBAL FUNCTIONS
 ***********************/
 float random_prob();// Generates a random number between [0, 1]

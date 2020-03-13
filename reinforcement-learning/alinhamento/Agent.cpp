@@ -229,6 +229,13 @@ void Agent::feed_reward(float reward){
         map <string, float>::iterator key = this->Q.find((*it));
         if(key != Q.end())
             key->second += delta;
+
+        // If the player that receive the reward 
+        // is our agent, sum delta to the global
+        // variable cumulative_reward to compute
+        // the data
+        if(this->player_symbol == '1')
+            this->cumulative_reward += delta;
     }
 }
 
@@ -277,11 +284,19 @@ float Agent::win_rate(){
     return (float)i/Q.size();;
 }
 
-// Saves the policy based on Q-Table
+// Saves the winrate based on the game agains a random player
 void Agent::save_winrate(ofstream *winrate_file){
     *winrate_file << "Episode"  << ","  << "Winrate" << "\n";
     for(map<int, float >::const_iterator it = this->winrate.begin(); it != this->winrate.end(); ++it){
     	*winrate_file << it->first  << ","  << it->second << "\n";
+	}  
+}
+
+// Saves the winrate based on the game agains a random player
+void Agent::save_cumulative_reward(ofstream *reward_file){
+    *reward_file << "Episode"  << ","  << "Reward" << "\n";
+    for(map<int, float >::const_iterator it = this->rewards.begin(); it != this->rewards.end(); ++it){
+    	*reward_file << it->first  << ","  << it->second << "\n";
 	}  
 }
 

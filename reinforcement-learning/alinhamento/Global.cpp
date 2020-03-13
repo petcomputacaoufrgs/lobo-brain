@@ -19,19 +19,25 @@ void Global::train(int rounds){
     int win = 0;
     int count_win = 0;
     int num_rounds = 0;
-    map<int, float> winrate;
+    this->p1->cumulative_reward = 0;
     for(int i=1;i<=rounds;i++){
         this->state->reset();
         if(i % 100 == 0){
             num_rounds = 100;
             float winrate_variable = (float)count_win/num_rounds;
             this->p1->winrate.insert({i, winrate_variable});
-            if(i%1000 == 0)
+            this->p1->rewards.insert({i, this->p1->cumulative_reward});
+
+            if(i%1000 == 0){
                 cout << "WinRate: " << winrate_variable << endl;
+                cout << "Cumulative Reward: " << this->p1->cumulative_reward << endl;
+            }
+
             if(this->p1->epsilon < .95){
               this->p1->epsilon += .002;
             }
             count_win = 0;
+            this->p1->cumulative_reward = 0;
         }
         if(i % 1000 == 0){
             cout << "Rounds: " << i << endl;

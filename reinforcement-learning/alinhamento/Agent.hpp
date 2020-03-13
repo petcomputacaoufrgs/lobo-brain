@@ -40,6 +40,10 @@ class Agent{
 
         void save_winrate(ofstream *winrate);
 
+        float cumulative_reward;
+        
+        void save_cumulative_reward(ofstream *reward_file);
+
         State* current_state;
 
         // states_value table (Q-table) that 
@@ -47,6 +51,8 @@ class Agent{
         map<string, float> Q; 
 
         map<int, float> winrate;
+
+        map<int, float> rewards;
         float epsilon;
     private:
         float alpha;
