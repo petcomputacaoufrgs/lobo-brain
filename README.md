@@ -36,7 +36,7 @@ Para replicar o resultado dos experimentos, é necessário:
     ```
 ### Tipos de tabuleiros suportados
 * Tapatan;
- <img src="https://www.yourkidsot.com/uploads/2/4/0/3/24030117/s780171065908427913_p57_i1_w1654.png" height="400" width="300">
+ <img src="https://www.yourkidsot.com/uploads/2/4/0/3/24030117/s780171065908427913_p57_i1_w1654.png" height="200" width="150">
  
 
  
