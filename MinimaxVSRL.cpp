@@ -51,17 +51,17 @@ void play(Agent* p2, int rounds){
         int win = 0;
         p2->current_state->is_end = false;
         //cin.get();
-        if(i % 10 == 0){
-            num_rounds = 10;
+        if(i % 100 == 0){
+            num_rounds = 100;
             float winrate_variable = (float)count_win/num_rounds;
             p2->winrate.insert({i, winrate_variable});
 
-            if(i%10 == 0){
+            if(i%100 == 0){
                 cout << "\t" << "WinRate: " << winrate_variable << endl;
             }
             count_win = 0;
         }
-        if(i%10 == 0){
+        if(i%100 == 0){
             cout << "Round: " << i << endl;
         }
         //tab.posicoes na posicao inicial
