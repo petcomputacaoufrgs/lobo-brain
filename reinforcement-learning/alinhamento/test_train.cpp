@@ -25,16 +25,16 @@ int main(int argc, char* argv[]){
     Global setup = Global(&p1, &p2, &current_state);
     
 
-    cout << "First player: " << setup.state->player_symbol << endl;
-    cout << "Initial current board hash: " << "\"" << setup.p1->current_state->getCurrentHash() << "\"" << endl;
-    cout << "Initial last board hash: " << "\"" << setup.p1->current_state->getLastHash() << "\"" << endl;
-    cout << "Initial transition hash: " << "\"" << setup.p1->current_state->getTransitionHash() << "\"" << endl;
-    setup.state->show_board();
+    //cout << "First player: " << setup.state->player_symbol << endl;
+    //cout << "Initial current board hash: " << "\"" << setup.p1->current_state->getCurrentHash() << "\"" << endl;
+    //cout << "Initial last board hash: " << "\"" << setup.p1->current_state->getLastHash() << "\"" << endl;
+    //cout << "Initial transition hash: " << "\"" << setup.p1->current_state->getTransitionHash() << "\"" << endl;
+    //setup.state->show_board();
 
     //cin.get();
 
     cout << "Training..." << endl;
-    setup.train(50000);
+    setup.train(150000);
     cout << "Finished!" << endl;
 
     cout << endl << "Q-TABLE: " << endl << endl;

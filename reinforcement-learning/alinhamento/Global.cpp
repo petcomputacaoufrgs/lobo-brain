@@ -22,6 +22,12 @@ void Global::train(int rounds){
     this->p1->cumulative_reward = 0;
     for(int i=1;i<=rounds;i++){
         this->state->reset();
+        if(i % 1000 == 0){
+            cout << "Rounds: " << i << endl;
+            cout << "\t" << "Epsilon p1: " << this->p1->epsilon << endl;
+            cout << "\t" << "Epsilon p2: " << this->p2->epsilon << endl;
+            
+        }
         if(i % 100 == 0){
             num_rounds = 100;
             float winrate_variable = (float)count_win/num_rounds;
@@ -29,21 +35,15 @@ void Global::train(int rounds){
             this->p1->rewards.insert({i, this->p1->cumulative_reward});
 
             if(i%1000 == 0){
-                cout << "WinRate: " << winrate_variable << endl;
-                cout << "Cumulative Reward: " << this->p1->cumulative_reward << endl;
+                cout << "\t" << "WinRate: " << winrate_variable << endl;
+                cout << "\t" << "Cumulative Reward: " << this->p1->cumulative_reward << endl;
             }
 
             if(this->p1->epsilon < .95){
-              this->p1->epsilon += .002;
+             this->p1->epsilon += .002;
             }
             count_win = 0;
             this->p1->cumulative_reward = 0;
-        }
-        if(i % 1000 == 0){
-            cout << "Rounds: " << i << endl;
-            cout << "Epsilon p1: " << this->p1->epsilon << endl;
-            cout << "Epsilon p2: " << this->p2->epsilon << endl;
-            
         }
         while(this->state->is_end == false){
             // Player 1 plays
