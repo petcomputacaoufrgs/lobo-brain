@@ -20,3 +20,7 @@ Tabuleiro::Tabuleiro()
 {
 
 }
+
+vector<vector<char>> Tabuleiro::getBoard(){
+	return this->posicoes;
+}

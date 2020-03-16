@@ -22,6 +22,7 @@ class Tabuleiro
 		
 		Tabuleiro();
 		Tabuleiro(vector<vector<char>> posicoes);
+		vector<vector<char>> getBoard();
 };
 
 #endif

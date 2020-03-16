@@ -38,7 +38,7 @@ int main(int argc, char* argv[]){
     cout << "Finished!" << endl;
 
     cout << endl << "Q-TABLE: " << endl << endl;
-    //print_map(setup.p1->Q);
+    print_map(setup.p1->Q);
 
     cout << endl << "SAVING POLICY..." << endl;
     q_table.open(q_file_name);
