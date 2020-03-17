@@ -18,21 +18,21 @@ minimax/alinhamento/node.cpp -o test
 #include <fstream>
 
 // Reinforcement Learning
-#include "/home/thiagolermen/Documents/lobo-brain/reinforcement-learning/alinhamento/State.hpp"
-#include "/home/thiagolermen/Documents/lobo-brain/reinforcement-learning/alinhamento/Agent.hpp"
-#include "/home/thiagolermen/Documents/lobo-brain/reinforcement-learning/alinhamento/Global.hpp"
+#include "../lobo-brain/reinforcement-learning/alinhamento/State.hpp"
+#include "../lobo-brain/reinforcement-learning/alinhamento/Agent.hpp"
+#include "../lobo-brain/reinforcement-learning/alinhamento/Global.hpp"
 // Minimax
-#include "/home/thiagolermen/Documents/lobo-brain/minimax/alinhamento/tabuleiro.hpp"
-#include "/home/thiagolermen/Documents/lobo-brain/minimax/alinhamento/tree.hpp"
-#include "/home/thiagolermen/Documents/lobo-brain/minimax/alinhamento/evaluations.hpp"
-#include "/home/thiagolermen/Documents/lobo-brain/minimax/alinhamento/decision.hpp"
-#include "/home/thiagolermen/Documents/lobo-brain/minimax/alinhamento/move.hpp"
-#include "/home/thiagolermen/Documents/lobo-brain/minimax/alinhamento/node.hpp"
+#include "../lobo-brain/minimax/alinhamento/tabuleiro.hpp"
+#include "../lobo-brain/minimax/alinhamento/tree.hpp"
+#include "../lobo-brain/minimax/alinhamento/evaluations.hpp"
+#include "../lobo-brain/minimax/alinhamento/decision.hpp"
+#include "../lobo-brain/minimax/alinhamento/move.hpp"
+#include "../lobo-brain/minimax/alinhamento/node.hpp"
 
 typedef vector<vector<char>> Board;
 
-string file_name = "/home/thiagolermen/Documents/lobo-brain/reinforcement-learning/alinhamento/q-table_p2.csv";
-string winrate_file_name = "/home/thiagolermen/Documents/lobo-brain/winrate_vs_minimax.csv";
+string file_name = "../lobo-brain/reinforcement-learning/alinhamento/q-table_p2.csv";
+string winrate_file_name = "../lobo-brain/winrate_vs_minimax.csv";
 
 // Saves the winrate based on the game agains a random player
 void save_winrate(ofstream *winrate_file, Agent* p2){
