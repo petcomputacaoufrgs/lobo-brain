@@ -1,6 +1,3 @@
-
-
-
 /*
 g++ MinimaxVSRL.cpp reinforcement-learning/alinhamento/Agent.cpp 
 reinforcement-learning/alinhamento/State.cpp 
@@ -9,7 +6,6 @@ minimax/alinhamento/tree.cpp
 minimax/alinhamento/evaluations.cpp 
 minimax/alinhamento/move.cpp minimax/alinhamento/decision.cpp 
 minimax/alinhamento/node.cpp -o test
-
 */
 #include <iostream>
 #include <vector>
@@ -31,7 +27,7 @@ minimax/alinhamento/node.cpp -o test
 
 typedef vector<vector<char>> Board;
 
-string file_name = "../lobo-brain/reinforcement-learning/alinhamento/q-table_p2.csv";
+string file_name = "../lobo-brain/docs/q-table_p2.csv";
 string winrate_file_name = "../lobo-brain/winrate_vs_minimax.csv";
 
 // Saves the winrate based on the game agains a random player
@@ -163,7 +159,7 @@ void play(Agent* p2, int rounds){
 int main(){
     State current_state = State('1', '2');
     Agent p1 = Agent(&current_state, '1', 0.2, 0, 1);
-    Agent p2 = Agent(&current_state, '2', 0.2, 0, 1);
+    Agent p2 = Agent(&current_state, '2', 0.2, 0, 0.95);
     Global setup = Global(&p1, &p2, &current_state);
 
     ofstream winrate_file;
