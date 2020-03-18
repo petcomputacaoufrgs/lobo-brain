@@ -236,6 +236,9 @@ void Agent::feed_reward(float reward){
         // the data
         if(this->player_symbol == '1')
             this->cumulative_reward += delta;
+        else if(this->player_symbol == '2')
+            this->cumulative_reward += delta;
+        
     }
 }
 

@@ -42,7 +42,7 @@ void save_winrate(ofstream *winrate_file, Agent* p2){
 void play(Agent* p2, int rounds){
 
     int num_rounds;
-    int count_win;
+    int count_win = 0;
     for(int i=1;i<=rounds;i++){
         int win = 0;
         p2->current_state->is_end = false;
@@ -86,7 +86,7 @@ void play(Agent* p2, int rounds){
 
         //system("clear");
 
-        printa_tab(tab_atual);
+        //printa_tab(tab_atual);
 
         while(tapatanEvaluation(tab_atual, game->root->board, '1', '2', &rep) == 0 && p2->current_state->is_end == false){
 
@@ -96,15 +96,15 @@ void play(Agent* p2, int rounds){
             p2->current_state->player_symbol = '2';
             // Player 1 plays
             // p1 action is a [from, to] vector based on the action taken
-            cout << endl << "P2 IS PLAYING..." << endl << endl;
+            //cout << endl << "P2 IS PLAYING..." << endl << endl;
 
             //choose a action to take based in exploration or exploitation
             vector<vector<int>> p2_action = p2->choose_action();
             // take action and update board statgdb e
             p2->current_state->update_state(p2_action.at(0), p2_action.at(1));
                 
-            cout << "\n\tRL PLAY: " << endl;
-            p2->current_state->show_board();
+            //cout << "\n\tRL PLAY: " << endl;
+            //p2->current_state->show_board();
             tab_atual = p2->current_state->getBoard();
 
             game = new Tree(tab_atual);
@@ -115,20 +115,20 @@ void play(Agent* p2, int rounds){
             if (p2->current_state->is_end == true){
                 count_win++;
                 //cout << "cabo1"<< endl;
-                if(win == 2)
-                    cout << "PLAYER 1 WINS!!" << endl;
-                else if(win == 0)
-                    cout << "TIE!!" << endl;
-                else
-                    cout << "PLAYER 2 WINS!!" << endl;
+                //if(win == 2)
+                    //cout << "PLAYER 1 WINS!!" << endl;
+                //else if(win == 0)
+                    //cout << "TIE!!" << endl;
+                //else
+                    //cout << "PLAYER 2 WINS!!" << endl;
                 
 
                 //p1.reset('1', 0.2, 0.7, 1);
                 p2->reset('2', 0.2, 0.7, p2->epsilon);
                 break;
             }else{
-                cout << endl << "P1 IS PLAYING..." << endl << endl;
-                printa_tab(tab_atual);
+                //cout << endl << "P1 IS PLAYING..." << endl << endl;
+                //printa_tab(tab_atual);
 
 
                 /* JOGADA MINIMAX */
@@ -138,13 +138,13 @@ void play(Agent* p2, int rounds){
                 tab_atual = choice->board;
                 p2->current_state->setBoard(tab_atual.getBoard());
 
-                cout << "\n\tMINIMAX PLAY: " << endl;
-                printa_tab(tab_atual);
+                //cout << "\n\tMINIMAX PLAY: " << endl;
+                //printa_tab(tab_atual);
 
                 p2->reset('2', 0.2, 0.7, p2->epsilon);
 
                 if(tapatanEvaluation(tab_atual, game->root->board, '1', '2', &rep) > 0){
-                    cout << "cabo" << endl;
+                    //cout << "cabo" << endl;
                     win = 1;
                     p2->current_state->is_end = true;
                     tab_atual = start;
@@ -158,21 +158,40 @@ void play(Agent* p2, int rounds){
 
 int main(){
     State current_state = State('1', '2');
-    Agent p1 = Agent(&current_state, '1', 0.2, 0, 1);
-    Agent p2 = Agent(&current_state, '2', 0.2, 0, 0.95);
+    Agent p1 = Agent(&current_state, '1', 0.2, 0, 0);
+    Agent p2 = Agent(&current_state, '2', 0.2, 0, 0.3);
     Global setup = Global(&p1, &p2, &current_state);
 
     ofstream winrate_file;
 
-    cout << endl << "LOADING POLICY..." << endl;
-    setup.p2->load_policy(file_name);
+    //cout << endl << "LOADING POLICY..." << endl;
+    //setup.p2->load_policy(file_name);
 
-    play(&p2, 1000);
+    system("clear");
+    cout << "\t\t>>>>> Treino Inicial <<<<<" << endl;
+    int initial_train =  1000;
+    setup.train(initial_train, '2');
 
-    cout << endl << "SAVING WINRATE..." << endl;
-    winrate_file.open(winrate_file_name);
-    save_winrate(&winrate_file, &p2);
-    winrate_file.close();
+    float average_winrate;
+
+    do {
+        cout << "\t\t>>>>> Contra MiniMax <<<<<" << endl;
+        play(&p2, 1000);
+        float winrate_sum = 0;
+        int c = 0;
+        int i;
+        for(map<int, float >::const_iterator it = p2.winrate.begin(); it != p2.winrate.end(); ++it){
+            c++;
+            winrate_sum += it->second;
+	    }
+        average_winrate = winrate_sum/(float)c;
+        if(average_winrate < 0.6) {
+            cout << "\t\t>>>>> Treino " << i << " <<<<<" << endl;
+            initial_train += 10000;
+            setup.train(initial_train, '2');
+        }
+        i++;
+    } while(average_winrate < .6);
 
     return 0;
 }

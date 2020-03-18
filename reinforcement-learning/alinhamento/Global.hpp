@@ -14,7 +14,7 @@ class Global{
     public:
 
         Global(Agent* p1, Agent* p2, State* state); // Constructor
-        void train(int rounds); // Train the algorithm
+        void train(int rounds, char analyze); // Train the algorithm
         void play();// Plays against an human
 
         Agent* p1; // Pointer to the p1' class

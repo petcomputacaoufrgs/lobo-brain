@@ -15,35 +15,47 @@ Global::Global(Agent* p1, Agent* p2, State* state){
 }
 
 // Train the algorithm
-void Global::train(int rounds){
+void Global::train(int rounds, char analyze){
     int win = 0;
     int count_win = 0;
     int num_rounds = 0;
     this->p1->cumulative_reward = 0;
+    this->p2->cumulative_reward = 0;
     for(int i=1;i<=rounds;i++){
         this->state->reset();
         if(i % 1000 == 0){
             cout << "Rounds: " << i << endl;
-            cout << "\t" << "Epsilon p1: " << this->p1->epsilon << endl;
-            cout << "\t" << "Epsilon p2: " << this->p2->epsilon << endl;
+            cout << "\t" << "Epsilon P1: " << this->p1->epsilon << endl;
+            cout << "\t" << "Epsilon P2: " << this->p2->epsilon << endl;
             
         }
         if(i % 100 == 0){
             num_rounds = 100;
-            float winrate_variable = (float)count_win/num_rounds;
-            this->p1->winrate.insert({i, winrate_variable});
+            float winrate_variable1 = (float)count_win/num_rounds;
+            float winrate_variable2 = (float)(100 - count_win)/num_rounds;
+            this->p1->winrate.insert({i, winrate_variable1});
+            this->p2->winrate.insert({i, winrate_variable2});
             this->p1->rewards.insert({i, this->p1->cumulative_reward});
+            this->p2->rewards.insert({i, this->p1->cumulative_reward});
 
             if(i%1000 == 0){
-                cout << "\t" << "WinRate: " << winrate_variable << endl;
-                cout << "\t" << "Cumulative Reward: " << this->p1->cumulative_reward << endl;
+                cout << "\t" << "WinRate P1: " << winrate_variable1 << endl;
+                cout << "\t" << "WinRate P2: " << winrate_variable2 << endl;
+                cout << "\t" << "Cumulative Reward P1: " << this->p1->cumulative_reward << endl;
+                cout << "\t" << "Cumulative Reward P2: " << this->p2->cumulative_reward << endl;
             }
-
-            if(this->p1->epsilon < .95){
-             this->p1->epsilon += .002;
+            if(analyze == '1'){
+                if(this->p1->epsilon < .95){
+                    this->p1->epsilon += .00065;
+                }
+            }else if(analyze == '2'){
+                if(this->p2->epsilon < .95){
+                    this->p2->epsilon += .00065;
+                }
             }
             count_win = 0;
             this->p1->cumulative_reward = 0;
+            this->p2->cumulative_reward = 0;
         }
         while(this->state->is_end == false){
             // Player 1 plays
