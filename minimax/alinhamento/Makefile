@@ -16,10 +16,10 @@ all: tree_teste.exe decision_teste.exe
 %.o: %.cpp
 	$(CXX) -c $^ -o $@ $(CXXFLAGS)
 
-tree_teste.exe: tree_teste.o tree.o node.o tabuleiro.o VDE.o move.o
+tree_teste.exe: tree_teste.o tree.o node.o tabuleiro.o evaluations.o move.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
-decision_teste.exe: decision_teste.o tree.o node.o tabuleiro.o VDE.o decision.o move.o
+decision_teste.exe: decision_teste.o tree.o node.o tabuleiro.o evaluations.o decision.o move.o
 	$(CXX) $^ -o $@ $(LDFLAGS)	
 
 move_teste.exe: move_teste.o move.o
@@ -28,7 +28,7 @@ move_teste.exe: move_teste.o move.o
 node_teste.exe: node_teste.o node.o tabuleiro.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
-VDE_teste.exe: VDE_teste.o VDE.o tabuleiro.o
+evaluations_teste.exe: VDE_teste.o evaluations.o tabuleiro.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 # Limpa os arquivos construidos
