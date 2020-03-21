@@ -28,7 +28,7 @@ move_teste.exe: move_teste.o move.o
 node_teste.exe: node_teste.o node.o tabuleiro.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
-evaluations_teste.exe: VDE_teste.o evaluations.o tabuleiro.o
+evaluations_teste.exe: evaluations_teste.o evaluations.o tabuleiro.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 # Limpa os arquivos construidos
