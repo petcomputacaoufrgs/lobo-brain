@@ -1,11 +1,5 @@
 /*
-g++ MinimaxVSRL.cpp reinforcement-learning/alinhamento/Agent.cpp 
-reinforcement-learning/alinhamento/State.cpp 
-reinforcement-learning/alinhamento/Global.cpp minimax/alinhamento/tabuleiro.cpp 
-minimax/alinhamento/tree.cpp 
-minimax/alinhamento/evaluations.cpp 
-minimax/alinhamento/move.cpp minimax/alinhamento/decision.cpp 
-minimax/alinhamento/node.cpp -o test
+g++ MinimaxVSRL.cpp reinforcement-learning/alinhamento/Agent.cpp reinforcement-learning/alinhamento/State.cpp reinforcement-learning/alinhamento/Global.cpp minimax/alinhamento/tabuleiro.cpp minimax/alinhamento/tree.cpp minimax/alinhamento/evaluations.cpp minimax/alinhamento/move.cpp minimax/alinhamento/decision.cpp minimax/alinhamento/node.cpp -o test
 */
 #include <iostream>
 #include <vector>
@@ -88,7 +82,7 @@ void play(Agent* p2, int rounds){
 
         //printa_tab(tab_atual);
 
-        while(tapatanEvaluation(tab_atual, game->root->board, '1', '2', &rep) == 0 && p2->current_state->is_end == false){
+        while(tapatanEvaluation(tab_atual, game->root->board, '1', '2', &rep) == 0 && !p2->current_state->is_end){
 
 
             /* JOGADA RL */
@@ -112,7 +106,7 @@ void play(Agent* p2, int rounds){
             // check if the game's over
             win = p2->current_state->winner();
             //cout << win << endl;
-            if (p2->current_state->is_end == true){
+            if (p2->current_state->is_end){
                 count_win++;
                 //cout << "cabo1"<< endl;
                 //if(win == 2)
@@ -137,6 +131,8 @@ void play(Agent* p2, int rounds){
                 choice = decision(game, game->root, false, &rep, max_depth);
                 tab_atual = choice->board;
                 p2->current_state->setBoard(tab_atual.getBoard());
+
+                game->free();
 
                 //cout << "\n\tMINIMAX PLAY: " << endl;
                 //printa_tab(tab_atual);

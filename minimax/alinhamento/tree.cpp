@@ -117,3 +117,7 @@ void Tree::generateChildren(Node* current_state, char player, bool jump)
         current_state->addChildren(newChild);
     }
 }
+
+void Tree::free() {
+    this->root->free();
+}

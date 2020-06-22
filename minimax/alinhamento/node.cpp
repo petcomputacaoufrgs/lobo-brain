@@ -18,3 +18,14 @@ Node::Node(Tabuleiro board)
     newSon->parent = this;
     this->children.push_back(newSon);
 }
+
+void Node::free() {
+
+    if(this->children.size() == 0) {
+        delete this;
+    } else {
+        for(int i = 0; i < this->children.size(); i++) {
+            this->children[i]->free();
+        }
+    }
+}

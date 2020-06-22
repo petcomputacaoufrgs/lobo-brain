@@ -18,6 +18,7 @@ class Node
         Node(Tabuleiro board);
 
         void addChildren(Node* newChildren);
+        void free();
 };
 #endif
 
