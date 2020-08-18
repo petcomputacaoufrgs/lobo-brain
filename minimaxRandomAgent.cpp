@@ -4,16 +4,29 @@
 
 /*
  *
- * g++ minimaxRandomAgent.cpp minimax/alinhamento/tabuleiro.cpp minimax/alinhamento/tree.cpp minimax/alinhamento/evaluations.cpp minimax/alinhamento/decision.cpp minimax/alinhamento/move.cpp minimax/alinhamento/node.cpp -o testMin
+ * g++ minimaxRandomAgent.cpp minimax/alinhamento/tabuleiro.cpp minimax/alinhamento/tree.cpp minimax/alinhamento/evaluations.cpp minimax/alinhamento/decision.cpp minimax/alinhamento/move.cpp minimax/alinhamento/node.cpp -o minimaxRA
  *
  *
  * */
+
+
+// UNCOMMENT FOR WINDOWS
+//#define WINDOWS
+
+#ifdef WINDOWS
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#else
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#endif
 
 #include <iostream>
 #include <vector>
 #include <string>
 #include <random>
 #include <fstream>
+#include <filesystem>
 
 #include "../lobo-brain/minimax/alinhamento/tabuleiro.hpp"
 #include "../lobo-brain/minimax/alinhamento/tree.hpp"
@@ -22,11 +35,16 @@
 #include "../lobo-brain/minimax/alinhamento/move.hpp"
 #include "../lobo-brain/minimax/alinhamento/node.hpp"
 
-string winrate_file = "../lobo-brain/randomOpResults.csv";
-
 const int minimaxAgentWin = 100;
 const int randomAgentWin = -100;
 const int gameTie = -1;
+
+string GetCurrentWorkingDir( void ) {
+    char buff[FILENAME_MAX];
+    GetCurrentDir( buff, FILENAME_MAX );
+    string current_working_dir(buff);
+    return current_working_dir;
+}
 
 int randomInt(int from, int to) {
     std::random_device rd;  //Will be used to obtain a seed for the random number engine
@@ -35,11 +53,19 @@ int randomInt(int from, int to) {
     return distrib(gen);
 }
 
+void saveResults(vector<int> *losses, vector<float> *moves, string results_file) {
 
+    int max_depth = losses->size();
 
-/*int saveWinRate(offstream *winrate_file) {
+    ofstream file(results_file);
 
-}*/
+    file << "Depth,Losses,AvgMoves" << endl;
+    for(int i=0; i < max_depth; i++) {
+        file << i+1 << "," << losses->at(i) << "," << moves->at(i) << endl;
+    }
+
+    file.close();
+}
 
 /*
  *  --------------
@@ -78,7 +104,7 @@ int play(int depth) {
     int rep = 0;
 
     // setting chars
-    char minimaxAgentChar = '1'; // this is hard coded
+    char minimaxAgentChar = '1'; // this is hard coded...
     char randomAgentChar = '2';
 
     // if jumps are allowed
@@ -104,7 +130,7 @@ int play(int depth) {
     /*================*/
 
     // printing first board
-    printa_tab(current_board);
+    // printa_tab(current_board);
 
     // while game is not over
     gamestate = tapatanEvaluation(current_board, game->root->board, '1', '2', &rep);
@@ -129,7 +155,7 @@ int play(int depth) {
         game = new Tree(current_board);
 
         // print move
-        printa_tab(current_board);
+        // printa_tab(current_board);
 
         // check if the game is finished
         gamestate = tapatanEvaluation(current_board, game->root->board, '1', '2', &rep);
@@ -155,7 +181,7 @@ int play(int depth) {
         moves++;
 
         // print move
-        printa_tab(current_board);
+        // printa_tab(current_board);
 
         // check if game is finished
         gamestate = tapatanEvaluation(current_board, game->root->board, '1', '2', &rep);
@@ -164,6 +190,8 @@ int play(int depth) {
     /*============*/
     /* GAME ENDED */
     /*============*/
+
+//    printa_tab(current_board);
 
     // act according to the winner
     if(gamestate == minimaxAgentWin) {
@@ -176,33 +204,91 @@ int play(int depth) {
     }
 }
 
-int episodicPlay(int eps, int eps_interval, int max_depth) {
+void episodicPlay(int eps, int depth, vector<float> *moves, vector<int> *losses) {
 
     /*==================*/
     /* RECORD VARIABLES */
     /*==================*/
 
-    int episodes_played = 0;
-    int minimax_wins = 0;
+    int losses_counter = 0;
+    int moves_counter = 0;
+    float losses_avg;
+    float moves_avg;
 
-    // minimax depth, will be increased over time
-    int current_depth = 1;
+    /*===================*/
+    /* PLAY & RECORD LOOP*/
+    /*===================*/
+
+    const clock_t begin_time = clock();
+    cout << "\nDepth " << depth << " started." << endl;
+
+    for(int i=0; i<eps; i++) {
+        int ret = play(depth);
+        if(ret > 0) {
+            moves_counter += ret;
+        } else if(ret == -1) {
+            losses_counter += 1;
+        }
+    }
+
+    /*==============*/
+    /* SAVE RESULTS */
+    /*==============*/
+
+    // get avg moves
+    moves_avg = (float) moves_counter / eps;
+//    loses_avg = (float) loss_counter / eps;
+
+    moves->push_back(moves_avg);
+    losses->push_back(losses_counter);
+
+    float t = float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+    cout << "Depth " << depth << " finished. (" << t << "s)" << endl;
+
+    /*=======*/
+    /* DEBUG */
+    /*=======*/
+
+/*    cout << "> depth=" << depth << endl;
+    cout << "\nmoves_counter=" << moves_counter << endl;
+    cout << "\nmoves_avg=" << moves_avg << endl;
+    cout << "\nloss_counter=" << loss_counter << endl;*/
 
 }
 
-int main() {
+int main(int argc, char** argv) {
 
-    vector<int> moves;
-    int sum;
-    float avg;
-
-    for(int i=0; i<17; i++) {
-        moves.push_back(play(9));
+    if(argc != 4) {
+        cout << "Usage: " << argv[0] << " (eps | INT) (max_depth | INT) (output file name | STRING [.csv])" << endl;
+        exit(0);
     }
-    sum = accumulate(moves.begin(), moves.end(), 0.0);
-    avg = (float) sum / moves.size();
-    cout << sum << "|";printf("%.15f\n", avg);
 
-//    cout << play(10) << endl;
+    vector<float> moves;
+    vector<int> losses;
+
+    // number of episodes per depth
+    int eps = atoi(argv[1]);
+
+    // farthest depth it will go
+    int max_depth = atoi(argv[2]);
+
+    // where  to save results
+    string results_file = GetCurrentWorkingDir() + "/" + argv[3];
+
+    cout << results_file << endl;
+
+    cout << "Running with the following parameters: \n"
+         << "\tMax depth=" << max_depth << "\n"
+         << "\tEps per depth=" << eps << endl;
+
+    const clock_t begin = clock();
+
+    for(int i=1; i<=max_depth; i++) {
+        episodicPlay(eps, i, &moves, &losses);
+    }
+
+    float full_t = float( clock () - begin ) /  CLOCKS_PER_SEC;
+    saveResults(&losses, &moves, results_file);
+    cout << "Results file saved as " << results_file << ". (" << full_t << "s)" << endl;
 
 }
