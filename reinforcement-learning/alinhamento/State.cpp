@@ -222,6 +222,8 @@ int State::winner(){
 // Returns a vector of tuples (possible moves) 
 // ([i,j] represents the positions of the board)
 // and that represents the actions
+
+// This function is based on the game. It'll change according to the game
 vector<vector<int>> State::possible_moves(int player_position){
     vector<vector<int>> possible_mov;
     vector<int> ij;
