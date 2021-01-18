@@ -124,9 +124,6 @@ void Global::train(int rounds, char analyze){
                 }
             }
         }
-        // if(this->p1->epsilon < 0.95){
-        //      this->p1->epsilon += 0.002;
-        // }
     }
 }
 
