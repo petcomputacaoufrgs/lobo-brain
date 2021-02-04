@@ -33,7 +33,7 @@ Para replicar o resultado dos experimentos, é necessário:
     ./test_play.exe
     ```
     
-### Definições de funções
+### Definições de funções (método de Reinforcement Learning)
 #### test_train.cpp
 
 A partir da definição de dois agentes (jogadores um e dois) podemos definir os parâmetros de treino dos agentes através dos valores de <i>alpha</i>, <i>gamma</i> e <i>epsilon</i>. Através dessa definição, podemos treinar um dos agentes através de jogos sucessivos contra uma máquina com decisões aleatórias. Dessa forma, podemos deifnir a quantidade de trino atrvés da seguinte linha:
