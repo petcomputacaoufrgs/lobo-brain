@@ -21,7 +21,7 @@ Para replicar o resultado dos experimentos, é necessário:
     make test_play.exe
     ```
 * Executar os arquivos .exe
-  - Para treino do algoritmo (50000 rounds):
+  - Para treino do algoritmo (150000 rounds):
     
     ```
     ./test_train.exe
