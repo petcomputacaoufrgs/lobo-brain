@@ -59,6 +59,16 @@ A partir da definição de dois agentes (jogadores um e dois) podemos definir os
   Para maiores quantidade de treino, o nível de dificuldade do jogo se torna impossível, pois a máquina atinge cerca de 100% de taxa de vitória.
 
 #### test_play.cpp
+
+É a função da para a execução da versão demo do programa. Através dessa função, o jogador pode testar diferentes níveis de dificuldade jogando contra a máquina previamente treinada.
+
+A função utiliza do arquivo q-table.csv para a tomada de decisões da máquina através da linha
+
+ ```
+    setup.p1->load_policy(file_name);
+  ```
+  
+ Onde pode-se definir qual jogador receberá a quantidade de treino pré-definida e <i>file_name</i> é o nome do arquivo no qual está a <i>Q-Table</i>.
 ### Tipos de tabuleiros suportados
 * Tapatan;
  <img src="https://www.yourkidsot.com/uploads/2/4/0/3/24030117/s780171065908427913_p57_i1_w1654.png" height="200" width="150">
