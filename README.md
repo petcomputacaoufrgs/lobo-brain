@@ -66,7 +66,7 @@ Para a implementação do algoritmo MiniMax foram utilizadas duas formas diferen
                         );
  ```
 
-Dessa forma, para definições de diferentes formas de tabuleiros, devem ser previamente estruturados de modo modo que o tabuleiro possa ser representado através de uma matriz de caracteres.
+Dessa forma, para definições de diferentes formas de tabuleiros, devem ser previamente estruturados de modo que o tabuleiro possa ser representado através de uma matriz de caracteres.
 
 ### Definições de funções (método de Reinforcement Learning)
 #### test_train.cpp
