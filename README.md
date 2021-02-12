@@ -49,7 +49,7 @@ O comportamento do jogo é definido sob as regras do jogo em questão, e consist
     
 Tendo em vista que tabuleiros são formados por "casas" e "caminhos", podemos representá-los por meio de um grafo (que pode ser generalizado para tabuleiros NxN) ou uma matriz de caracteres (de tamanho 3x3 no caso do Tapatan), onde os possíveis caminhos são harcoded, isto é, definidos dentro do código.
 Cada "casa" representa uma posição que pode ser ocupada pelo jogador 1 (representado em preto), 2 (representado em vermelho), ou que pode estar vazia (representada em cinza).
-Tais estruturas são denotadas nas Figuras \ref{fig:tabuleiroGrafo} e \ref{fig:tabuleiroMatriz}, ambas descrevendo o jogo Tapatan em seu estado inicial:
+Tais estruturas são denotadas nas Figuras abaixo, ambas descrevendo o jogo Tapatan em seu estado inicial:
 
     
 ### Definições de funções (método de Reinforcement Learning)
