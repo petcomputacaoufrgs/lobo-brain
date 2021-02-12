@@ -53,9 +53,21 @@ Tais estruturas são denotadas nas Figuras abaixo, ambas descrevendo o jogo Tapa
 
 <img src="/img/tapatan-grafo.png">
 
-Para a implementação do algoritmo MiniMax foram utilizadas duas formas diferentes de estruturação dos dados do tabuleiro, já apresentados anteriormente. São elas: grafo  e matriz . Para o algoritmo <i>Q-Learing</i>, optou-se por utilizar apenas esta última.
+<img src="/img/tapatan-matriz.png">
 
-    
+Para a implementação do algoritmo MiniMax foram utilizadas duas formas diferentes de estruturação dos dados do tabuleiro, já apresentados anteriormente. São elas: grafo  e matriz . Para o algoritmo <i>Q-Learing</i>, optou-se por utilizar apenas esta última. Podemos implementar, portanto um tabuleiro através da seguinte linha de código:
+
+ ```
+    Board initial_state ({
+                          {'2', '1', '2'},
+                          {'0', '0', '0'},
+                          {'1', '2', '1'}
+                         }
+                        );
+ ```
+
+Dessa forma, para definições de diferentes formas de tabuleiros, devem ser previamente estruturados de modo modo que o tabuleiro possa ser representado através de uma matriz de caracteres.
+
 ### Definições de funções (método de Reinforcement Learning)
 #### test_train.cpp
 
