@@ -33,6 +33,26 @@ Para replicar o resultado dos experimentos, é necessário:
     ./test_play.exe
     ```
     
+### Estrutura computacional
+
+Para implementar uma versão digital do jogo de tabuleiro, é preciso modelar sua estrutura e comportamento para que sejam representadas computacionalmente.
+A estrutura dos jogos de tabuleiro pode ser modelada a partir dos seguintes elementos básicos:
+
+    * O estado atual do tabuleiro: configuração das peças no momento;
+    * Informação de quem irá se mover: jogador 1 ou jogador 2, peças azuis ou vermelhas, etc.
+    
+O comportamento do jogo é definido sob as regras do jogo em questão, e consiste em:
+
+    * conjunto de regras de movimentação: oque pode e oque não pode ser feito
+    * conjunto de regras de posicionamento:  determina se uma configuração de peças é válida
+    * condições de término do jogo: característica dos tabuleiros onde o jogo encerra
+    
+Tendo em vista que tabuleiros são formados por ``casas'' e ``caminhos'', podemos representá-los por meio de um grafo (que pode ser generalizado para tabuleiros NxN) ou uma matriz de caracteres (de tamanho 3x3 no caso do Tapatan), onde os possíveis caminhos são harcoded, isto é, definidos dentro do código.
+    
+    Cada ``casa'' representa uma posição que pode ser ocupada pelo jogador 1 (representado em preto), 2 (representado em vermelho), ou que pode estar vazia (representada em cinza).
+    Tais estruturas são denotadas nas Figuras \ref{fig:tabuleiroGrafo} e \ref{fig:tabuleiroMatriz}, ambas descrevendo o jogo Tapatan em seu estado inicial:
+
+    
 ### Definições de funções (método de Reinforcement Learning)
 #### test_train.cpp
 
