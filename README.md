@@ -51,6 +51,10 @@ Tendo em vista que tabuleiros são formados por "casas" e "caminhos", podemos re
 Cada "casa" representa uma posição que pode ser ocupada pelo jogador 1 (representado em preto), 2 (representado em vermelho), ou que pode estar vazia (representada em cinza).
 Tais estruturas são denotadas nas Figuras abaixo, ambas descrevendo o jogo Tapatan em seu estado inicial:
 
+<img src="/img/tapatan-grafo.png">
+
+Para a implementação do algoritmo MiniMax foram utilizadas duas formas diferentes de estruturação dos dados do tabuleiro, já apresentados anteriormente. São elas: grafo  e matriz . Para o algoritmo <i>Q-Learing</i>, optou-se por utilizar apenas esta última.
+
     
 ### Definições de funções (método de Reinforcement Learning)
 #### test_train.cpp
