@@ -112,6 +112,25 @@ A função utiliza do arquivo q-table.csv para a tomada de decisões da máquina
 
  <img src="https://i.pinimg.com/736x/ab/f2/41/abf241ae7a831cfc3e0cbf8033f64fea.jpg" height="200" width="150">
  
+Pode-se utilizar os algoritmos implementados em outros jogos de tabuleiro. Para isso, deve-se abstrair o novo tabuleiro e implementar suas regras. Temos duas funções que devem ser modificadas para futuras adaptações nas regras e no tabuleiro.
+
+A função
+
+ ```
+   int State::winner()
+ ```
+ que define as regras do jogo e as condições de vitória, e a função
+ 
+  ```
+   vector<vector<int>> State::possible_moves(int player_position)
+  ```
+  que define as possíveis movimentações da máquina de acordo com o tabuleiro.
+
+Há atualmente duas formas de abstração de tabuleiros: grafo e matriz. Para jogos onde consegue-se mapear as posições ("casas")  em uma matriz, a utilização desta é recomendada pois facilita a implementação do algoritmo Q-learning, que é mais eficiente e preferível ao MiniMax.
+
+Já para tabuleiros de maior complexidade (muitas posições de peças, muitos caminhos, mais formas de movimentação de peças, etc.) é recomendado o uso de grafos como estrutura representativa do tabuleiro, uma vez que este tipo permite alta generalidade, facilita a busca por informações e a aplicação de métodos. Tal estrutura já encontra-se implementada sobre os jogos Tapatan e Pong Hau K'i, e portanto deve ser de fácil conversão para outros tabuleiros. 
+É importante destacar, porém, que o algoritmo Q-learning <b>NÃO</b> foi implementado usando representação por grafo, apenas matriz, e por isso se faz necessária ao leitor desenvolver uma nova abstração que dê conta de todos os requisitos do jogo em questão (geralmente posições das peças, caminhos/movimentações possiveis, regras e condições de término).
+ 
  
 
  
