@@ -2,6 +2,7 @@
 #define TABULEIRO_H
 
 #include <vector>
+#include "vertex.hpp"
 
 using namespace std;
 
@@ -15,14 +16,28 @@ using namespace std;
 *			- Tabuleiro exemplo (<vetor>);        *
 *                                                 *
 ***************************************************/
-class Tabuleiro 
+class Tabuleiro
 {
 	public:
-		vector<vector<char>> posicoes;
-		
+		Vertex* firstPos;
+		int size;
+
+		Tabuleiro(Vertex *firstPos, int size);
 		Tabuleiro();
-		Tabuleiro(vector<vector<char>> posicoes);
-		vector<vector<char>> getBoard();
+		//delete Tabuleiro(const Tabuleiro &old) = 0;
+
+		bool operator == (const Tabuleiro & board);
+
+		Vertex* search(int pos);
+
+		void pongHauKiInitialPositions();
+		void setCurrentBoard(char player, char enemy, int from, int to, vector<int> playerPos, vector<int> enemyPos);
+
+		void print();
 };
+
+
+Tabuleiro pongHauKiBoard();
+
 
 #endif

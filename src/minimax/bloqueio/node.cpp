@@ -4,9 +4,12 @@
 
 using namespace std;
 
+// era vector<string>, agora eh char
+
+// aparentemente aqui esta com algum erro
+// logico que nao esta  inicializando corretamente a classe Node
 Node::Node(Tabuleiro board)
 {
-
     this->board = board;
 
     this->parent = NULL;
@@ -17,15 +20,4 @@ Node::Node(Tabuleiro board)
     //Node newSon = Node(board);
     newSon->parent = this;
     this->children.push_back(newSon);
-}
-
-void Node::free() {
-
-    if(this->children.size() == 0) {
-        delete this;
-    } else {
-        for(int i = 0; i < this->children.size(); i++) {
-            this->children[i]->free();
-        }
-    }
 }

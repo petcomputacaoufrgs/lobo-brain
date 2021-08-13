@@ -1,21 +1,22 @@
 #include <iostream>
 #include <vector>
-#include "tree.hpp"
-#include "tabuleiro.hpp"
+#include "minimaxTree.hpp"
+#include "board.hpp"
 #include "move.hpp"
-#include "node.hpp"
+#include "minimaxNode.hpp"
 #include "decision.hpp"
 
 using namespace std;
 
-//Metodo construtor da arvore
-Tree::Tree(Tabuleiro startingBoard)
+
+minimaxTree::minimaxTree(Board startingBoard)
 {
     Node* rootNode = new Node(startingBoard);
     this->setRoot(rootNode);
 }
-//Metodo setter da arvore
-void Tree::setRoot(Node* root)
+
+
+void minimaxTree::setRoot(Node* root)
 {
     this->root = root;
 }
@@ -41,37 +42,46 @@ void Tree::setRoot(Node* root)
 *           e adiciona no vetor a ser devolvido                                          *
 ******************************************************************************************/
 
-vector<Tabuleiro> Tree::generateBoards(Tabuleiro board, char player, bool jump)
+vector<Board> minimaxTree::produceNextLayerBoards(Board originalBoard, Player player, bool jump)
 {
-    int i,j, player_pos;
-    vector<vector<int>> possible_mov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
+    vector<vector<int>> possibleMov;//matriz com as possiveis posicoes geradas a partir do tabuleiro passado como parametro
 
-    vector<vector<int>> aux_vet;
+    vector<vector<int>> auxVector;
 
-    vector<Tabuleiro> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
+    vector<Board> possibleBoards;//vetor com os possiveis tabuleiros gerados a partir da posicao atual
+
+    /*
+     *
+     *
+     * Here we will iterate over all the board positions
+     * searching for the Player pieces
+     *
+     *
+     */
 
     for(i=0;i<3;i++)
     {
         for(j=0;j<3;j++)
         {
-            if(board.posicoes[i][j] == player)//verifica se a posicao do tabuleiro esta sendo ocupada pelo jogador
+            if(originalBoard.playersPositions[i][j] == player)//verifica se a posicao do tabuleiro esta sendo ocupada pelo jogador
             {
-                player_pos = 3*i+j;//realiza uma aritmetica para determinar a posicao do jogador no tabuleiro
+                playerPos = 3*i+j;//realiza uma aritmetica para determinar a posicao do jogador no tabuleiro
 
 
                 // TODO: SWITCH DE ACORDO COM O JOGO USANDO CÓDIGOS PRé DEFINIDOS
-                possible_mov = tapatanMoves(player_pos);
+                possibleMov = tapatanMoves(playerPos);
+
                 if(jump) {
-                  aux_vet = tapatanJumpMoves(player_pos, board);
-                  possible_mov.insert(possible_mov.end(), aux_vet.begin(), aux_vet.end());
+                  auxVector = tapatanJumpMoves(playerPos, originalBoard);
+                  possibleMov.insert(possibleMov.end(), auxVector.begin(), auxVector.end());
                 }
 
-                for(vector<vector<int>>::iterator it = possible_mov.begin(); it != possible_mov.end(); it++)//varre todas as posicoes do tabuleiro
+                for(vector<vector<int>>::iterator it = possibleMov.begin(); it != possibleMov.end(); it++)//varre todas as posicoes do tabuleiro
                 {
-                    if(board.posicoes[it->at(0)][it->at(1)] == '0')//verifica se a posicao do tabuleiro esta vazia para poder realizar a possivel movimentacao
+                    if(originalBoard.playersPositions[it->at(0)][it->at(1)] == '0')//verifica se a posicao do tabuleiro esta vazia para poder realizar a possivel movimentacao
                     {
-                        //gambiarra fodida pois n sei cpp quem quiser melhorar pode dale
-                        Tabuleiro newBoard = board;
+                        //
+                        Board newBoard = originalBoard;
                         newBoard.posicoes[it->at(0)][it->at(1)] = player;//gera um possivel tabuleiro com a possivel movimentacao a partir da posicao atual do jogo
                         newBoard.posicoes[i][j] = '0';//quer dizer que o jogador se movimentou, ou seja, tem que zerar a posicao anterior dele
 
