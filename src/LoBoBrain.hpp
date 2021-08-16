@@ -15,14 +15,10 @@ public:
     // Class constructor without board specified
     LoBoGamesEngine(vector<Player> players);
 
-//    LoBoGamesEngine(vector<TapatanPlayer> players, bool jumpEnable);
-
-    MiniMaxTree game;
+    MiniMaxTree gameTree;
     Board board;
     vector<Player> players;
     Player currentPlayer;
-
-    MiniMaxNode* execute();
 
 
 };

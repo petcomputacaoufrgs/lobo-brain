@@ -1,34 +1,36 @@
-#ifndef TREE_H
-#define TREE_H
+#ifndef MINIMAX_TREE_H
+#define MINIMAX_TREE_H
 
-#include "minimaxNode.hpp"
+#include "./minimaxNode.hpp"
 #include "../LoBoBrain.hpp"
 
-class MiniMaxTree
+class MiniMaxTree : MiniMaxNode
 {
-    public:
-        // The root at the first layer of the tree
-        MiniMaxNode* root;
+public:
+    // The root at the first layer of the tree
+    MiniMaxNode* root;
 
-        // Class constructor
-        MiniMaxTree(Board startingBoard);
+    // Class constructor
+    MiniMaxTree(Board nodeBoard, Board startingBoard);
 
-        // Setter method for the tree root
-        void setRoot(MiniMaxNode* root);
+    // Setter method for the tree root
+    void setRoot(MiniMaxNode* root);
 
-        // Returns all the possible boards
-        // that can be transitioned from
-        // a input board
-        vector<Board> nextLayerBoards(Board originalBoard, Player player);
+    // Returns all the possible boards
+    // that can be transitioned from
+    // a input board
+    vector<Board> nextGenerationBoards(Board originalBoard, Player player);
 
+
+    // Reproduce all possible board setups
+    static void buildNextGeneration(MiniMaxNode* currentNode, const vector<Player>& players);
 
 private:
-        // Reproduce all possible board setups
-        void buildNextLayer(MiniMaxNode* currentNode, vector<Player> players, bool jump);
 
-        // Clear memory
-        void free();
+    // Clear memory
+    void free();
 
+    void buildNextLayer(const vector<Board>& possibleBoards);
 };
 
 #endif

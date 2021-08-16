@@ -1,20 +1,19 @@
-export module LoboBrain.Player;
-
 #include "player.hpp"
 #include <string>
+#include <utility>
 
 using namespace std;
 
-Player::Player(char symbol, string name)
+Player::Player(LoBoGamesEngine* gameEngine, char symbol, string name)
 {
-    this.symbol = symbol;
-    this.name = name;
-    this.score = 0;
+    this->gameEngine = gameEngine;
+    this->symbol = symbol;
+    this->name = move(name);
 }
 
-Player::Player()
+Player::Player(LoBoGamesEngine* gameEngine)
 {
-    this.symbol = this.defaultSymbol;
-    this.name = this.defaultName;
-    this.score = 0;
+    this->gameEngine = gameEngine;
+    this->symbol = this->defaultSymbol;
+    this->name = this->defaultName;
 }

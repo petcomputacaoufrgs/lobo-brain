@@ -1,8 +1,10 @@
-#ifndef LOBO_BRAIN_TAPATAN_H
-#define LOBO_BRAIN_TAPATAN_H
+#ifndef TAPATAN_H
+#define TAPATAN_H
 
 #include "../LoBoBrain.hpp"
 #include "../LoBoBrain/player.hpp"
+#include "../LoBoBrain/board.hpp"
+#include "../Agents/MiniMaxAgent.hpp"
 
 using namespace std;
 
@@ -24,34 +26,9 @@ class TapatanPlayer : public Player
 
 public:
     void update();
-
-
 private:
-    vector<BoardCoordinates> possibleMoves;
-
     void updatePossibleMoves();
     void updatePieces();
-};
-
-class TapatanGame : public LoBoGamesEngine
-{
-public:
-    int repetitions;
-    bool jumpEnabled;
-    bool finished;
-
-    // Overwrite class constructors for
-    // using default initial setup and/or Jump setting
-    TapatanGame(vector<TapatanPlayer*> players, TapatanBoard board, bool jumpEnabled);
-    TapatanGame(vector<TapatanPlayer*> players, bool jumpEnabled);
-    TapatanGame(vector<TapatanPlayer*> players, TapatanBoard board);
-    TapatanGame(vector<TapatanPlayer*> players);
-
-    void registerMovement(TapatanBoard newSetup);
-
-private:
-    int maxRepetitions = 3;
-
 };
 
 class TapatanBoard : public Board
@@ -61,10 +38,10 @@ public:
     // Overwrite class constructor for
     // using default initial setup
     TapatanBoard();
-    TapatanBoard(BoardCoordinates boardSetup);
+    explicit TapatanBoard(BoardCoordinates boardSetup);
 
     // Print function for showing
-    // the board in the terminal
+    // the board in terminal
     void representation();
 
     // Read board positions and check
@@ -84,6 +61,43 @@ private:
             {'1', '2', '1'}
     };
 
+};
+
+class TapatanGame : public LoBoGamesEngine
+{
+public:
+    int repetitions;
+    bool jumpEnabled;
+    bool finished;
+
+    // Overwrite class constructors for
+    // using default initial setup and/or Jump setting
+    TapatanGame(vector<TapatanPlayer*> players, TapatanBoard* board, bool jumpEnabled);
+    TapatanGame(vector<TapatanPlayer*> players, bool jumpEnabled);
+    TapatanGame(vector<TapatanPlayer*> players, TapatanBoard* board);
+    TapatanGame(vector<TapatanPlayer*> players);
+
+    void registerMovement(TapatanBoard newSetup);
+
+private:
+    int maxRepetitions = 3;
+
+};
+
+class MiniMaxTapatanAgent : public MiniMaxAgent
+{
+public:
+
+        /*
+         * Build a new layer of the MiniMax tree
+         */
+        int executeNewLayer(bool isMax, int currentDepth);
+
+        /*
+         * Use the current tree to make a decision
+         * by the point of view of the current player
+         */
+        Board play();
 };
 
 #endif //LOBO_BRAIN_TAPATAN_H

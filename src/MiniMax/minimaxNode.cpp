@@ -1,24 +1,25 @@
 #include <iostream>
+#include <utility>
 #include "minimaxNode.hpp"
 
 using namespace std;
 
 MiniMaxNode::MiniMaxNode(Board nodeBoard)
 {
-    this->nodeBoard = nodeBoard;
-
+    this->nodeBoard = move(nodeBoard);
     this->parent = NULL;
+    this->score = NULL;
 }
 
- void MiniMaxNode::buildNextLayer(MiniMaxNode* newSon)
+ void MiniMaxNode::buildNextGeneration(MiniMaxNode* newSon)
 {
     newSon->parent = this;
-    this->nextLayer.push_back(newSon);
+    this->nextGeneration.push_back(newSon);
 }
 
 void MiniMaxNode::free() {
 
-    if(this->nextLayer.size() == 0) {
+    if(this->nextGeneration.empty()) {
 
         // RECURSION BASE
 
@@ -31,8 +32,8 @@ void MiniMaxNode::free() {
 
         // if it has children, iterate over
         // them, AND THEN delete this node
-        for(int i = 0; i < this->nextLayer.size(); i++) {
-            this->nextLayer[i]->free();
+        for(auto & i : this->nextGeneration) {
+            i->free();
         }
         delete this;
     }

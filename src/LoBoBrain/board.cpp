@@ -1,21 +1,24 @@
 #include "board.hpp"
 
+#include <utility>
+
 using namespace std;
 
-Board::Board(BoardCoordinates boardSetup)
+Board::Board(LoBoGamesEngine* gameEngine, BoardCoordinates boardSetup)
 {
-    this.updateSetup(boardSetup);
+    this->gameEngine = gameEngine;
+    this->updateSetup(move(boardSetup));
 }
 
-Board::Board()
+Board::Board(LoBoGamesEngine* gameEngine)
 {
-
-}
+    this->gameEngine = gameEngine;
+};
 
 void Board::updateSetup(BoardCoordinates newBoardSetup){
-    this.setup = newBoardSetup;
+    this->setup = move(newBoardSetup);
 }
 
 BoardCoordinates Board::getSetup(){
-    return this.setup;
+    return this->setup;
 }

@@ -2,6 +2,7 @@
 #define BOARD_H
 
 #include <vector>
+#include "../LoBoBrain.hpp"
 
 using namespace std;
 
@@ -18,11 +19,13 @@ public:
 
     // Initialization without
     // board specification
-    Board();
+    Board(LoBoGamesEngine* gameEngine);
 
     // Initialization with
     // board specification
-    Board(BoardCoordinates boardSetup);
+    explicit Board(LoBoGamesEngine* game, BoardCoordinates boardSetup);
+
+    LoBoGamesEngine* gameEngine;
 
     // Setter for updating board
     void updateSetup(BoardCoordinates newBoardSetup);
