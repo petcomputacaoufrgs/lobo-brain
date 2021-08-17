@@ -4,18 +4,18 @@
 
 using namespace std;
 
-Board::Board(LoBoGamesEngine* gameEngine, BoardCoordinates boardSetup)
+Board::Board(const LoBoGamesEngine& gameEngine)
+{
+    this->gameEngine = gameEngine;
+};
+
+Board::Board(const LoBoGamesEngine& gameEngine, BoardCoordinates boardSetup)
 {
     this->gameEngine = gameEngine;
     this->updateSetup(move(boardSetup));
 }
 
-Board::Board(LoBoGamesEngine* gameEngine)
-{
-    this->gameEngine = gameEngine;
-};
-
-void Board::updateSetup(BoardCoordinates newBoardSetup){
+string Board::updateSetup(BoardCoordinates newBoardSetup){
     this->setup = move(newBoardSetup);
 }
 

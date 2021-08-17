@@ -25,7 +25,7 @@ public:
     Board(BoardCoordinates boardSetup);
 
     // Setter for updating board
-    void updateSetup(BoardCoordinates newBoardSetup);
+    std::__cxx11::basic_string<char> updateSetup(BoardCoordinates newBoardSetup);
 
     // Getter for board positions
     BoardCoordinates getSetup();

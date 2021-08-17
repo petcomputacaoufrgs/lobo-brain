@@ -2,6 +2,7 @@
 #define BOARD_H
 
 #include <vector>
+#include <string>
 #include "../LoBoBrain.hpp"
 
 using namespace std;
@@ -19,27 +20,27 @@ public:
 
     // Initialization without
     // board specification
-    Board(LoBoGamesEngine* gameEngine);
+    Board(const LoBoGamesEngine& gameEngine);
 
     // Initialization with
     // board specification
-    explicit Board(LoBoGamesEngine* game, BoardCoordinates boardSetup);
+    explicit Board(const LoBoGamesEngine& game, BoardCoordinates boardSetup);
 
-    LoBoGamesEngine* gameEngine;
+    LoBoGamesEngine gameEngine;
 
-    // Setter for updating board
-    void updateSetup(BoardCoordinates newBoardSetup);
+    virtual // Setter for updating board
+    string updateSetup(BoardCoordinates newBoardSetup) override;
 
-    // Getter for board positions
+    virtual // Getter for board positions
     BoardCoordinates getSetup();
 
 private:
 
-    // the 'map' of the board is here
-    // represented by char array
-    BoardCoordinates setup;
-
-    BoardCoordinates initialSetup = NULL;
+    BoardCoordinates initialSetup = vector<vector<int>>;
+protected:
+// the 'map' of the board is here
+// represented by char array
+BoardCoordinates setup;
 };
 
 #endif

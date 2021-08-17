@@ -20,13 +20,16 @@ using namespace std;
  * 'i' and 'j' are the coordinates
  * of the pieces in the board
  */
-
 class TapatanPlayer : public Player
 {
-
 public:
+    explicit TapatanPlayer(LoBoGamesEngine* gameEngine);
+    TapatanPlayer(LoBoGamesEngine* gameEngine, char symbol, string name);
+
+    int score;
     void update();
-private:
+
+protected:
     void updatePossibleMoves();
     void updatePieces();
 };
@@ -38,11 +41,17 @@ public:
     // Overwrite class constructor for
     // using default initial setup
     TapatanBoard();
-    explicit TapatanBoard(BoardCoordinates boardSetup);
+
+    explicit TapatanBoard(const BoardCoordinates& boardSetup);
+
+    string updateSetup(BoardCoordinates newBoardSetup) override;
+
+    // Getter for board positions
+    BoardCoordinates getSetup() override;
 
     // Print function for showing
     // the board in terminal
-    void representation();
+    static void representation();
 
     // Read board positions and check
     // whether game is over or not
@@ -51,11 +60,13 @@ public:
 
 private:
 
+
+
     // Here we define the default initial condition
     // of the game, that will be used in
     // Initialization without
     // board specification
-    BoardCoordinates initialPositions = {
+    BoardCoordinates initialSetup = {
             {'2', '1', '2'},
             {'0', '0', '0'},
             {'1', '2', '1'}
@@ -72,14 +83,15 @@ public:
 
     // Overwrite class constructors for
     // using default initial setup and/or Jump setting
-    TapatanGame(vector<TapatanPlayer*> players, TapatanBoard* board, bool jumpEnabled);
+    TapatanGame(vector<Player> players1, Board board, initializer_list<Player> players);
     TapatanGame(vector<TapatanPlayer*> players, bool jumpEnabled);
     TapatanGame(vector<TapatanPlayer*> players, TapatanBoard* board);
-    TapatanGame(vector<TapatanPlayer*> players);
+    TapatanGame(vector<Player> players1, Board board1, const vector<TapatanPlayer *>& players,
+                TapatanBoard *board, bool jumpEnabled);
 
     void registerMovement(TapatanBoard newSetup);
 
-private:
+protected:
     int maxRepetitions = 3;
 
 };
@@ -100,4 +112,4 @@ public:
         Board play();
 };
 
-#endif //LOBO_BRAIN_TAPATAN_H
+#endif //TAPATAN_H

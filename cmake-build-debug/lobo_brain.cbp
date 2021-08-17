@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="lobo_brain"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/phi/Projects/lobo-brain/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/phi/Projects/lobo-brain/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/phi/Projects/lobo-brain/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lobo_brain">
+				<Option output="/home/phi/Projects/lobo-brain/cmake-build-debug/lobo_brain" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/phi/Projects/lobo-brain/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento"/>
+					<Add directory="/home/phi/Projects/lobo-brain/src"/>
+					<Add directory="/home/phi/Projects/lobo-brain/src/Games"/>
+					<Add directory="/home/phi/Projects/lobo-brain/src/LoBoBrain"/>
+					<Add directory="/home/phi/Projects/lobo-brain/src/MiniMax"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 lobo_brain"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lobo_brain/fast">
+				<Option output="/home/phi/Projects/lobo-brain/cmake-build-debug/lobo_brain" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/phi/Projects/lobo-brain/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento"/>
+					<Add directory="/home/phi/Projects/lobo-brain/src"/>
+					<Add directory="/home/phi/Projects/lobo-brain/src/Games"/>
+					<Add directory="/home/phi/Projects/lobo-brain/src/LoBoBrain"/>
+					<Add directory="/home/phi/Projects/lobo-brain/src/MiniMax"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 lobo_brain/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/phi/Projects/lobo-brain/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento/Agent.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento/Agent.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento/Global.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento/Global.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento/State.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento/State.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento/test.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento/test_play.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/reinforcement-learning/alinhamento/test_train.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/Games/tapatan.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/Games/tapatan.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/LoBoBrain.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/LoBoBrain.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/LoBoBrain/board.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/LoBoBrain/board.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/LoBoBrain/player.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/LoBoBrain/player.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/MiniMax.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/MiniMax.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/MiniMax/minimaxNode.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/MiniMax/minimaxNode.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/MiniMax/minimaxTree.cpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/src/MiniMax/minimaxTree.hpp">
+			<Option target="lobo_brain"/>
+		</Unit>
+		<Unit filename="/home/phi/Projects/lobo-brain/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -10,12 +10,13 @@
 class LoBoGamesEngine {
 
 public:
-    // Class constructor with board specified
-    LoBoGamesEngine(vector<Player> players, Board board);
+
     // Class constructor without board specified
     LoBoGamesEngine(vector<Player> players);
+    // Class constructor with board specified
+    LoBoGamesEngine(vector<Player> players, Board board);
 
-    MiniMaxTree gameTree;
+    MiniMaxTree* gameTree;
     Board board;
     vector<Player> players;
     Player currentPlayer;

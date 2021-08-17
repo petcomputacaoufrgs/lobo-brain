@@ -1,5 +1,7 @@
 #include "tapatan.hpp"
 
+#include <utility>
+
 using namespace std;
 
 /*
@@ -8,12 +10,21 @@ using namespace std;
  * =========================
  */
 TapatanBoard::TapatanBoard() {
-    this.updateSetup(this.initialSetup);
+    this->updateSetup(this->initialSetup);
 }
 
-TapatanBoard::TapatanBoard(BoardCoordinates boardSetup)
+TapatanBoard::TapatanBoard(const BoardCoordinates& boardSetup)
 {
-    this.updateSetup(boardSetup);
+    this->updateSetup(boardSetup);
+}
+
+string TapatanBoard::updateSetup(BoardCoordinates newBoardSetup){
+    this->setup = move(newBoardSetup);
+    return this->evaluate();
+}
+
+BoardCoordinates TapatanBoard::getSetup(){
+    return this->setup;
 }
 
 void TapatanBoard::representation()
@@ -33,22 +44,22 @@ string TapatanBoard::evaluate()
 {
 
     BoardCoordinates bc = this->getSetup();
-    TapatanPlayer* player_1 = game.players.at(0);
-    char p1 = player_1.symbol;
-    TapatanPlayer* player_2 = game.players.at(1);
-    char p2 = player_2.symbol;
+    TapatanPlayer* player_1 = this->gameEngine->players.at(0);
+    char p1 = player_1->symbol;
+    TapatanPlayer* player_2 = this->gameEngine->players.at(1);
+    char p2 = player_2->symbol;
 
-    if (this.setup == this.initialSetup)
+    if (this->setup == this->initialSetup)
     {
-            game.repetitions += 1;
+            this->gameEngine->repetitions += 1;
 
-            if (game.repetitions >= game.maxRepetitions) {
+            if (this->gameEngine->repetitions >= this->gameEngine->maxRepetitions) {
 
-                player_2.score = -1;
-                player_1.score = -1;
+                player_2->score = -1;
+                player_1->score = -1;
 
-                game.finished = true;
-                return "Tie"
+                this->gameEngine->finished = true;
+                return "Tie";
             }
     }
 
@@ -59,11 +70,11 @@ string TapatanBoard::evaluate()
             bc[1][0] == p1 && bc[2][0] == p1 ||
             bc[1][1] == p1 && bc[2][2] == p1)
         {
-            player_1.score = 100;
-            player_2.score = -100;
+            player_1->score = 100;
+            player_2->score = -100;
 
-            game.finished = true;
-            return player_1.name
+            this->gameEngine->finished = true;
+            return player_1->name;
         }
     }
     else if (bc[0][2] == p1)
@@ -71,11 +82,11 @@ string TapatanBoard::evaluate()
         if (bc[1][1] == p1 && bc[2][0] == p1 ||
             bc[1][2] == p1 && bc[2][2] == p1)
         {
-            player_1.score = 100;
-            player_2.score = -100;
+            player_1->score = 100;
+            player_2->score = -100;
 
-            game.finished = true;
-            return player_1.name
+            this->gameEngine->finished = true;
+            return player_1->name;
         }
     }
     else if (bc[1][1] == p1)
@@ -83,21 +94,21 @@ string TapatanBoard::evaluate()
         if (bc[0][1] == p1 && bc[2][1] == p1 ||
             bc[1][0] == p1 && bc[1][2] == p1)
         {
-            player_1.score = 100;
-            player_2.score = -100;
+            player_1->score = 100;
+            player_2->score = -100;
 
-            game.finished = true;
-            return player_1.name
+            this->gameEngine->finished = true;
+            return player_1->name;
         }
     }
     else if (bc[2][0] == p1)
     {
         if (bc[2][1] == p1 && bc[2][2] == p1) {
-            player_1.score = 100;
-            player_2.score = -100;
+            player_1->score = 100;
+            player_2->score = -100;
 
-            game.finished = true;
-            return player_1.name
+            this->gameEngine->finished = true;
+            return player_1->name;
         }
     }
 
@@ -108,11 +119,11 @@ string TapatanBoard::evaluate()
             bc[1][0] == p2 && bc[2][0] == p2 ||
             bc[1][1] == p2 && bc[2][2] == p2)
         {
-            player_2.score = 100;
-            player_1.score = -100;
+            player_2->score = 100;
+            player_1->score = -100;
 
-            game.finished = true;
-            return player_2.name
+            this->gameEngine->finished = true;
+            return player_2->name;
         }
     }
     else if (bc[0][2] == p2)
@@ -120,11 +131,11 @@ string TapatanBoard::evaluate()
         if (bc[1][1] == p2 && bc[2][0] == p2 ||
             bc[1][2] == p2 && bc[2][2] == p2)
         {
-            player_2.score = 100;
-            player_1.score = -100;
+            player_2->score = 100;
+            player_1->score = -100;
 
-            game.finished = true;
-            return player_2.name
+            this->gameEngine->finished = true;
+            return player_2->name;
         }
     }
     else if (bc[1][1] == p2)
@@ -132,30 +143,30 @@ string TapatanBoard::evaluate()
         if (bc[0][1] == p2 && bc[2][1] == p2 ||
             bc[1][0] == p2 && bc[1][2] == p2)
         {
-            player_2.score = 100;
-            player_1.score = -100;
+            player_2->score = 100;
+            player_1->score = -100;
 
-            game.finished = true;
-            return player_2.name
+            this->gameEngine->finished = true;
+            return player_2->name;
         }
     }
     else if (bc[2][0] == p2)
     {
         if(bc[2][1] == p2 && bc[2][2] == p2) {
-            player_2.score = 100;
-            player_1.score = -100;
+            player_2->score = 100;
+            player_1->score = -100;
 
-            game.finished = true;
-            return player_2.name
+            this->gameEngine->finished = true;
+            return player_2->name;
         }
     }
 
     // Game is not finished
-    player_1.score = 0;
-    player_2.score = 0;
+    player_1->score = 0;
+    player_2->score = 0;
 
-    game.finished = false;
-    return NULL;
+    this->gameEngine->finished = false;
+    return "";
 
 }
 
@@ -164,11 +175,21 @@ string TapatanBoard::evaluate()
  *     TAPATAN PLAYER
  * =========================
  */
-TapatanPlayer::TapatanPlayer()
+TapatanPlayer::TapatanPlayer(LoBoGamesEngine* gameEngine)
 {
-
+    this->gameEngine = gameEngine;
+    this->symbol = this->defaultSymbol;
+    this->name = this->defaultName;
+    this->score = 0;
 }
 
+TapatanPlayer::TapatanPlayer(LoBoGamesEngine* gameEngine, char symbol, string name)
+{
+    this->gameEngine = gameEngine;
+    this->symbol = symbol;
+    this->name = move(name);
+    this->score = 0;
+}
 /*
  * Reads from the board the player pieces coords
  */
@@ -182,23 +203,23 @@ void TapatanPlayer::updatePieces()
     // pieces of the player
     for(i=0;i<3;i++) {
         for (j = 0; j < 3; j++) {
-            if (this->gameBoard->getSetup()[i][j] == this->symbol) {
+            if (this->gameEngine->board->getSetup()[i][j] == this->symbol) {
                 // found a piece from the player
                 playerPieces.emplace_back(i, j);
             }
         }
     }
 
-    this.pieces = playerPieces;
+    this->pieces = playerPieces;
 }
 
-void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jumpEnabled) {
+void TapatanPlayer::updatePossibleMoves() {
 
     vector<pair<PieceCoordinates, PieceCoordinates>> possibleMoves;
     vector<PieceCoordinates> playerPieces = this->pieces;
 
-
-
+    BoardCoordinates currentBoard = this->gameEngine->board->getSetup();
+    bool jumpEnabled = this->gameEngine->jumpEnabled;
     /*
      *
      * First we will build a vector with
@@ -208,9 +229,7 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
      * position of that movement is free.
      *
      */
-    for(int i=0; i<playerPieces.size(); i++) {
-        PieceCoordinates piece = playerPieces[i];
-
+    for(auto piece : playerPieces) {
         // This variable will hold the position
         // from the piece we're going to move
         PieceCoordinates selectedPiece = make_pair(piece.first, piece.second);
@@ -220,16 +239,16 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
             case 0:
 
                 // Move right .
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(0, 1)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(0, 1));
 
                 // Move down \/
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 0)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(1, 0));
 
                 // Move right and down
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 1)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(1, 1));
 
                 if (jumpEnabled) {
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 2)));
+                    possibleMoves.emplace_back(selectedPiece, make_pair(2, 2));
                 }
 
                 break;
@@ -237,16 +256,16 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
                 //(0,1)
             case 1:
                 // Move left <-
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 0)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(1, 0));
 
                 // Move down\/
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 1)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(1, 1));
 
                 // Move right .
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(0, 2)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(0, 2));
 
                 if (jumpEnabled) {
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 1)));
+                    possibleMoves.emplace_back(selectedPiece, make_pair(2, 1));
                 }
 
                 break;
@@ -254,18 +273,18 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
                 //(0,2)
             case 2:
                 // Move left <-
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(0, 1)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(0, 1));
 
                 // Move down and left
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 1)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(1, 1));
 
                 // Move down \/
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 2)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(1, 2));
 
                 if (jumpEnabled) {
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(0,0)));
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(2,0)));
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(2,2)));
+                    possibleMoves.emplace_back(selectedPiece, make_pair(0,0));
+                    possibleMoves.emplace_back(selectedPiece, make_pair(2,0));
+                    possibleMoves.emplace_back(selectedPiece, make_pair(2,2));
                 }
 
                 break;
@@ -273,16 +292,16 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
                 //(1,0)
             case 3:
                 // Move up /\ /
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(0, 0)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(0, 0));
 
                 // Move right .
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 1)));
+                possibleMoves.emplace_back(selectedPiece, make_pair(1, 1));
 
                 // Move down \/
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 0)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2, 0)));
 
                 if (jumpEnabled) {
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 2)));
+                    possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 2)));
                 }
 
                 break;
@@ -290,44 +309,44 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
                 //(1,1)
             case 4:
                 // Move up and right
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(0, 0)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(0, 0)));
 
                 // Move up /\ /
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(0, 1)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(0, 1)));
 
                 // Move up and right
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(0, 2)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(0, 2)));
 
                 // Move up
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 0)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 0)));
 
                 // Move right
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 2)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 2)));
 
                 // Move down and left
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 0)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2, 0)));
 
                 // Move down
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 1)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2, 1)));
 
                 // Move down and right
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 2)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2, 2)));
 
                 break;
 
                 //(1,2)
             case 5:
                 // Move up
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(0, 2)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(0, 2)));
 
                 // Move left
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 1)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 1)));
 
                 // Move down
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 2)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2, 2)));
 
                 if (jumpEnabled) {
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 0)));
+                    possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 0)));
                 }
 
                 break;
@@ -335,18 +354,18 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
                 //(2,0)
             case 6:
                 // Move right
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 1)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2, 1)));
 
                 // Move up
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 0)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 0)));
 
                 // Move up and left
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 1)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 1)));
 
                 if (jumpEnabled) {
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(0,0)));
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(2,0)));
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(2,2)));
+                    possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(0,0)));
+                    possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2,0)));
+                    possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2,2)));
                 }
 
                 break;
@@ -354,16 +373,16 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
                 //(2,1)
             case 7:
                 // Move left
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 0)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2, 0)));
 
                 // Move up
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 1)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 1)));
 
                 // Move right
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 2)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2, 2)));
 
                 if (jumpEnabled) {
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(0, 1)));
+                    possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(0, 1)));
                 }
 
                 break;
@@ -371,18 +390,18 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
                 //(2,2)
             case 8:
                 // Move left
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(2, 1)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2, 1)));
 
                 // Move left and up
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 1)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 1)));
 
                 // Move up
-                possibleMoves.push_back(make_pair(selectedPiece, make_pair(1, 2)));
+                possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(1, 2)));
 
                 if (jumpEnabled) {
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(0,0)));
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(2,0)));
-                    possibleMoves.push_back(make_pair(selectedPiece, make_pair(2,2)));
+                    possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(0,0)));
+                    possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2,0)));
+                    possibleMoves.emplace_back(make_pair(selectedPiece, make_pair(2,2)));
                 }
 
                 break;
@@ -392,11 +411,10 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
 
         // Verify if the target position of the movement is free
         // and then set the possibles
-        for (BoardCoordinates::iterator it = possibleMoves.begin();
-             it != possibleMoves.end(); it++) {
+        for (auto & possibleMove : possibleMoves) {
 
-            PieceCoordinates from = it.first;
-            PieceCoordinates to = it.second;
+            PieceCoordinates from = possibleMove.first;
+            PieceCoordinates to = possibleMove.second;
 
             if (currentBoard[to.first][to.second] == '0') {
 
@@ -408,9 +426,9 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
                 possibleBoard[from.first][from.second] = '0';
 
                 // Set the new piece position
-                possibleBoard[to.first][to.second] = this.symbol;
+                possibleBoard[to.first][to.second] = this->symbol;
 
-                this.possibleMoves.push_back(possibleBoard);
+                this->possibleMoves.push_back(possibleBoard);
             }
 
         }
@@ -418,9 +436,8 @@ void TapatanPlayer::updatePossibleMoves(BoardCoordinates currentBoard, bool jump
 }
 
 void TapatanPlayer::update() {
-    this->updatePossibleMoves(BoardCoordinates currentBoard, bool jumpEnabled);
-    this->updatePieces()
-
+    this->updatePossibleMoves();
+    this->updatePieces();
 }
 
 
@@ -429,13 +446,20 @@ void TapatanPlayer::update() {
  *     TAPATAN GAME
  * =========================
  */
-TapatanGame::TapatanGame(vector<TapatanPlayer*> players, Board board)
-{
-    this.board = TapatanBoard(board);
-    this.players = players;
+
+TapatanGame::TapatanGame(vector<Player> players, Board board, vector<TapatanPlayer*> player)
+        : LoBoGamesEngine(std::move(players), std::move(board)) {
+    this->board = new TapatanBoard();
+    this->players = players;
+}
+
+TapatanGame::TapatanGame(vector<Player> players, Board board, const vector<TapatanPlayer *>& players,
+                         TapatanBoard *board, bool jumpEnabled) : LoBoGamesEngine(std::move(players), std::move(board)) {
+    this->board = TapatanBoard(*board);
+    this->players = players;
 
 
-    this.jumpEnabled = false;
+    this->jumpEnabled = false;
 }
 
 TapatanGame::TapatanGame(vector<TapatanPlayer> *players, int jumpEnabled)
@@ -484,12 +508,11 @@ TapatanGame::TapatanGame(vector<TapatanPlayer *> players, bool jumpEnabled) {
 
 }
 
-TapatanGame::TapatanGame(vector<TapatanPlayer *> players) {
+void TapatanGame::registerMovement(TapatanBoard newSetup) {
 
 }
 
-
-int MiniMaxAgent::execute(MiniMaxNode* currentNode, Player minPlayer, Player maxPlayer, int currentDepth)
+int MiniMaxTapatanAgent::executeNewLayer(MiniMaxNode* currentNode, Player minPlayer, Player maxPlayer, int currentDepth)
 {
 
     if(currentDepth >= this.maxDepth) {

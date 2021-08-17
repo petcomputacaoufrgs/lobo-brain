@@ -8,19 +8,18 @@
 using namespace std;
 
 class Player {
-
 public:
-    explicit Player(LoBoGamesEngine* gameEngine);
-    Player(LoBoGamesEngine* gameEngine, char symbol, string name);
+    Player(LoBoGamesEngine gameEngine);
+    Player(LoBoGamesEngine gameEngine, char symbol, string name);
 
     char symbol;
     string name;
-    LoBoGamesEngine* gameEngine;
+    LoBoGamesEngine gameEngine;
 
     vector<PieceCoordinates> pieces;
     vector<BoardCoordinates> possibleMoves;
 
-private:
+protected:
     char defaultSymbol = '1';
     string defaultName = "Player 1";
 };

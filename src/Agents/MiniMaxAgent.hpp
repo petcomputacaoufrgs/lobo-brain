@@ -11,12 +11,12 @@ public:
     /*
      * Initializations
      */
-    MiniMaxAgent(LoBoGamesEngine* game);
-    MiniMaxAgent(LoBoGamesEngine* game, int maxDepth);
+    MiniMaxAgent(LoBoGamesEngine* game, MiniMaxTree* gameTree);
+    MiniMaxAgent(LoBoGamesEngine* game, MiniMaxTree* gameTree, int maxDepth);
 
 
 
-private:
+protected:
     // Initializations
     LoBoGamesEngine* game;
     MiniMaxTree* gameTree;

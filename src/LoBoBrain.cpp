@@ -12,12 +12,9 @@ LoBoGamesEngine::LoBoGamesEngine(vector<Player*> players, Board board)
     this.game = new MiniMaxNode(board);
 }
 
-LoBoGamesEngine::LoBoGamesEngine(vector<Player*> players)
+LoBoGamesEngine::LoBoGamesEngine(vector<Player> players)
 {
-    this.players = players;
-    this.currentPlayer = players[0];
-
-    this.board = NULL;
-
-    this.game = NULL;
+    this->players = players;
+    this->currentPlayer = players[0];
+    this->board = NULL;
 }
